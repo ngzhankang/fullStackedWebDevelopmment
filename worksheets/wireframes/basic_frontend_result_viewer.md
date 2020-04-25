@@ -4,9 +4,7 @@ This document should help you explain how your user interfaces are designed. You
 
 ## Wireframe
 
-> This is just an example, please find your own wireframe.
-
-![Wireframe](assets/sample-wireframe-result-viewer-frontend.png)
+![Wireframe](assets/FSP_Wireframe_Website_blockframe_Insert_API.jpeg)
 
 ## Justifications
 

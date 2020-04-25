@@ -14,7 +14,7 @@ This document helps you identify the smaller tasks and helps you create a rough 
             1. Wireframe
             2. Implementation
             3. Integration
-    2. Mobile
+    <!-- 2. Mobile
         1. Data Viewer
             1. Wireframe
             2. Implementation
@@ -22,26 +22,36 @@ This document helps you identify the smaller tasks and helps you create a rough 
         2. Result Viewer
             1. Wireframe
             2. Implementation
-            3. Integration
-    3. Backend
+            3. Integration -->
+    2. Backend
         1. Insert API
             1. Database Setup
             2. Implementation
         2. Result API
             1. Implementation
 
-> You can break these tasks into even smaller units or even combine some into bigger units if you think some tasks are trivial enough.
+## Estimated Schedule
 
-> You can follow this template for the advance feature. You can plan it right at the start or you can plan it abit later.
-
-## Estimate Schedule
-
-### Member 1 - <ENTER NAME>
+### Member 1 - Triston Loh
 
 | Week | Level | Component | Feature       | Task           |
 | ---- | ----- | --------- | ------------- | -------------- |
-| 1    | Basic | Frontend  | Data Viewer   | Wireframe      |
-| 1    | Basic | Frontend  | Result Viewer | Wireframe      |
-| 2-3  | Basic | Frontend  | Data Viewer   | Implementation |
+| 1    | Basic | Fundemental Planning Stage  | NIL   | Project Planning/Wireframe      |
+| 2    | Basic | Frontend  | Result Viewer | Wireframe      |
+| 3  | Basic | Frontend  | Data Viewer   | Implementation |
+| 4  | Basic | Frontend  | Data Viewer   | Implementation |
+| 5  | Basic | Frontend  | Data Viewer   | Implementation |
+
+
+### Member 2 - Ng Zhan Kang
+
+| Week | Level | Component | Feature       | Task           |
+| ---- | ----- | --------- | ------------- | -------------- |
+| 1    | Basic | Fundemental Planning Stage  | NIL   | Project Planning/Wireframe      |
+| 2    | Basic | Frontend  | Result Viewer | Wireframe      |
+| 3  | Basic | Frontend  | Data Viewer   | Implementation |
+| 4  | Basic | Frontend  | Data Viewer   | Implementation |
+| 5  | Basic | Frontend  | Data Viewer   | Implementation |
+
 
 > This is just a template, you just need to state **WHO** will do **WHAT** and **WHEN**.

@@ -4,17 +4,13 @@ This report is for you to document the progres of your project. You should also 
 
 ## What have I done last week
 
--   Watched Tv
--   Play Games
--   Watch YT
+-Assignment was issued this week, so nothing has been done last week.
 
 ## What do I plan to do next week
 
--   Research more about out problem
--   Work on project
+-   Research more about out problem.
+-   Work on project.
 
 ## Additional Thoughts
 
--   VSCode is sick.
--   Our team name is nice.
--   Lecturer is awesome :).
+-   NIL
