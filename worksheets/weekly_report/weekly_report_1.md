@@ -14,3 +14,4 @@ This report is for you to document the progres of your project. You should also 
 ## Additional Thoughts
 
 -   NIL
+-   Hope to do more for next week
