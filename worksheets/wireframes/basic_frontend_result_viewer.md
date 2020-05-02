@@ -4,7 +4,7 @@ This document should help you explain how your user interfaces are designed. You
 
 ## Wireframe
 
-<!-- ![Wireframe](assets/FSP_Wireframe_Website_blockframe_Insert_API.jpeg) -->
+![Wireframe](assets/FSP_Wireframe_Website_blockframe_Result_viewer_API.png)
 
 ## Justifications
 
@@ -22,31 +22,31 @@ This document should help you explain how your user interfaces are designed. You
 
 1. Maybe they could show the popularity of the shows so that people can decide if its worth.
 
-### [Justification 2 - Result Viewer](https://www.eventbrite.sg/e/introduction-to-music-therapy-workshop-tickets-90923830625?aff=ebdssbdestsearch)
+### [Justification 2 - Result Viewer](https://www.vividseats.com/Search.action?searchTerm=Chicago)
 
-![Justification 2 - Result Viewer](assets/FSP_Justification_Result_Viewer_2.jpeg)
+![Justification 2 - Result Viewer](assets/FSP_Justification_Result_Viewer_2.png)
 
 #### Good Points
 
-1. Shows the date and time in bolded and larger fonts characters for easy reference.
-2. Gives a brief description of the workshop and its venue.
-3. Shows the starting price of the ticket at the bottom of the 'Tickets' button.
+1. Shows all search results/filter results in rows, which is neat.
+2. Shows the time and the date explicitly beside the name of the festival.
+3. Beautiful UI/UX at the top of the search queries.
 
 #### Bad Points
 
 1. Maybe they could show the popularity of the shows so that people can decide if its worth.
-2. The title could have been placed above the date so that people are more clear about the event.
+2. They could have add in more filters like time filters because the most they filter for time is just day or night and not numeric timing filters.
 
-### [Justification 3 - Result Viewer](https://www.vividseats.com/concerts/festivals/)
+### [Justification 3 - Result Viewer](https://guides.ticketmaster.co.uk/festival-finder/?filter=1&tmp=2&camefrom=CFC_Festival_Finder&tm_link=festivalfinder&price=1%2C300&age%5B%5D=adult&festival-search-category%5B%5D=281&festival-search-category%5B%5D=293&festival-search-category%5B%5D=307&festival-search-category%5B%5D=288&festival-search-category%5B%5D=286&festival-search-category%5B%5D=283&festival-search-category%5B%5D=294&festival-search-category%5B%5D=287&duration%5B%5D=single&location_type%5B%5D=city&submit=Submit+Query)
 
-![Justification 3 - Result Viewer](assets/FSP_Justification_Result_Viewer_3.jpeg)
+![Justification 3 - Result Viewer](assets/FSP_Justification_Result_Viewer_3.png)
 
 #### Good Points
 
-1. Distinct colours and landmarks to make it easy for users to see the different events.
-2. There is price comparison to allow users to make an informed decision before buying tickets.
-3. It shows the distance from where they live to the event.
+1. Simplistic UI design that is more suitable/friendly for the younger people.
+2. Short and brief description of each event and festivcals so that users can be more curious and then explore more of each events.
+3. When hovered over each tiles,there will be a description of the headliners for the user to read.
 
 #### Bad Points
 
-1. Maybe they could show the popularity of the shows so that people can decide if its worth.
+1. Does not show the timing only until the user click on the buy now button, which redirects them to a new tab/webpage.
