@@ -36,9 +36,9 @@ This document helps you identify the smaller tasks and helps you create a rough 
 
 | Week | Level | Component | Feature       | Task           |
 | ---- | ----- | --------- | ------------- | -------------- |
-| 1    | Basic | Fundemental Planning Stage  | NIL   | Project Planning/Wireframe      |
-| 2    | Basic | Frontend  | Result Viewer | Wireframe      |
-| 3  | Basic | Frontend  | Data Viewer   | Implementation |
+| 1    | Basic | Planning  | Data/Result Viewer   | Project Planning/Wireframe      |
+| 2    | Basic | Planning  | Data Result Viewer | Wireframe/Justification     |
+| 3  | Basic | Database  | Database   | Creating Table|
 | 4  | Basic | Frontend  | Data Viewer   | Implementation |
 | 5  | Basic | Frontend  | Data Viewer   | Implementation |
 
@@ -47,11 +47,8 @@ This document helps you identify the smaller tasks and helps you create a rough 
 
 | Week | Level | Component | Feature       | Task           |
 | ---- | ----- | --------- | ------------- | -------------- |
-| 1    | Basic | Fundemental Planning Stage  | NIL   | Project Planning/Wireframe      |
-| 2    | Basic | Frontend  | Result Viewer | Wireframe      |
-| 3  | Basic | Frontend  | Data Viewer   | Implementation |
+| 1    | Basic | Planning  | Data/Result Viewer   | Project Planning/Wireframe      |
+| 2    | Basic | Planning  | Data/Result Viewer | Wireframe/Justification      |
+| 3  | Basic | Database  | Database   | Set Up Database/Creating Table |
 | 4  | Basic | Frontend  | Data Viewer   | Implementation |
 | 5  | Basic | Frontend  | Data Viewer   | Implementation |
-
-
-> This is just a template, you just need to state **WHO** will do **WHAT** and **WHEN**.

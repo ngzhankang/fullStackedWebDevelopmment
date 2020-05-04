@@ -1,6 +1,6 @@
 # Schema
 
-This document will gives user a good idea of how your database's structure looks like.
+This document will gives user a good idea of how your database's  structure looks like.
 
 You may refer to the following link to learn more about postgresql schema:
 
@@ -9,13 +9,10 @@ You may refer to the following link to learn more about postgresql schema:
 
 The following are examples of how you can create a table, replace the examples with your own create statements of all your table.
 ```sql
-CREATE TABLE table_name(
-   id SERIAL PRIMARY KEY,
-   name VARCHAR UNIQUE NOT NULL,
-);
-
-CREATE TABLE table_name_2(
-   id SERIAL PRIMARY KEY,
-   table_name_id VARCHAR NOT NULL REFERENCES table_name(id)
+CREATE TABLE festivals(
+   `performanceId` INT(10) SERIAL PRIMARY KEY NOT NULL UNIQUE,
+   `festivalId` INT(10) SERIAL NOT NULL,
+   `startTime` TIME NOT NULL,
+   `endTime` TIME NOT NULL
 );
 ```
