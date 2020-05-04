@@ -4,18 +4,15 @@ This report is for you to document the progres of your project. You should also 
 
 ## What have I done last week
 
--   Worked on...
--   Worked on...
--   Changed....
+-   Came up with a wireframe design.
+-   Worked on completing all the justifications.
+-   Changed our initial wireframes.
 
 ## What do I plan to do next week
 
--   Worked on...
--   Worked on...
--   Changed....
+-   Work on database set-up.
+-   Change wireframes and justifications if necessary.
 
 ## Additional Thoughts
 
--   VSCode is sick.
--   This addon is fabulous.
--   Lecturer is awesome.
+-   Nope. 
