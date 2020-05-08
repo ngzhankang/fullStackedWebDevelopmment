@@ -1,109 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
 
-    <!-- External CSS stylesheet -->
-    <link rel="stylesheet" href="index.css" />
-
-    <!-- Mandatory bootstrap tags -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
-    <!-- Title and Favicon -->
+    <!-- Title And Favicon-->
     <title>Jibaboom! ∙ DataViewer</title>
     <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicons/favicon-16x16.png">
     <link rel="manifest" href="./favicons/site.webmanifest">
+
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- BootStrap CSS And CSS Script -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 
-<body>
-    <div class="container">
+<body class="bg-white text-center d-flex h-100">
+    <div class="container d-flex p-3 mx-auto flex-column">
 
-        <!-- NavBar Experiment Feature-->
-        <nav class="navbar navbar-expand-xl navbar-transparent bg-transparent">
-            <a class="navbar-brand" href="#">
-                <img src="favicons/favicon.ico" width="30" height="30" class="d-inline-block align-top" alt="">
-                Jibaboom
-            </a>
-            <div class="navbar-nav">
-                <li>
-                    <a href="#">Result Viewer</a>
-                </li>
-            </div>
-            <!-- <label class="switch">
-                <input type="checkbox" checked>
-                <span class="slider round"></span>
-              </label> -->
-        </nav>
+        <!-- Navbar -->
+        <header class="mb-auto">
+            <h3 class="float-left">
+                <img src="favicons/favicon.ico" width="30" height="30" class="d-inline-block align-top" alt="">Jibaboom
+            </h3>
+            <nav class="nav justify-content-center float-right">
+                <a class="nav-link active" href="#home">Home</a>
+                <a class="nav-link" href="#result-viewer">Data Viewer</a>
 
-        <ul class="nav navbar-nav centered-navbar">
-            <li>
-                <a href="#">Result Viewer</a>
-            </li>
-        </ul>
+                <!-- Navbar(Darkmode Switch) -->
+                <div class="nav-link">
 
-        <!-- Data Viewer Table -->
-        <table class="table table-striped table-hover table-bordered my-5">
-            <thead>
-                <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                </tr>
-                <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
-                </tr>
-                <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
-                </tr>
-            </tbody>
-        </table>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="darkSwitch">
+                        <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
+                    </div>
+
+                    <!-- Javascript For Darkmode Switch -->
+                    <script src="index.js"></script>
+
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Body -->
+        <main role="main">
+
+            <!-- Main Body(Table For Data Display) -->
+            <table class="table table-striped table-hover table-bordered my-5">
+                <thead>
+                    <tr>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>john@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>Mary</td>
+                        <td>Moe</td>
+                        <td>mary@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>July</td>
+                        <td>Dooley</td>
+                        <td>july@example.com</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="mt-auto">
+            <hr>
+            <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved by skrtttt.</p>
+        </footer>
+
     </div>
-
-    <!-- Trial For Dark Mode Feature Button -->
-    <h2>Toggle Dark/Light Mode</h2>
-    <p>Click the button to toggle between dark and light mode for this page.</p>
-    <button onclick="myFunction()">Toggle dark mode</button>
-
-    <!-- Source For JS Responsive Script -->
-    <script src="index.js"></script>
 </body>
-
-<footer class="site-footer">
-    <div class="container">
-        <div class="row">
-        </div>
-        <hr>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-sm-6 col-xs-12">
-                <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved by
-                    <a href="#">skrtttt</a>.
-                </p>
-            </div>
-
-
-        </div>
-    </div>
-</footer>
 
 </html>
