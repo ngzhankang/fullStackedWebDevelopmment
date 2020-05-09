@@ -20,9 +20,25 @@ Based on your chosen rules, give an example of a code that follows the code styl
 ### Good Example
 
 ```js
+function foo() {
+  let x = 2;
+  console.log(x);
+}
+
+function bar() {
+  console.log(1);
+}
 ```
 
 ### Bad Example
 
 ```js
+function foo() {
+let x = 2;
+console.log(x);
+}
+
+  function bar() {
+console.log(1);
+  }
 ```

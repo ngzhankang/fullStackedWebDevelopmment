@@ -8,11 +8,30 @@ You may refer to the following link to learn more about postgresql schema:
 2. [Foreign Keys](https://www.postgresqltutorial.com/postgresql-foreign-key/)
 
 The following are examples of how you can create a table, replace the examples with your own create statements of all your table.
+
 ```sql
-CREATE TABLE festivals(
-   `performanceId` INT(10) SERIAL PRIMARY KEY NOT NULL UNIQUE,
-   `festivalId` INT(10) SERIAL NOT NULL,
-   `startTime` TIME NOT NULL,
-   `endTime` TIME NOT NULL
+CREATE TABLE Performance(
+    performanceId NUMERIC PRIMARY KEY NOT NULL CHECK (performanceId BETWEEN 0000000001 and 9999999999) UNIQUE,
+    startTime TIME,
+    endTime TIME,
+    FOREIGN KEY (performanceId) REFERENCES MusicFestival(festivalId)
+);
+```
+
+```sql
+CREATE TABLE MusicFestival(
+    festivalId NUMERIC PRIMARY KEY NOT NULL CHECK (festivalId BETWEEN 0000000000 AND 9999999999) UNIQUE
+);
+```
+
+> [!IMPORTANT]
+> ADVANCED FEATURE (CA3 & CA4)
+```sql
+CREATE TABLE PerformanceWithPopularity(
+    performanceId NUMERIC(10) PRIMARY KEY NOT NULL CHECK (performanceId BETWEEN 0000000001 and 9999999999) UNIQUE,
+    startTime TIME,
+    endTime TIME,
+    popularity NUMERIC,
+    FOREIGN KEY (performanceId) REFERENCES MusicFestival(festivalId)
 );
 ```

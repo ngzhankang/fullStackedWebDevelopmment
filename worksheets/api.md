@@ -15,61 +15,69 @@ Each API should include
 
 > Errors and it's corresponding code can be defined by yourself. You need not follow HTTP errors.
 
-## Get Data
+-------------------------------------------------------------------------------------
 
-| attribute   | value       |
-| ----------- | ----------- |
-| HTTP Method | GET         |
-| Endpoint    | /basic/data |
+## Post Data (Insert API)
+
+| attribute   | value         |
+| ----------- | ------------- |
+| HTTP Method | POST          |
+| Endpoint    | /basic/insert |
 
 ### Parameters
 
-| parameter | datatype        | example   |
-| --------- | --------------- | --------- |
-| id        | 10 digit number | 123456789 |
+_Not Required_
+
+### Request Body
+
+```json
+{
+  "data": [
+    {
+      "festivalId": IDENTIFIER,
+      "performanceId": IDENTIFIER,
+      "startTime": TIME,
+      "endTime": TIME
+    }
+  ]
+}
+```
 
 ### Response Body
 
 ```json
 {
-    "result": [
-        {
-            "id": number,
-            "property1": number,
-            "property2": string,
-            ...
-        }
-    ]
+  "result": "success"
 }
 ```
 
-### Error
+### Error Response
 
 ```json
 {
-	"error": string,
-	"code": number
+  "error": string,
+  "code": number
 }
 ```
 
 ### Sample Request
 
-```http
-GET /basic/data?id=1234567890
-```
-
-### Sample Response
-
 ```json
 {
-    "result": [
-        {
-            "id": 1234567890,
-            "property1": 1234567890,
-            "property2": "haha",
-            ...
-        }
-    ]
+  "data": [
+    {
+      "festivalId": 1234567890,
+      "performanceId": 1234567890,
+      "startTime": 1000,
+      "endTime": 1030
+    },
+    {
+      "festivalID": 1234567891,
+      "performanceId": 1234567891,
+      "startTime": 1030,
+      "endTime": 1100,
+    },
+  ]
 }
 ```
 
@@ -77,7 +85,81 @@ GET /basic/data?id=1234567890
 
 ```json
 {
-	"error": "Server Error",
-	"code": 500
+  "error": "Duplicate Entry",
+  "code": 400
+}
+```
+-------------------------------------------------------------------------------------
+## Get Data (Result API)
+
+| attribute   | value         |
+| ----------- | ------------- |
+| HTTP Method | GET           |
+| Endpoint    | /basic/result |
+
+### Parameters
+
+| parameter  | datatype        | example    |
+| ---------- | --------------- | ---------- |
+| festivalId | 10 digit number | 1234567890 |
+
+### Response Body
+
+```json
+{
+  "result": [
+    [
+      {
+        "performanceId": IDENTIFIER,
+        "startTime": TIME,
+        "endTime": TIME
+      }
+    ]
+  ]
+}
+```
+
+### Error
+
+```json
+{
+  "error": string,
+  "code": number
+}
+```
+
+### Sample Request
+
+```http
+GET /basic/result?festivalId=1234567890
+```
+
+### Sample Response
+
+```json
+{
+  "result": [
+    [
+      {
+        "performanceId": 1234567890,
+        "startTime": 1000,
+        "endTime": 1030
+      },
+      {
+        "performanceId": 1234567891,
+        "startTime": 1030,
+        "endTime": 1100
+      }
+    ]
+  ]
+}
+```
+
+### Sample Error
+
+```json
+{
+  "error": "Server Error",
+  "code": 500
 }
 ```

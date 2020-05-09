@@ -32,23 +32,14 @@ This document helps you identify the smaller tasks and helps you create a rough 
 
 ## Estimated Schedule
 
-### Member 1 - Triston Loh
+### Member 1 - Triston Loh | Member 2 - Ng Zhan Kang
 
-| Week | Level | Component | Feature       | Task           |
-| ---- | ----- | --------- | ------------- | -------------- |
-| 1    | Basic | Planning  | Data/Result Viewer   | Project Planning/Wireframe      |
-| 2    | Basic | Planning  | Data Result Viewer | Wireframe/Justification     |
-| 3  | Basic | Database  | Database   | Creating Table|
-| 4  | Basic | Frontend  | Data Viewer   | Implementation |
-| 5  | Basic | Frontend  | Data Viewer   | Implementation |
+| Week | Level | Component | Feature       | Task  |Responsibility          |
+| ---- | ----- | --------- | ------------- | -------------- |------------|
+| 1    | Basic | Planning  | Data Viewer   | Wireframe/Justification      |Both |
+| 2    | Basic | Planning  | Result Viewer | Wireframe/Justification     |Both |
+| 3    | Basic | Planning  | Markdown Scripts | Fill Up Markdown Scripts | Both |
+| 4    | Basic | Database  | DB Population  | Creating Table  |Both |
+| 5    | Basic | Database  | DB Foreign Keys  | Establishing table relationships |Both |
 
 
-### Member 2 - Ng Zhan Kang
-
-| Week | Level | Component | Feature       | Task           |
-| ---- | ----- | --------- | ------------- | -------------- |
-| 1    | Basic | Planning  | Data/Result Viewer   | Project Planning/Wireframe      |
-| 2    | Basic | Planning  | Data/Result Viewer | Wireframe/Justification      |
-| 3  | Basic | Database  | Database   | Set Up Database/Creating Table |
-| 4  | Basic | Frontend  | Data Viewer   | Implementation |
-| 5  | Basic | Frontend  | Data Viewer   | Implementation |
