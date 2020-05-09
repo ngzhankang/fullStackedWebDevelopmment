@@ -1,18 +1,50 @@
 -- ATTENTION! THIS SCRIPT IS NOT PART OF THE FILE SYSTEM AND
 --      IS PLACED HERE JUST TO FACILITATE THE TEAM FOR CODING 
---      THE SQL QUERIES.
-CREATE TABLE festivals(
-performanceId NUMERIC(10) PRIMARY KEY NOT NULL UNIQUE,
-festivalId NUMERIC(10) NOT NULL, 
-startTime TIME NOT NULL,
-endTime TIME NOT NULL
+--      THE SQL QUERIES IN VS CODE.
+--      THIS SCRIPT HERE CONTROLS THE 'public' SCHEMAS IN PGADMIN4
+
+-- NOTE! INTEGER CHECK MIGHT NEED TO BE REMOVED BASED ON CIRCUMSTANCE IN FUTURE.
+
+-- Performance Table
+CREATE TABLE Performance(
+    performanceId NUMERIC PRIMARY KEY NOT NULL CHECK (performanceId BETWEEN 0000000001 and 9999999999) UNIQUE,
+    startTime TIME,
+    endTime TIME
 );
 
-SELECT * FROM festivals;
+INSERT INTO Performance VALUES (
+    0000000001, '0800', '1200'
+);
 
-INSERT INTO festivals VALUES (
--- '1234567892', '1234567893', '0800', '1200',
--- '2345678901', '2345678901', '2222', '1300'
-)
+SELECT performanceId, startTime, endTime FROM Performance;
 
-DROP TABLE festivals;
+DROP TABLE Performance;
+
+-- Performance With Popularity Table
+CREATE TABLE PerformanceWithPopularity(
+    performanceId NUMERIC(10) PRIMARY KEY NOT NULL CHECK (performanceId BETWEEN 0000000001 and 9999999999) UNIQUE,
+    startTime TIME,
+    endTime TIME,
+    popularity NUMERIC
+);
+
+INSERT INTO PerformanceWithPopularity VALUES(
+    2234567789, '0800', '1200', 10
+);
+
+SELECT * FROM PerformanceWithPopularity;
+
+DROP TABLE PerformanceWithPopularity
+
+-- Music Festival Table
+CREATE TABLE MusicFestival(
+    festivalId NUMERIC PRIMARY KEY NOT NULL CHECK (festivalId BETWEEN 0000000000 AND 9999999999) UNIQUE
+);
+
+INSERT INTO MusicFestival VALUES(
+    '222'
+);
+
+SELECT festivalId FROM MusicFestival;
+
+DROP TABLE MusicFestival;
