@@ -36,7 +36,7 @@ Link: [Use Case Diagram](https://www.plantuml.com/plantuml/svg/0/RP5D4e8m38NtFKM
 
 The above listed are functional requirements, that is, **WHAT** the system should allow users to do. There are also non-functional requirements that state **HOW** a system should perform.
 
--   Q1. Consider the use case of `Compute basic/advance result`, **HOW** is this functionality made available to both JiBaBoom and Adminstrator _(Hint: They are different)_? `(Both parties are allowed to query the database regardless of their positions or ranks. The function is made such that both have access to the system so that they can key in what they want to find out.)`
+-   Q1. Consider the use case of `Compute basic/advance result`, **HOW** is this functionality made available to both JiBaBoom and Adminstrator _(Hint: They are different)_? `(In order for Jibaboom to compute the result, the company just need to enter the frontend webpage and then type in their query for the entire system to process. Meanwhile, administrators need to constantly update the database in SQL so that Jibaboom, from the frontend side is able to see constantly updated data for computation.)`
 -   Q2. Consider the use case of `Insert basic/advance data`. **HOW** is the data stored? `(Upon the insertion of the data from the frontend and through the backend, it will be stored into a database.)`
 
 ---
@@ -79,7 +79,7 @@ Link: [Component Diagram](https://www.plantuml.com/plantuml/svg/0/JK-x3i8m3Dpz5L
 1. Does the frontend communicate with the mobile? `(Yes/No)(N.A.)`
 2. Does the frontend communicate directly with the database? `(No)`
 3. How should the frontend display data from the database? `(When there is a query from the frontend, it sends a request to the backend, which thereafter send another request to the database to fetch the data and render back to the backend and eventually to the frontend.)`
-4. How does the frontend communicate with backend? `(Via backend whereby it sends a request to the backend, which will render the command to the db to fetch the data back to the backend and eventually the frontend side.)`
+4. How does the frontend communicate with backend? `(The frontend will send a form data for inputs received by the user and JSON-formatted data for the backend side to process and store to SQL.)`
 
 ---
 
