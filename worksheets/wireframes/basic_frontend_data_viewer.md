@@ -40,7 +40,7 @@ This document should help you explain how your user interfaces are designed. You
 
 #### Good Points
 
-1. A dropdown list to let users choose between the venue instead of letting them tyoe themselves.
+1. A dropdown list to let users choose between the venue instead of letting them type themselves.
 2. 4 different categories(filters) for the users to narrow down their selection.
 
 #### Bad Points
