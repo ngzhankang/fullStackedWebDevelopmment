@@ -7,7 +7,7 @@
 
 -- Performance Table
 CREATE TABLE Performance(
-    performanceId NUMERIC PRIMARY KEY NOT NULL CHECK (performanceId BETWEEN 0000000001 and 9999999999) UNIQUE,
+    performanceId BIGINT PRIMARY KEY NOT NULL CHECK (performanceId BETWEEN 0000000001 and 9999999999) UNIQUE,
     startTime TIME,
     endTime TIME,
     FOREIGN KEY (performanceId) REFERENCES MusicFestival(festivalId)
@@ -24,7 +24,7 @@ DROP TABLE Performance;
 
 -- Performance With Popularity Table
 CREATE TABLE PerformanceWithPopularity(
-    performanceId NUMERIC(10) PRIMARY KEY NOT NULL CHECK (performanceId BETWEEN 0000000001 and 9999999999) UNIQUE,
+    performanceId BIGINT PRIMARY KEY NOT NULL CHECK (performanceId BETWEEN 0000000001 and 9999999999) UNIQUE,
     startTime TIME,
     endTime TIME,
     popularity NUMERIC,
@@ -38,11 +38,9 @@ INSERT INTO PerformanceWithPopularity VALUES(
 SELECT * FROM PerformanceWithPopularity;
 DROP TABLE PerformanceWithPopularity
 
-
-
 -- Music Festival Table
 CREATE TABLE MusicFestival(
-    festivalId NUMERIC PRIMARY KEY NOT NULL CHECK (festivalId BETWEEN 0000000000 AND 9999999999) UNIQUE
+    festivalId BIGINT PRIMARY KEY NOT NULL CHECK (festivalId BETWEEN 0000000001 AND 9999999999) UNIQUE
 );
 
 INSERT INTO MusicFestival VALUES(
