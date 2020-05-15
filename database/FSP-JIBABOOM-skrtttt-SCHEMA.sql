@@ -18,8 +18,6 @@ INSERT INTO Performance VALUES (
 );
 
 SELECT performanceId, startTime, endTime FROM Performance;
-DROP TABLE Performance;
-
 
 
 -- Performance With Popularity Table
@@ -49,3 +47,6 @@ INSERT INTO MusicFestival VALUES(
 
 SELECT festivalId FROM MusicFestival;
 DROP TABLE MusicFestival;
+
+--Alter Table to Add In Foreign Keys
+ALTER TABLE ADD Performance FOREIGN KEY (performanceId) REFERENCES MusicFestival(festivalId)
