@@ -17,3 +17,7 @@
 }
 
 /* CSS For table */
+[data-theme="dark"] .table {
+  background-color: #111 !important;
+  color: #eee;
+}
