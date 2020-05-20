@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const database = require('./database');
+
 var app = express();
 
 app.use(logger('dev'));
@@ -14,6 +16,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res, next) => {
   res.json({ hello: 'world' });
+});
+
+app.post('/basic/insert', function(req, res, next) {
+  const { data } = req.body;
+  database.InsertPerformance(data, (error, result) => {
+    if(error){
+      return next(error);
+    }
+    console.log(result);
+    res.json(data);
+  });
 });
 
 // catch 404 and forward to error handler

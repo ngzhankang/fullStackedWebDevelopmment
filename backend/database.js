@@ -25,8 +25,22 @@ function resetTable() {
     });
 }
 
+function InsertPerformance(performance, callback) {
+    let i = 1234567890;
+    const template = performance.map(performance => `(${i++}, ${i++}, ${i++})`).join(',');
+    const values = performance.reduce((reduced, performance) => [...reduced, performance.performanceId, performance.startTime, performance.endTime], [])
+    const query = `INSERT INTO Performance (performanceId, startTime, endTime) VALUES ${template};`;
+    
+    const client = connect();
+    client.query(query, values, (err, result) => {
+        callback(err, result);
+        client.end();
+    })
+}
+
 module.exports = {
     resetTable,
+    InsertPerformance,
 }
 
 
