@@ -37,14 +37,8 @@ app.get('/basic/data', function (req, res, next) {
     if (error) {
       return next(error);
     }
-    res.json(data);
+    res.json(result);
   });
-  res.json({
-    festivalId,
-    startTime,
-    page,
-    pageSize,
-  })
 })
 
 // catch 404 and forward to error handler
