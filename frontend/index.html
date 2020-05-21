@@ -14,9 +14,15 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- BootStrap CSS And CSS Script -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+  <!-- Optional JavaScript And Jquery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+
+  <!-- BootStrap CSS And CSS Script And JS For buttons to work!-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="index.css" />
+  <script src="indexfunctions.js" type="text/JavaScript"></script>
 </head>
 
 <body class="bg-white text-center d-flex h-100">
@@ -45,45 +51,42 @@
 
     <!-- Main Body -->
     <main role="main">
-      <!-- Main Body == Filter -->
-      <form>
-        <div class="row">
+      <!-- Main Body(Filter) -->
+      <form id='basic-data-filter-form'>
+        <div class="form-row">
           <div class="col-5">
-            <input type="text" class="form-control" placeholder="festivalId" id="festivalIdInput">
+            <input key="festivalId" type="number" min="1000000000" max="9999999999" class="form-control" placeholder="festivalId" id="festivalIdInput" />
           </div>
           <div class="col-5">
-            <input type="text" class="form-control" placeholder="startTime" id="startTimeInput">
+            <input key="startTime" type="time" class="form-control" placeholder="startTime" id="startTimeInput" />
           </div>
+          <input class="btn btn-primary" type="submit" value="Submit" />
         </div>
       </form>
-      <!-- Main Body == Table -->
+      <!-- Main Body(Table) -->
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">#</th>
             <th scope="col">festivalId</th>
             <th scope="col">performanceId</th>
             <th scope="col">startTime</th>
             <th scope="col">endTime</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id='basic-data-tbody'>
           <tr>
-            <th scope="row">1</th>
             <td>1234567890</td>
             <td>2234567789</td>
             <td>1334</td>
             <td>2400</td>
           </tr>
           <tr>
-            <th scope="row">2</th>
             <td>2234567890</td>
             <td>2234567789</td>
             <td>0534</td>
             <td>2400</td>
           </tr>
           <tr>
-            <th scope="row">3</th>
             <td>3234567890</td>
             <td>2234567789</td>
             <td>1034</td>
@@ -95,38 +98,42 @@
 
     <!-- Footer -->
     <footer class="mt-auto">
-      <!-- Footer == Pagination -->
-      <nav aria-label="Page navigation">
-        <ul class="pagination">
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+
+      <div class="form-row">
+        <div class="col-10">
+          <!-- Footer(Pagination) -->
+          <nav aria-label="Page navigation">
+            <ul class="pagination">
+              <li class="page-item">
+                <a fn='gotoFirstPage' id="basic-data-first-page" class="page-link" href="#">First</a>
+              </li>
+              <li class="page-item">
+                <a fn='changePage' value="-1" id="basic-data-previous-page" class="page-link" href="#">Previous</a>
+              </li>
+              <li class="page-item">
+                <a fn='changePage' value="1" id="basic-data-next-page" class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-1">
+          <!-- Footer(Size Options) -->
+          <select fn='changePageSize' id='basic-data-page-size-select' class="custom-select">
+            <option value="5" selected>5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+          </select>
+        </div>
+      </div>
       <hr>
-      <!-- Footer == Copyrights -->
+      <!-- Footer(Copyrights) -->
       <p class="copyright-text">
         Copyright &copy; 2020 All Rights Reserved by skrtttt.
       </p>
     </footer>
   </div>
 
-  <!-- Optional JavaScript And Jquery -->
-  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-    crossorigin="anonymous"></script>
 
-  <!-- Load ReactJs Component -->
-  <script src="table.js"></script>
 </body>
 
 </html>
