@@ -5,12 +5,13 @@
 
 -- NOTE! INTEGER CHECK MIGHT NEED TO BE REMOVED BASED ON CIRCUMSTANCE IN FUTURE.
 
--- Performance Table
+-- Performance 
+DROP TABLE IF EXISTS Performance;
 CREATE TABLE Performance(
     performanceId BIGINT PRIMARY KEY NOT NULL CHECK (performanceId BETWEEN 0000000001 and 9999999999) UNIQUE,
-    startTime TIME,
-    endTime TIME,
-    FOREIGN KEY (performanceId) REFERENCES MusicFestival(festivalId)
+    startTime SMALLINT,
+    endTime SMALLINT,
+    -- FOREIGN KEY (performanceId) REFERENCES MusicFestival(festivalId)
 );
 
 INSERT INTO Performance VALUES (

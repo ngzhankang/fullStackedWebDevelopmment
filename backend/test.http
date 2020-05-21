@@ -5,13 +5,23 @@ Content-Type: application/json
     "data": [
         {
             "performanceId": 1234567890,
-            "startTime": 13-30,
-            "endTime": 15-30
+            "startTime": 1330,
+            "endTime": 1530
         },
-         {
+        {
             "performanceId": 1234567891,
-            "startTime": 15-30,
-            "endTime": 16-30
+            "startTime": 1330,
+            "endTime": 1530
+        },
+        {
+            "performanceId": 1234567892,
+            "startTime": 1330,
+            "endTime": 1530
         }
     ]
 }
+
+###
+
+GET http://localhost:3000/basic/data?festivalId=1234567890&startTime=1330&page=2&pageSize=1 HTTP/1.1
+Content-Type: application/json
