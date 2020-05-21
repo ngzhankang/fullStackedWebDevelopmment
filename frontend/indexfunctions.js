@@ -19,7 +19,7 @@ const basicDataPaginationFunction = {
 };
 
 // using localhost machine address to fetch data.
-const basicDataUrl = "http://localhost:3000/basic/data";
+const basicDataUrl = "http://localhost:8080/basic/data";
 
 // to populate the table upon getting the data from the backend
 function populateBasicDataTable(data) {
