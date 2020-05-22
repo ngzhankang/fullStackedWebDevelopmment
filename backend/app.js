@@ -18,8 +18,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// insert api
-app.post('/basic/insert', function (req, res, next) {
+// POST insert api for performance
+app.post('/basic/insert/Performance', function (req, res, next) {
   const { data } = req.body;
   database.insertPerformance(data, (error, result) => {
     if (error) {
@@ -31,9 +31,23 @@ app.post('/basic/insert', function (req, res, next) {
   });
 });
 
-app.get('/basic/data', function (req, res, next) {
-  const { festivalId, startTime, page, pageSize } = req.query;
-  database.getFestivals(festivalId, startTime, page, pageSize, (error, result) => {
+// POST for musicfestival
+app.post('/basic/insert/MusicFestival', function (req, res, next) {
+  const { data } = req.body;
+  database.insertFestival(data, (error, result) => {
+    if (error) {
+      console.log(error)
+      return next(error);
+    }
+    console.log(result);
+    res.json(data);
+  });
+});
+
+// GET method data viewer filter api
+app.get('/basic/data/', function (req, res, next) {
+  const { fk_festivalId, startTime, page, pageSize } = req.query;
+  database.getFestivals(fk_festivalId, startTime, page, pageSize, (error, result) => {
     if (error) {
       return next(error);
     }

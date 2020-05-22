@@ -34,7 +34,7 @@
       </h3>
       <nav class="nav justify-content-center float-right">
         <a class="nav-link active" href="#home">Home</a>
-        <a class="nav-link" href="#result-viewer">Data Viewer</a>
+        <a class="nav-link" href="#result-viewer">Result Viewer</a>
 
         <!-- Navbar(Darkmode Switch) -->
         <div class="nav-link">
@@ -58,7 +58,7 @@
             <input key="festivalId" type="number" min="1000000000" max="9999999999" class="form-control" placeholder="festivalId" id="festivalIdInput" />
           </div>
           <div class="col-5">
-            <input key="startTime" type="time" class="form-control" placeholder="startTime" id="startTimeInput" />
+            <input key="startTime" type="number" min="0000" max="2400" class="form-control" placeholder="startTime" id="startTimeInput" />
           </div>
           <input class="btn btn-primary" type="submit" value="Submit" />
         </div>
@@ -74,24 +74,6 @@
           </tr>
         </thead>
         <tbody id='basic-data-tbody'>
-          <tr>
-            <td>1234567890</td>
-            <td>2234567789</td>
-            <td>1334</td>
-            <td>2400</td>
-          </tr>
-          <tr>
-            <td>2234567890</td>
-            <td>2234567789</td>
-            <td>0534</td>
-            <td>2400</td>
-          </tr>
-          <tr>
-            <td>3234567890</td>
-            <td>2234567789</td>
-            <td>1034</td>
-            <td>2400</td>
-          </tr>
         </tbody>
       </table>
     </main>

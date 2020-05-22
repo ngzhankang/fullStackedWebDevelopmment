@@ -1,4 +1,6 @@
-POST http://localhost:3000/basic/insert HTTP/1.1
+### POST performanceId, startime and endtime to performance table
+
+POST http://localhost:3000/basic/insert/Performance HTTP/1.1
 Content-Type: application/json
 
 {
@@ -6,22 +8,83 @@ Content-Type: application/json
         {
             "performanceId": 1234567890,
             "startTime": 1330,
-            "endTime": 1530
+            "endTime": 1530,
+            "fk_festivalId": 2234567891 
         },
         {
             "performanceId": 1234567891,
             "startTime": 1330,
-            "endTime": 1530
+            "endTime": 1530,
+            "fk_festivalId": 2234567891
         },
         {
             "performanceId": 1234567892,
             "startTime": 1330,
-            "endTime": 1530
+            "endTime": 1530,
+            "fk_festivalId": 2234567891
+        },
+        {
+            "performanceId": 1234567893,
+            "startTime": 1330,
+            "endTime": 1530,
+            "fk_festivalId": 2234567891
+        },
+        {
+            "performanceId": 1234567894,
+            "startTime": 1430,
+            "endTime": 1530,
+            "fk_festivalId": 2234567891
+        },
+        {
+            "performanceId": 1234567895,
+            "startTime": 1430,
+            "endTime": 1530,
+            "fk_festivalId": 2234567892
+        },
+        {
+            "performanceId": 1234567896,
+            "startTime": 1330,
+            "endTime": 1530,
+            "fk_festivalId": 2234567892
+        },
+        {
+            "performanceId": 1234567897,
+            "startTime": 1330,
+            "endTime": 1530,
+            "fk_festivalId": 2234567892
+        },
+        {
+            "performanceId": 123456788,
+            "startTime": 1330,
+            "endTime": 1530,
+            "fk_festivalId": 2234567892
+        },
+{
+            "performanceId": 1234567899,
+            "startTime": 1330,
+            "endTime": 1530,
+            "fk_festivalId": 2234567892
         }
     ]
 }
 
-###
+### POST festivalId to MusicFestival table
 
-GET http://localhost:3000/basic/data?festivalId=1234567890&startTime=1330&page=2&pageSize=1 HTTP/1.1
+POST http://localhost:3000/basic/insert/MusicFestival HTTP/1.1
+Content-Type: application/json
+
+{
+    "data": [
+        {
+            "festivalId": 2234567891
+        },
+        {
+            "festivalId": 2234567892
+        }
+    ]
+}
+
+### GET filter for data viewer
+
+GET http://localhost:3000/basic/data?fk_festivalId=2234567899&startTime=1330&page=1&pageSize=1 HTTP/1.1
 Content-Type: application/json

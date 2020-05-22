@@ -8,29 +8,29 @@ const basicDataQuery = {
 // list out all the functions so that they can do some logic changes
 const basicDataPaginationFunction = {
   gotoFirstPage: function () {
-    basicDataQuery["page"] = 0;
+    basicDataQuery['page'] = 0;
   },
   changePage: function (delta) {
-    basicDataQuery["page"] += parseInt(delta);
+    basicDataQuery['page'] += parseInt(delta);
   },
   changePageSize: function (newPageSize) {
-    basicDataQuery["pageSize"] = newPageSize;
+    basicDataQuery['pageSize'] = newPageSize;
   },
 };
 
-// using localhost machine address to fetch data.
-const basicDataUrl = "http://localhost:8080/basic/data";
+// using localhost machine address to get and fetch from the backend
+const basicDataUrl = "http://localhost:3000/basic/data";
 
 // to populate the table upon getting the data from the backend
 function populateBasicDataTable(data) {
   console.log(data);
-  const dataTableHtml = data.map(
-    ({festivalId, performanceid, startTime, endTime}) => `
+  const dataTableHtml = data.rows.map(
+    ({fk_festivalid, performanceid, starttime, endtime}) => `
             <tr>
-                <td>${festivalId}</td>
+                <td>${fk_festivalid}</td>
                 <td>${performanceid}</td>
-                <td>${startTime}</td>
-                <td>${endTime}</td>
+                <td>${starttime}</td>
+                <td>${endtime}</td>
             </tr>
           `,
   );
@@ -47,19 +47,17 @@ function getBasicDataFromBackend(callback) {
 // to fire the table to refresh the old datas and to call populateBasicDataTabe function
 function refreshBasicDataTable() {
   getBasicDataFromBackend(function (error, data) {
-    if (error) {
-      return alert(error);
-    }
+    if (error) return alert(error);
     populateBasicDataTable(data);
   });
 }
 
 // to capture the input from html.
 function filterBasicData(event) {
-  $("#basic-data-filter-form input")
-    .not(":input[type=submit]")
+  $('#basic-data-filter-form input')
+    .not(':input[type=submit]')
     .each((idx, input) => {
-      basicDataQuery[$(input).attr("key")] = $(input).val();
+      basicDataQuery[$(input).attr('key')] = $(input).val();
     });
   refreshBasicDataTable();
   return false;
@@ -67,24 +65,26 @@ function filterBasicData(event) {
 
 // to control the pagination after clicking
 function paginateBasicData(event) {
-  const fn = $(this).attr("fn");
-  const value = $(this).attr("value") || $(this).val("value"); //if the 1st value is nth, take the 2nd value
+  const fn = $(this).attr('fn');
+  const value = $(this).attr('value') || $(this).val(); //if the 1st value is nth, take the 2nd value
   basicDataPaginationFunction[fn](value);
   refreshBasicDataTable();
 }
 
+// getting info from the frontend and then sending to filterBasicData function
 function registerBasicDataFilterForm() {
   $("#basic-data-filter-form").submit(filterBasicData);
 }
 
 // to call the event for the pagination and size method upon click
 function regiserBasicDataPaginationForm() {
-  $("#basic-data-first-page").click(paginateBasicData);
-  $("#basic-data-previous-page").click(paginateBasicData);
-  $("#basic-data-next-page").click(paginateBasicData);
-  $("#basic-data-page-size-select").change(paginateBasicData);
+  $('#basic-data-first-page').click(paginateBasicData);
+  $('#basic-data-previous-page').click(paginateBasicData);
+  $('#basic-data-next-page').click(paginateBasicData);
+  $('#basic-data-page-size-select').change(paginateBasicData);
 }
 
+// call these functions
 $(document).ready(function () {
   registerBasicDataFilterForm();
   regiserBasicDataPaginationForm();

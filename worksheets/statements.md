@@ -6,12 +6,12 @@ For this worksheet you will need to provide an example of your own SQL statement
 
 Example:
 ```sql
-INSERT INTO​ table_name (id, startTime, endTime) ​VALUES ​(1, 1010, 2020); 
+INSERT INTO​ Performance (PerformanceId, startTime, endTime) ​VALUES ​(1234567890, 1010, 2020); 
 ```
 
 ## SELECT with Filtering and Pagination
 
 Example:
 ```sql
-SELECT ​* ​FROM ​table_name ​WHERE startTime >= 0 ​AND ​endTime <= 3000 LIMIT ​2 ​OFFSET ​10;
+SELECT ​* ​FROM ​Performance ​WHERE startTime >= 1330 LIMIT ​1 ​OFFSET ​1;
 ```
