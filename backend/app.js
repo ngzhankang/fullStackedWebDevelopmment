@@ -43,8 +43,9 @@ app.post('/basic/insert', function (req, res, next) {
     database.insertPerformance(data, (error2, result2) => {
       if (error2) {
         console.log(error2);
-        res.json({result: "success"});
+        return next(error2);
       }
+    res.json({result: "success"});
     })
   });
 });
