@@ -11,16 +11,17 @@ The following are examples of how you can create a table, replace the examples w
 
 ```sql
 CREATE TABLE Performance(
-    performanceId NUMERIC PRIMARY KEY NOT NULL CHECK (performanceId BETWEEN 0000000001 and 9999999999) UNIQUE,
-    startTime TIME,
-    endTime TIME,
-    FOREIGN KEY (performanceId) REFERENCES MusicFestival(festivalId)
+    performanceId BIGINT PRIMARY KEY NOT NULL CHECK (performanceId BETWEEN 0000000001 and 9999999999) UNIQUE,
+    startTime SMALLINT,
+    endTime SMALLINT,
+    festivalId BIGINT CHECK (festivalId BETWEEN 0000000001 and 9999999999),
+    FOREIGN KEY (festivalId) REFERENCES MusicFestival(festivalId)
 );
 ```
 
 ```sql
 CREATE TABLE MusicFestival(
-    festivalId NUMERIC PRIMARY KEY NOT NULL CHECK (festivalId BETWEEN 0000000000 AND 9999999999) UNIQUE
+    festivalId BIGINT PRIMARY KEY NOT NULL CHECK (festivalId BETWEEN 0000000001 AND 9999999999)
 );
 ```
 

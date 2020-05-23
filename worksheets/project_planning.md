@@ -34,12 +34,12 @@ This document helps you identify the smaller tasks and helps you create a rough 
 
 ### Member 1 - Triston Loh | Member 2 - Ng Zhan Kang
 
-| Week | Level | Component | Feature       | Task  |Responsibility          |
-| ---- | ----- | --------- | ------------- | -------------- |------------|
-| 1    | Basic | Planning  | Data Viewer   | Wireframe/Justification      |Both |
-| 2    | Basic | Planning  | Result Viewer | Wireframe/Justification     |Both |
-| 3    | Basic | Planning  | Markdown Scripts | Fill Up Markdown Scripts | Both |
-| 4    | Basic | Database  | DB Population  | Creating Table  |Both |
-| 5    | Basic | Database  | DB Foreign Keys  | Establishing table relationships |Both |
+| Week | Level | Component | Feature       | Task  |  Responsibility  |
+| ---- | ----- | --------- | ------------- | -------------- |-----------|
+| 1    | Basic | Planning  | Data Viewer, Result Viewer   | Wireframe/Justification      | Both |
+| 2    | Basic | Planning  | Markdown Scripts | Fill Up Markdown Scripts | Both |
+| 3    | Basic | Database  | DB Population  | Creating Table And Establishing Table Relationships  | Both |
+| 4    | Basic | Frontend and Backend  | Endpoints and Filters(part 1)  | Create basic endpoints and make filters in frontend | Both |
+| 5    | Basic | Frontend and Backend  | Endpoints and Filters(part 2)  | Finish up endpoints and frontend | Both |
 
 

@@ -10,9 +10,9 @@ This report is for you to document the progres of your project. You should also 
 
 ## What do I plan to do next week
 
--   Try to get the frontend roughly done and focus more on backend
--   Change anything if required
+-   Await for our destiny.
+-   May the force be with us. :)
 
 ## Additional Thoughts
 
--   Nil
+-   Phase 1 is coming to an end :)

@@ -4,18 +4,17 @@ This report is for you to document the progres of your project. You should also 
 
 ## What have I done last week
 
--   Worked on...
--   Worked on...
--   Changed....
+-   Worked on frontend and backend
+-   Start on some basic data input
+-   Changed wireframe design
 
 ## What do I plan to do next week
 
--   Worked on...
--   Worked on...
--   Changed....
+-   Finish up on frontend and backend
+-   Test out our project
 
 ## Additional Thoughts
 
--   VSCode is sick.
--   This addon is fabulous.
--   Lecturer is awesome.
+-   VSCode is sick as usual.
+-   Phase 1 is almost coming to an end!
+-   Thz lecturer!
