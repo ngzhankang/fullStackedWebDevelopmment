@@ -18,7 +18,7 @@ CREATE TABLE Performance(
 
 -- Music Festival Table
 CREATE TABLE MusicFestival(
-    festivalId BIGINT PRIMARY KEY NOT NULL CHECK (festivalId BETWEEN 0000000001 AND 9999999999) UNIQUE
+    festivalId BIGINT PRIMARY KEY NOT NULL CHECK (festivalId BETWEEN 0000000001 AND 9999999999)
 );
 
 -- Performance With Popularity Table

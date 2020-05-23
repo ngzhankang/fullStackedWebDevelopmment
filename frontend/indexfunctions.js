@@ -25,9 +25,9 @@ const basicDataUrl = "http://localhost:3000/basic/data";
 function populateBasicDataTable(data) {
   console.log(data);
   const dataTableHtml = data.rows.map(
-    ({fk_festivalid, performanceid, starttime, endtime}) => `
+    ({festivalid, performanceid, starttime, endtime}) => `
             <tr>
-                <td>${fk_festivalid}</td>
+                <td>${festivalid}</td>
                 <td>${performanceid}</td>
                 <td>${starttime}</td>
                 <td>${endtime}</td>

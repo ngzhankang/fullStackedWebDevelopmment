@@ -19,7 +19,8 @@ function resetTable() {
     CREATE TABLE Performance(
         performanceId BIGINT PRIMARY KEY NOT NULL CHECK (performanceId BETWEEN 0000000001 and 9999999999) UNIQUE,
         startTime SMALLINT,
-        endTime SMALLINT
+        endTime SMALLINT,
+        festivalId BIGINT CHECK (festivalId BETWEEN 0000000001 and 9999999999)
     );
     `;
     client.query(query, (err, res) => {
@@ -32,8 +33,8 @@ function resetTable() {
 function insertPerformance(performance, callback) {
     let i = 1;
     const template = performance.map(performance => `($${i++}, $${i++}, $${i++}, $${i++})`).join(',');
-    const values = performance.reduce((reduced, performance) => [...reduced, performance.performanceId, performance.startTime, performance.endTime, performance.festivalId], [])
-    const query = `INSERT INTO Performance (performanceId, startTime, endTime, festivalId) VALUES ${template};`;
+    const values = performance.reduce((reduced, performance) => [...reduced, performance.festivalId, performance.performanceId, performance.startTime, performance.endTime], [])
+    const query = `INSERT INTO Performance (festivalId, performanceId, startTime, endTime) VALUES ${template};`;
     const client = connect();
     client.query(query, values, (err, result) => {
         callback(err, result);
@@ -42,11 +43,11 @@ function insertPerformance(performance, callback) {
 }
 
 // insertFestival() function to dump in some random generated data for MusicFestival table
-function insertFestival(MusicFestival, callback) {
+function insertFestival(performance, callback) {
     let i = 1;
-    const templates = MusicFestival.map(MusicFestival => `($${i++})`).join(',');
-    const values = MusicFestival.reduce((reduced, MusicFestival) => [...reduced, MusicFestival.festivalId], [])
-    const query = `INSERT INTO MusicFestival (festivalId) VALUES ${templates};`;
+    const templates = performance.map(MusicFestival => `($${i++})`).join(',');
+    const values = performance.reduce((reduced, performance) => [...reduced, performance.festivalId], [])
+    const query = `INSERT INTO MusicFestival (festivalId) VALUES ${templates} ON CONFLICT DO NOTHING;`;
     const client = connect();
     client.query(query, values, (err, result) => {
         callback(err, result);
@@ -62,9 +63,9 @@ function getFestivals(festivalId, startTime, page=0, pageSize=5, callback) {
     if (!festivalId && !startTime) whereClause = '';
     else {
         whereClause = 'WHERE'
-        if (fk_festivalId) {
+        if (festivalId) {
             whereClause += ` festivalId = $${i++}`;
-            values.push(parseInt(fk_festivalId));
+            values.push(parseInt(festivalId));
         }
         if (startTime) {
             whereClause += ` startTime >= $${i++}`;
@@ -90,19 +91,3 @@ module.exports = {
     insertFestival,
     getFestivals
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
