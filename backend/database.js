@@ -32,8 +32,8 @@ function resetTable() {
 function insertPerformance(performance, callback) {
     let i = 1;
     const template = performance.map(performance => `($${i++}, $${i++}, $${i++}, $${i++})`).join(',');
-    const values = performance.reduce((reduced, performance) => [...reduced, performance.performanceId, performance.startTime, performance.endTime, performance.fk_festivalId], [])
-    const query = `INSERT INTO Performance (performanceId, startTime, endTime, fk_festivalId) VALUES ${template};`;
+    const values = performance.reduce((reduced, performance) => [...reduced, performance.performanceId, performance.startTime, performance.endTime, performance.festivalId], [])
+    const query = `INSERT INTO Performance (performanceId, startTime, endTime, festivalId) VALUES ${template};`;
     const client = connect();
     client.query(query, values, (err, result) => {
         callback(err, result);

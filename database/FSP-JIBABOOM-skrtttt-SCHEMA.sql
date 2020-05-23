@@ -12,7 +12,7 @@ CREATE TABLE Performance(
     performanceId BIGINT PRIMARY KEY NOT NULL CHECK (performanceId BETWEEN 0000000001 and 9999999999) UNIQUE,
     startTime SMALLINT,
     endTime SMALLINT,
-    festivalId BIGINT CHECK (fk_festivalId BETWEEN 0000000001 and 9999999999),
+    festivalId BIGINT CHECK (festivalId BETWEEN 0000000001 and 9999999999),
     FOREIGN KEY (festivalId) REFERENCES MusicFestival(festivalId)
 );
 
