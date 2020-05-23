@@ -18,36 +18,41 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// POST insert api for performance
-app.post('/basic/insert/Performance', function (req, res, next) {
-  const { data } = req.body;
-  database.insertPerformance(data, (error, result) => {
-    if (error) {
-      console.log(error)
-      return next(error);
-    }
-    console.log(result);
-    res.json(data);
-  });
-});
+// // POST insert api for performance
+// app.post('/basic/insert/Performance', function (req, res, next) {
+//   const { data } = req.body;
+//   database.insertPerformance(data, (error, result) => {
+//     if (error) {
+//       console.log(error)
+//       return next(error);
+//     }
+//     console.log(result);
+//     res.json(data);
+//   });
+// });
 
-// POST for musicfestival
-app.post('/basic/insert/MusicFestival', function (req, res, next) {
+// POST for festivalId first then performanceId
+app.post('/basic/insert', function (req, res, next) {
   const { data } = req.body;
   database.insertFestival(data, (error, result) => {
     if (error) {
       console.log(error)
       return next(error);
     }
-    console.log(result);
-    res.json(data);
+    // if insertFestivalId pass, proceed to insertPerformance
+    database.insertPerformance(data, (error2, result2) => {
+      if (error2) {
+        console.log(error2);
+        res.json({result: "success"});
+      }
+    })
   });
 });
 
 // GET method data viewer filter api
 app.get('/basic/data/', function (req, res, next) {
-  const { fk_festivalId, startTime, page, pageSize } = req.query;
-  database.getFestivals(fk_festivalId, startTime, page, pageSize, (error, result) => {
+  const { festivalId, startTime, page, pageSize } = req.query;
+  database.getFestivals(festivalId, startTime, page, pageSize, (error, result) => {
     if (error) {
       return next(error);
     }

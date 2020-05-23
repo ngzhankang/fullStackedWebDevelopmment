@@ -55,15 +55,15 @@ function insertFestival(MusicFestival, callback) {
 }
 
 // Function to push data from db to frontend, getting all data from Performance table
-function getFestivals(fk_festivalId, startTime, page=0, pageSize=5, callback) {
+function getFestivals(festivalId, startTime, page=0, pageSize=5, callback) {
     let whereClause;
     let i = 1;
     const values = [];
-    if (!fk_festivalId && !startTime) whereClause = '';
+    if (!festivalId && !startTime) whereClause = '';
     else {
         whereClause = 'WHERE'
         if (fk_festivalId) {
-            whereClause += ` fk_festivalId = $${i++}`;
+            whereClause += ` festivalId = $${i++}`;
             values.push(parseInt(fk_festivalId));
         }
         if (startTime) {

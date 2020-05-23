@@ -88,4 +88,5 @@ function regiserBasicDataPaginationForm() {
 $(document).ready(function () {
   registerBasicDataFilterForm();
   regiserBasicDataPaginationForm();
+  refreshBasicDataTable();
 });
