@@ -34,6 +34,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 // POST for festivalId first then performanceId
 app.post('/basic/insert', function (req, res, next) {
   const { data } = req.body;
+
+  if(data.length === 0) {
+    res.json({result: "Success!", code: 200})
+  }
   database.insertFestival(data, (error, result) => {
     if (error) {
       console.log(error)
