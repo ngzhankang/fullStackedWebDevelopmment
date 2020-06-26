@@ -248,7 +248,7 @@ _Not Required_
 | attribute   | value         |
 | ----------- | ------------- |
 | HTTP Method | GET           |
-| Endpoint    | /advanced/result |
+| Endpoint    | /advance/result |
 
 ### Parameters
 
