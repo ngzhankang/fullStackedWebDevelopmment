@@ -38,6 +38,13 @@ app.post('/basic/insert', function (req, res, next) {
   if(data.length === 0) {
     res.json({result: "Success!", code: 200})
   }
+  for(var i = 0; i < data.length; i++){
+    // check that each entry has all the fields
+    // check for entries that doesn't have all the fields
+    if(data[i].festivalId == undefined || data[i].performanceId == undefined || data[i].startTime == undefined || data[i].endTime == undefined)
+    // return error
+    return res.json({error: 'Invalid data', code: 400})
+  }
   database.insertFestival(data, (error, result) => {
     if (error) {
       console.log(error)

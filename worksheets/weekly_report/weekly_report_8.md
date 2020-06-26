@@ -4,18 +4,12 @@ This report is for you to document the progres of your project. You should also 
 
 ## What have I done last week
 
--   Worked on...
--   Worked on...
--   Changed....
+-   Worked on assignment for other modules.
 
 ## What do I plan to do next week
 
--   Worked on...
--   Worked on...
--   Changed....
+-   Have a 1 week break before school starts again.
 
 ## Additional Thoughts
 
--   VSCode is sick.
--   This addon is fabulous.
--   Lecturer is awesome.
+-   Finally a short break!

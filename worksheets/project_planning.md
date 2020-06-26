@@ -34,12 +34,20 @@ This document helps you identify the smaller tasks and helps you create a rough 
 
 ### Member 1 - Triston Loh | Member 2 - Ng Zhan Kang
 
+## Phase 1
 | Week | Level | Component | Feature       | Task  |  Responsibility  |
 | ---- | ----- | --------- | ------------- | -------------- |-----------|
-| 1    | Basic | Planning  | Data Viewer, Result Viewer   | Wireframe/Justification      | Both |
-| 2    | Basic | Planning  | Markdown Scripts | Fill Up Markdown Scripts | Both |
-| 3    | Basic | Database  | DB Population  | Creating Table And Establishing Table Relationships  | Both |
-| 4    | Basic | Frontend and Backend  | Endpoints and Filters(part 1)  | Create basic endpoints and make filters in frontend | Both |
-| 5    | Basic | Frontend and Backend  | Endpoints and Filters(part 2)  | Finish up endpoints and frontend | Both |
+| 1    | Basic | Planning | Data Viewer, Result Viewer | Wireframe/Justification | Both |
+| 2    | Basic | Planning | Markdown Scripts | Fill Up Markdown Scripts | Both |
+| 3    | Basic | Database | DB Population | Creating Table And Establishing Table Relationships | Both |
+| 4    | Basic | Frontend and Backend | Endpoints and Filters(part 1) | Create basic endpoints and make filters in frontend | Both |
+| 5    | Basic | Frontend and Backend | Endpoints and Filters(part 2) | Finish up endpoints and frontend | Both |
 
-
+## Phase 2
+| Week | Level | Component | Feature       | Task  |  Responsibility  |
+| ---- | ----- | --------- | ------------- | -------------- |-----------|
+| 10   | Advanced | Planning + Database | Markdown Scripts, Wireframes, Database | Add wireframes, edit markdown scripts, edit database for advanced feature | Both |
+| 11   | Advanced | Planning  | Markdown Scripts | Fill Up Markdown Scripts | Both |
+| 12   | Advanced | Database  | DB Population  | Creating Table And Establishing Table Relationships  | Both |
+| 13   | Advanced | Frontend and Backend  | Endpoints and Filters(part 1)  | Create basic endpoints and make filters in frontend | Both |
+| 14   | Advanced | Frontend and Backend  | Endpoints and Filters(part 2)  | Finish up endpoints and frontend | Both |

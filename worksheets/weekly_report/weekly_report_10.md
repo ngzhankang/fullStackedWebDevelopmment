@@ -4,9 +4,7 @@ This report is for you to document the progres of your project. You should also 
 
 ## What have I done last week
 
--   Worked on...
--   Worked on...
--   Changed....
+-   Took a 1 week break.
 
 ## What do I plan to do next week
 

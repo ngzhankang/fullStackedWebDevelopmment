@@ -4,18 +4,13 @@ This report is for you to document the progres of your project. You should also 
 
 ## What have I done last week
 
--   Worked on...
--   Worked on...
--   Changed....
+-   Submitted all our assignments for modules.
 
 ## What do I plan to do next week
 
--   Worked on...
--   Worked on...
--   Changed....
+-   Since school is going to start, we are going to start working on the assignment so that we can finish the assignment earlier and focus on assignments for other modules.
+-   For e.g cleaning up ca1 and ca2, updating database for advanced feature, add wireframes for advanced feature, add more things to the markdowns for advanced feature.
 
 ## Additional Thoughts
 
--   VSCode is sick.
--   This addon is fabulous.
--   Lecturer is awesome.
+-   School is starting, time to get ready to grind!

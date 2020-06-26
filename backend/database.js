@@ -18,9 +18,9 @@ function resetTable() {
     DROP TABLE IF EXISTS Performance;
     CREATE TABLE Performance(
         performanceId BIGINT PRIMARY KEY NOT NULL CHECK (performanceId BETWEEN 0000000001 and 9999999999) UNIQUE,
-        startTime SMALLINT,
-        endTime SMALLINT,
-        festivalId BIGINT CHECK (festivalId BETWEEN 0000000001 and 9999999999)
+        startTime SMALLINT NOT NULL,
+        endTime SMALLINT NOT NULL,
+        festivalId BIGINT NOT NULL CHECK (festivalId BETWEEN 0000000001 and 9999999999)
     );
     `;
     client.query(query, (err, res) => {

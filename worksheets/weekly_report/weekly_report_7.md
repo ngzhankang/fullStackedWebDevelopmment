@@ -4,18 +4,13 @@ This report is for you to document the progres of your project. You should also 
 
 ## What have I done last week
 
--   Worked on...
--   Worked on...
--   Changed....
+-   Submitted fsp assignment.
+-   Prepare assignments for other modules.
 
 ## What do I plan to do next week
 
--   Worked on...
--   Worked on...
--   Changed....
+-   Touch up on assignments for other modules.
 
 ## Additional Thoughts
 
--   VSCode is sick.
--   This addon is fabulous.
--   Lecturer is awesome.
+-  Phase 1 ended.
