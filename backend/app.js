@@ -7,6 +7,7 @@ var logger = require('morgan');
 var cors = require('cors');
 
 const database = require('./database');
+// const algorithm = require('./algorithm')
 
 var app = express();
 
@@ -17,19 +18,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-// hello
-// // POST insert api for performance
-// app.post('/basic/insert/Performance', function (req, res, next) {
-//   const { data } = req.body;
-//   database.insertPerformance(data, (error, result) => {
-//     if (error) {
-//       console.log(error)
-//       return next(error);
-//     }
-//     console.log(result);
-//     res.json(data);
-//   });
-// });
 
 // POST for festivalId first then performanceId
 app.post('/basic/insert', function (req, res, next) {

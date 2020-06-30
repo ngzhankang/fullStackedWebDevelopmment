@@ -60,7 +60,7 @@ function getFestivals(festivalId, startTime, page=0, pageSize=5, callback) {
     let whereClause;
     let i = 1;
     const values = [];
-    if (!festivalId && !startTime) {whereClause = ''} //Added Curly Bracket
+    if (!festivalId && !startTime) {whereClause = ''}
     else {
         whereClause = 'WHERE'
         if (festivalId) {
@@ -68,7 +68,7 @@ function getFestivals(festivalId, startTime, page=0, pageSize=5, callback) {
             values.push(parseInt(festivalId));
         }
         if (startTime) {
-            whereClause += festivalId ? ` AND startTime >= $${i++}` : ` startTime >= $${i++}`; //Our original code is whereClause += ` startTime >= $${i++}`;
+            whereClause += festivalId ? ` AND startTime >= $${i++}` : ` startTime >= $${i++}`;
             values.push(parseInt(startTime))
         }
     }

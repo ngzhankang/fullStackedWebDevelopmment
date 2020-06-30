@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Title And Favicon-->
+    <title>Jibaboom! ∙ ResultViewer</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicons/favicon-16x16.png" />
+    <link rel="manifest" href="./favicons/site.webmanifest" />
+
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Optional JavaScript And Jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+    <!-- BootStrap CSS And CSS Script And JS For buttons to work!-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="index.css" />
+    <script src="indexfunctions.js" type="text/JavaScript"></script>
+</head>
+</head>
+
+<body class="bg-white text-center d-flex h-100">
+    <div class="container d-flex p-3 mx-auto flex-column">
+        <!-- Navbar -->
+        <header class="mb-auto">
+            <h3 class="float-left">
+                <img src="favicons/favicon.ico" width="30" height="30" class="d-inline-block align-top"
+                    alt="" />Jibaboom
+            </h3>
+            <nav class="nav justify-content-center float-right">
+                <a class="nav-link active" href="#home">Home</a>
+                <a class="nav-link" href="index.html">Data Viewer</a>
+
+                <!-- Navbar(Darkmode Switch) -->
+                <div class="nav-link">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="darkSwitch" />
+                        <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
+                    </div>
+
+                    <!-- Javascript For Darkmode Switch -->
+                    <script src="index.js"></script>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Body -->
+        <main role="main">
+            <!-- Main Body(Filter) -->
+            <form id='basic-result-input-form'>
+                <div class="form-row col-6 mx-auto pt-5 pb-5 pl-5">
+                    <div class="col-6">
+                        <input required key="festivalId" type="number" min="1000000000" max="9999999999" class="form-control"
+                            placeholder="festivalId" id="festivalIdInput" />
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Submit" />
+                </div>
+            </form>
+
+            <!-- Main Body(Table) -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">festivalId</th>
+                        <th scope="col">performanceId</th>
+                        <th scope="col">startTime</th>
+                        <th scope="col">endTime</th>
+                        <th scope="col">popularity</th>
+                    </tr>
+                </thead>
+                <tbody id='basic-data-tbody'>
+                </tbody>
+            </table>
+        </main>
+
+        <!-- Footer -->
+        <footer class="mt-auto">
+
+            <div class="form-row">
+                <div class="col-10">
+                    <!-- Footer(Pagination) -->
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a fn='gotoFirstPage' id="basic-data-first-page" class="page-link" href="#">First</a>
+                            </li>
+                            <li class="page-item">
+                                <a fn='changePage' value="-1" id="basic-data-previous-page" class="page-link"
+                                    href="#">Previous</a>
+                            </li>
+                            <li class="page-item">
+                                <a fn='changePage' value="1" id="basic-data-next-page" class="page-link"
+                                    href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-1">
+
+                    <!-- Footer(Size Options) -->
+                    <select fn='changePageSize' id='basic-data-page-size-select' class="custom-select">
+                        <option value="5" selected>5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                    </select>
+                </div>
+            </div>
+            <hr>
+
+            <!-- Footer(Copyrights) -->
+            <p class="copyright-text">
+                Copyright &copy; 2020 All Rights Reserved by skrtttt.
+            </p>
+        </footer>
+
+</body>
+
+</html>
