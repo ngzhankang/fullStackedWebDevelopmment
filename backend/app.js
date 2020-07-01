@@ -51,18 +51,7 @@ app.post('/basic/insert/', function (req, res, next) {
   }
 });
 
-// GET endpoint for Performance table(OK)
-app.get('/basic/data/', function (req, res, next) {
-  const { festivalId, startTime, page, pageSize } = req.query;
-  database.getFestivals(festivalId, startTime, page, pageSize, (error, result) => {
-    if (error) {
-      return next(error);
-    }
-    res.json(result);
-  });
-});
-
-// POST for PerformanceWithPopularity table
+// POST for PerformanceWithPopularity table(OK)
 app.post('/advanced/insert/', function (req, res, next) {
   const { data } = req.body;
 
@@ -88,6 +77,17 @@ app.post('/advanced/insert/', function (req, res, next) {
       })
     });
   }
+});
+
+// GET endpoint for Performance table(OK)
+app.get('/basic/data/', function (req, res, next) {
+  const { festivalId, startTime, page, pageSize } = req.query;
+  database.getFestivals(festivalId, startTime, page, pageSize, (error, result) => {
+    if (error) {
+      return next(error);
+    }
+    res.json(result);
+  });
 });
 
 // GET for PerformanceWithPopularity table
