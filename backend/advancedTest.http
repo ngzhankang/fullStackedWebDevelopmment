@@ -1,0 +1,94 @@
+### POST performanceId, startime, endtime and popularity to performanceWithPopularity table(OK)
+@url1 = http://localhost:3000/advanced/insert/
+@url2 = http://localhost:3000/advanced/result/
+@httpMethod1 = POST
+@httpMethod2 = GET
+
+### POST data into performanceWithPopularity Table.(OK)
+{{httpMethod1}} {{url1}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "data": [
+        {
+            "festivalId": 2234567891, 
+            "performanceId": 1234567890,
+            "startTime": 1330,
+            "endTime": 1530,
+            "popularity": 1
+
+        },
+        {
+            "festivalId": 2234567891,
+            "performanceId": 1234567891,
+            "startTime": 1530,
+            "endTime": 1630,
+            "popularity": 10
+        },
+        {
+            "festivalId": 2234567891,
+            "performanceId": 1234567892,
+            "startTime": 1330,
+            "endTime": 1530,
+            "popularity": 100
+        },
+        {
+            "festivalId": 2234567891,
+            "performanceId": 1234567893,
+            "startTime": 1330,
+            "endTime": 1530,
+            "popularity": 100
+        },
+        {
+            "festivalId": 2234567891,
+            "performanceId": 1234567894,
+            "startTime": 1430,
+            "endTime": 1530,
+            "popularity": 100
+        },
+        {
+            "festivalId": 2234567892,
+            "performanceId": 1234567895,
+            "startTime": 1430,
+            "endTime": 1530,
+            "popularity": 100
+        },
+        {
+            "festivalId": 2234567892,
+            "performanceId": 1234567896,
+            "startTime": 1330,
+            "endTime": 1530,
+            "popularity": 100
+        },
+        {
+            "festivalId": 2234567892,
+            "performanceId": 1234567897,
+            "startTime": 1330,
+            "endTime": 1530,
+            "popularity": 100
+        },
+        {
+            "festivalId": 2234567892,
+            "performanceId": 123456788,
+            "startTime": 1330,
+            "endTime": 1530,
+            "popularity": 1000
+        },
+        {
+            "festivalId": 2234567892,
+            "performanceId": 1234567899,
+            "startTime": 1330,
+            "endTime": 1530,
+            "popularity": 10000
+        }
+    ]
+}
+
+### POST NULL datas to test for success message
+
+{{httpMethod1}} {{url1}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "data": []
+}

@@ -1,5 +1,4 @@
-### POST performanceId, startime and endtime to performance table
-
+### POST performanceId, startime and endtime to performance table(OK)
 POST http://localhost:3000/basic/insert HTTP/1.1
 Content-Type: application/json
 
@@ -68,45 +67,43 @@ Content-Type: application/json
     ]
 }
 
-### POST festivalId to MusicFestival table
+### POST festivalId to MusicFestival table(OK)
+POST http://localhost:3000/basic/insert/MusicFestival HTTP/1.1
+Content-Type: application/json
 
-# POST http://localhost:3000/basic/insert/MusicFestival HTTP/1.1
-# Content-Type: application/json
+{
+    "data": [
+        {
+            "festivalId": 2234567891
+        },
+        {
+            "festivalId": 2234567892
+        }
+    ]
+}
 
-# {
-#     "data": [
-#         {
-#             "festivalId": 2234567891
-#         },
-#         {
-#             "festivalId": 2234567892
-#         }
-#     ]
-# }
-
+### POST NULL datas to test for success message(OK)
 POST http://localhost:3000/basic/data?fk_festivalId=2234567899&startTime=1330&page=1&pageSize=1 HTTP/1.1
 Content-Type: application/json
 
 {
     "data": []
 }
+
+### GET filter for data viewer
+
+GET http://localhost:3000/basic/data?fk_festivalId=2234567899&startTime=1330&page=1&pageSize=1 HTTP/1.1
+Content-Type: application/json
+
     
 
 @url = http://localhost:3000/basic/insert
 @httpMethod = POST
 
-# @name EmptyData
+### @name EmptyData
 {{httpMethod}} {{url}} HTTP/1.1
 Content-Type: application/json
 
 {
 	"data": []
 }
-
-
-
-
-### GET filter for data viewer
-
-GET http://localhost:3000/basic/data?fk_festivalId=2234567899&startTime=1330&page=1&pageSize=1 HTTP/1.1
-Content-Type: application/json

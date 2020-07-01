@@ -26,9 +26,11 @@ CREATE TABLE PerformanceWithPopularity(
     performanceId BIGINT PRIMARY KEY NOT NULL CHECK (performanceId BETWEEN 0000000001 and 9999999999) UNIQUE,
     startTime TIME NOT NULL,
     endTime TIME NOT NULL,
+    festivalId BIGINT NOT NULL CHECK (festivalId BETWEEN 0000000001 and 9999999999),
     popularity NUMERIC NOT NULL,
-    FOREIGN KEY (performanceId) REFERENCES MusicFestival(festivalId)
+    FOREIGN KEY (festivalId) REFERENCES MusicFestival(festivalId)
 );
 
 SELECT * FROM Performance
 SELECT * FROM MusicFestival
+SELECT * FROM PerformanceWithPopularity
