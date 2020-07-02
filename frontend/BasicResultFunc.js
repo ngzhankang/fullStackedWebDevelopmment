@@ -43,13 +43,11 @@ const basicResultQuery = {
     }
     else {
       const dataTableHtml = Object.entries(data.rows).map( //data.result
-        ({ festivalid, performanceid, starttime, endtime, popularity }) => `
+        ({ performanceid, starttime, endtime }) => `
               <tr>
-                  <td>${festivalid}</td>
                   <td>${performanceid}</td>
                   <td>${starttime}</td>
                   <td>${endtime}</td>
-                  <td>${popularity}</td>
               </tr>
             `,
       );
