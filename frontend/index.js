@@ -56,10 +56,17 @@ function toggleAddSearch () {
     $('#advance-data-filter-form').toggle();
 }
 
+function togglePagination() {
+  // to allow basic and advance viewer to have pagination function
+  $('#basicNav').toggle();
+  $('#advanceNav').toggle();
+}
+
 // execute the necessary functions using jquery onClick the toggle.
 function onBasicSwitch () {
   togglePopularityColumn();
   toggleAddSearch();
+  togglePagination();
 }
 
 function SUMMONALLOUT () {
@@ -71,6 +78,6 @@ $(document).ready(function () {
   SUMMONALLOUT();
   $('#advancedTable').toggle();
   $('#advance-data-filter-form').toggle();
-
+  $('#advanceNav').toggle();
 });
 
