@@ -67,10 +67,11 @@ function onBasicSwitch () {
   togglePopularityColumn();
   toggleAddSearch();
   togglePagination();
+  return true;
 }
 
 function SUMMONALLOUT () {
-  $("#basicSwitch").click(onBasicSwitch);
+  $("#basicSwitch").click(onBasicSwitch)
 }
 
 // call these functions
