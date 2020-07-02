@@ -119,11 +119,11 @@ function getFestivals (festivalId, startTime, page=0, pageSize=5, callback) {
 }
 
 // retrieve data from PerformanceWithPopularity Table
-function getPopularity(festivalId, startTime, page=0, pageSize=5, callback) {
+function getPopularity(festivalId, startTime, endTime, page=0, pageSize=5, callback) {
     let whereClause;
     let i = 1;
     const values = [];
-    if (!festivalId && !startTime) {whereClause = ''}
+    if (!festivalId && !startTime && !endTime) {whereClause = ''}
     else {
         whereClause = 'WHERE'
         if (festivalId) {
@@ -133,6 +133,10 @@ function getPopularity(festivalId, startTime, page=0, pageSize=5, callback) {
         if (startTime) {
             whereClause += festivalId ? ` AND startTime >= $${i++}` : ` startTime >= $${i++}`;
             values.push(parseInt(startTime))
+        }
+        if (endTime) {
+            whereClause += festivalId ? ` AND endTime < $${i++}` : ` endTime < $${i++}`;
+            values.push(parseInt(endTime))
         }
     }
     let limitoffsetClause = `LIMIT $${i++} OFFSET $${i++}`

@@ -92,3 +92,8 @@ Content-Type: application/json
 {
     "data": []
 }
+
+### GET ALL datas to test for success message
+
+{{httpMethod2}} {{url1}} HTTP/1.1
+Content-Type: application/json
