@@ -38,6 +38,32 @@ window.addEventListener("load", () => {
 });
 
 // basicMethod switch function
-$("basicSwitch").on("click", function() {
-  $("entireTable").toggle();
+function togglePopularityColumn () {
+  // to hide and unhide the child columns
+  $('#basicTable').toggle()
+  $('#advancedTable').toggle();
+}
+
+// execute the necessary functions using jquery onClick the toggle.
+function onBasicSwitch () {
+  togglePopularityColumn();
+}
+
+function addSearch () {
+    // to hide and unhide the search filters
+    $('#festivalIdInput').toggle()
+    $('#startTimeInput').toggle();
+    $('#endTimeInput').toggle();
+}
+
+function SUMMONALLOUT () {
+  $("#basicSwitch").click(onBasicSwitch);
+}
+
+// call these functions
+$(document).ready(function () {
+  SUMMONALLOUT();
+  $('#advancedTable').toggle();
+  $('#endTimeInput').toggle();
 });
+

@@ -51,14 +51,14 @@
 
     <!-- Main Body -->
     <main role="main">
-      <!-- Main Body(Filter) -->
+      <!-- Main Body(Basic Filter) -->
       <form id='basic-data-filter-form'>
         <div class="form-row">
           <div class="col-5">
-            <input key="festivalId" type="number" min="1000000000" max="9999999999" class="form-control" placeholder="festivalId" id="festivalIdInput" />
+            <input key="festivalId" name="searchFestivalId" type="number" min="1000000000" max="9999999999" class="form-control" placeholder="festivalId" id="festivalIdInput" />
           </div>
           <div class="col-5">
-            <input key="startTime" type="number" min="0000" max="2400" class="form-control" placeholder="startTime" id="startTimeInput" />
+            <input key="startTime" name="searchStartTime" type="number" min="0000" max="2400" class="form-control" placeholder="startTime" id="startTimeInput" />
           </div>
           <div class="col-1">
               <input class="btn btn-primary" type="submit" value="Submit" />
@@ -68,16 +68,28 @@
             <label class="custom-control-label" for="basicSwitch" id="functionLabel">Basic</label>
           </div>
         </div>
-        
       </form>
       <!-- Main Body(Table) -->
-      <table class="table" id="entireTable">
+      <table class="table" id="basicTable">
         <thead>
           <tr>
             <th scope="col">festivalId</th>
             <th scope="col">performanceId</th>
             <th scope="col">startTime</th>
             <th scope="col">endTime</th>
+          </tr>
+        </thead>
+        <tbody id='basic-data-tbody'>
+        </tbody>
+      </table>
+      <table class="table" id="advancedTable">
+        <thead>
+          <tr>
+            <th scope="col">festivalId</th>
+            <th scope="col">performanceId</th>
+            <th scope="col">startTime</th>
+            <th scope="col">endTime</th>
+            <th scope="col">popularity</th>
           </tr>
         </thead>
         <tbody id='basic-data-tbody'>
