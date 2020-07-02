@@ -79,26 +79,15 @@ app.post('/advanced/insert/', function (req, res, next) {
   }
 });
 
-// GET endpoint for Performance table(OK)
-app.get('/basic/data/', function (req, res, next) {
-  const { festivalId, startTime, page, pageSize } = req.query;
-  database.getFestivals(festivalId, startTime, page, pageSize, (error, result) => {
-    if (error) {
-      return next(error);
-    }
-    res.json(result);
-  });
-});
+// GET endpoint for either Performance or PerformanceWithPopularity table(DATAVIEWER)
+app.get('/:type/data/', function (req, res, next) {
+  const { type } = req.params;
+  const { festivalId, startTime, endTime, page, pageSize } = req.query;
+  const callback = (error, result) => {if (error) return next(error); else return res.json(result);}
 
-// GET for PerformanceWithPopularity table
-app.get('/advanced/data/', function (req, res, next) {
-  const { festivalId, startTime, page, pageSize } = req.query;  // read the data from the browser
-  database.getPopularity(festivalId, startTime, page, pageSize, (error, result) => {
-    if (error) {
-      return next(error);
-    }
-    res.json(result);
-  });
+  if (type === typeEnum.ADVANCED) return database.getFestivals(req.query, callback);
+  else if (type === typeEnum.BASIC) return database.getPopularity(req.query, callback);
+  else return next ({error: "Unknown Type", code: 400});
 });
 
 // 404 Error Handler(OK)
