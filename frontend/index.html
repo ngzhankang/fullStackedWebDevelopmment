@@ -60,8 +60,15 @@
           <div class="col-5">
             <input key="startTime" type="number" min="0000" max="2400" class="form-control" placeholder="startTime" id="startTimeInput" />
           </div>
-          <input class="btn btn-primary" type="submit" value="Submit" />
+          <div class="col-1">
+              <input class="btn btn-primary" type="submit" value="Submit" />
+          </div>
+          <div class="custom-control custom-switch col-1 pt-2 pl-5">
+            <input type="checkbox" class="custom-control-input" id="darkSwitch" />
+            <label class="custom-control-label" for="darkSwitch" id="modelLabel">Basic</label>
+          </div>
         </div>
+        
       </form>
       <!-- Main Body(Table) -->
       <table class="table">
