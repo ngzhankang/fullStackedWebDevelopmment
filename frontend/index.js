@@ -37,6 +37,12 @@ window.addEventListener("load", () => {
     }));
 });
 
+
+
+
+
+
+
 // basicMethod switch function
 function togglePopularityColumn () {
   // to hide and unhide the child columns
@@ -44,16 +50,16 @@ function togglePopularityColumn () {
   $('#advancedTable').toggle();
 }
 
+function toggleAddSearch () {
+    // to hide and unhide the search filters
+    $('#basic-data-filter-form').toggle();
+    $('#advance-data-filter-form').toggle();
+}
+
 // execute the necessary functions using jquery onClick the toggle.
 function onBasicSwitch () {
   togglePopularityColumn();
-}
-
-function addSearch () {
-    // to hide and unhide the search filters
-    $('#festivalIdInput').toggle()
-    $('#startTimeInput').toggle();
-    $('#endTimeInput').toggle();
+  toggleAddSearch();
 }
 
 function SUMMONALLOUT () {
@@ -64,6 +70,7 @@ function SUMMONALLOUT () {
 $(document).ready(function () {
   SUMMONALLOUT();
   $('#advancedTable').toggle();
-  $('#endTimeInput').toggle();
+  $('#advance-data-filter-form').toggle();
+
 });
 

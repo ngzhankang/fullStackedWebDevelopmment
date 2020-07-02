@@ -69,7 +69,28 @@
           </div>
         </div>
       </form>
-      <!-- Main Body(Table) -->
+      <!-- Main Body(Advance Filter) -->
+      <form id='advance-data-filter-form'>
+        <div class="form-row">
+          <div class="col-3">
+            <input key="festivalId" name="searchFestivalId" type="number" min="1000000000" max="9999999999" class="form-control" placeholder="festivalId" id="festivalIdInput" />
+          </div>
+          <div class="col-3">
+            <input key="startTime" name="searchStartTime" type="number" min="0000" max="2400" class="form-control" placeholder="startTime" id="startTimeInput" />
+          </div>
+          <div class="col-3">
+            <input key="endTime" name="searchEndTime" type="number" min="0000" max="2400" class="form-control" placeholder="endTime" id="endTimeInput" />
+          </div>
+          <div class="col-2">
+              <input class="btn btn-primary" type="submit" value="Submit" />
+          </div>
+          <div class="custom-control custom-switch col-1 pt-2 pl-5">
+            <input type="checkbox" class="custom-control-input" id="basicSwitch" />
+            <label class="custom-control-label" for="basicSwitch" id="functionLabel">Advance</label>
+          </div>
+        </div>
+      </form>
+      <!-- Main Body(Basic Table) -->
       <table class="table" id="basicTable">
         <thead>
           <tr>
@@ -82,6 +103,7 @@
         <tbody id='basic-data-tbody'>
         </tbody>
       </table>
+      <!-- Main Body(Advance Table) -->
       <table class="table" id="advancedTable">
         <thead>
           <tr>
