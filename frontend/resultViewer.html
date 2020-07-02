@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="index.css" />
-    <script src="resultFunctions.js" type="text/JavaScript"></script>
+    <script src="BasicResultFunc.js" type="text/JavaScript"></script>
 </head>
 </head>
 
@@ -56,10 +56,16 @@
             <form id='basic-result-input-form'>
                 <div class="form-row col-6 mx-auto pt-5 pb-5 pl-5">
                     <div class="col-6">
-                        <input required key="festivalId" type="number" min="1000000000" max="9999999999" class="form-control"
-                            placeholder="festivalId" id="festivalIdInput" />
+                        <input required key="festivalId" type="number" min="1000000000" max="9999999999"
+                            class="form-control" placeholder="festivalId" id="festivalIdInput" />
                     </div>
-                    <input class="btn btn-primary" type="submit" value="Submit" />
+                    <div class="col-1">
+                        <input class="btn btn-primary" type="submit" value="Submit" />
+                    </div>
+                    <div class="custom-control custom-switch col-5 pt-2 pl-5">
+                        <input type="checkbox" class="custom-control-input" id="basicSwitch" />
+                        <label class="custom-control-label" for="basicSwitch" id="functionLabel">Basic</label>
+                    </div>
                 </div>
             </form>
 
@@ -67,14 +73,12 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">festivalId</th>
                         <th scope="col">performanceId</th>
                         <th scope="col">startTime</th>
                         <th scope="col">endTime</th>
-                        <th scope="col">popularity</th>
                     </tr>
                 </thead>
-                <tbody id='basic-data-tbody'>
+                <tbody id='basic-result-tbody'>
                 </tbody>
             </table>
         </main>
