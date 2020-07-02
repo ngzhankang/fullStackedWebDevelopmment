@@ -52,7 +52,7 @@ app.post('/basic/insert/', function (req, res, next) {
 });
 
 // POST for PerformanceWithPopularity table(OK)
-app.post('/advanced/insert/', function (req, res, next) {
+app.post('/advance/insert/', function (req, res, next) {
   const { data } = req.body;
 
   if (data.length === 0) {  // if nothing in input, return success message
@@ -83,7 +83,7 @@ app.post('/advanced/insert/', function (req, res, next) {
 app.get('/:type/data/', function (req, res, next) {
   const { type } = req.params;
   const { festivalId, startTime, endTime, page, pageSize } = req.query;
-  const typeEnum = { BASIC: 'basic', ADVANCE: 'advanced' }; 
+  const typeEnum = { BASIC: 'basic', ADVANCE: 'advance' }; 
   const callback = (error, result) => {if (error) return next(error); else return res.json(result);}
 
   if (type === typeEnum.BASIC) return database.getFestivals(festivalId, startTime, page, pageSize, callback);

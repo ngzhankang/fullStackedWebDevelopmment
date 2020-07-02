@@ -110,7 +110,6 @@ function getFestivals (festivalId, startTime, page=0, pageSize=5, callback) {
     values.push(parseInt(page) * parseInt(pageSize)); //offset = page * pageSize
     const query = `SELECT * FROM Performance ${whereClause} ${limitoffsetClause}`;
     const client = connect();
-    console.log(query)
     client.query(query, values, function(err, rows) {
         console.log(query)
         client.end();
@@ -144,7 +143,6 @@ function getPopularity(festivalId, startTime, endTime, page=0, pageSize=5, callb
     values.push(parseInt(page) * parseInt(pageSize));   //offset = page * pageSize
     const query = `SELECT * FROM PerformanceWithPopularity ${whereClause} ${limitoffsetClause}`;
     const client = connect();
-    console.log(query)
     client.query(query, values, function(err, rows) {
         console.log(query)
         client.end();
