@@ -1,4 +1,7 @@
+// darkMode switch function
 const darkSwitch = document.getElementById("darkSwitch");
+
+// initTheme() function for darkmode switch
 function initTheme() {
   const e =
     null !== localStorage.getItem("darkSwitch") &&
@@ -9,6 +12,7 @@ function initTheme() {
       : document.body.removeAttribute("data-theme");
 }
 
+// resetTheme() function for darkmode switch
 function resetTheme() {
   var modelLabel = document.getElementById("modelLabel");
 
@@ -31,4 +35,9 @@ window.addEventListener("load", () => {
     darkSwitch.addEventListener("change", () => {
       resetTheme();
     }));
+});
+
+// basicMethod switch function
+$("basicSwitch").on("click", function() {
+  $("entireTable").toggle();
 });

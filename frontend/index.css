@@ -23,3 +23,7 @@
 }
 
 /* Configs to respective div tags */
+
+#entireTable{
+  display: table;
+}
