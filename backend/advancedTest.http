@@ -1,6 +1,6 @@
 ### POST performanceId, startime, endtime and popularity to performanceWithPopularity table(OK)
-@url1 = http://localhost:3000/advanced/insert/
-@url2 = http://localhost:3000/advanced/result/
+@url1 = http://localhost:3000/advance/insert/
+@url2 = http://localhost:3000/advance/result/
 @httpMethod1 = POST
 @httpMethod2 = GET
 

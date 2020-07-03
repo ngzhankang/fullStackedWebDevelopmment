@@ -7,7 +7,7 @@ var logger = require('morgan');
 var cors = require('cors');
 
 const database = require('./database');
-// const algorithm = require('./algorithm')
+const algorithm = require('./algorithm');
 
 var app = express();
 
@@ -19,8 +19,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// POST endpoint for Performance table(OK)
-app.post('/basic/insert/', function (req, res, next) {
+// POST endpoint for Performance table(OK)(INSERT DATA)
+app.post('/basic/insert', function (req, res, next) {
   const { data } = req.body;
 
   if(data.length === 0) {
@@ -51,8 +51,8 @@ app.post('/basic/insert/', function (req, res, next) {
   }
 });
 
-// POST for PerformanceWithPopularity table(OK)
-app.post('/advance/insert/', function (req, res, next) {
+// POST for PerformanceWithPopularity table(OK)(INSERT DATA)
+app.post('/advance/insert', function (req, res, next) {
   const { data } = req.body;
 
   if (data.length === 0) {  // if nothing in input, return success message
@@ -80,7 +80,7 @@ app.post('/advance/insert/', function (req, res, next) {
 });
 
 // GET endpoint for either Performance or PerformanceWithPopularity table(DATA VIEWER)
-app.get('/:type/data/', function (req, res, next) {
+app.get('/:type/data', function (req, res, next) {
   const { type } = req.params;
   const { festivalId, startTime, endTime, page, pageSize } = req.query;
   const typeEnum = { BASIC: 'basic', ADVANCE: 'advance' }; 
@@ -89,6 +89,17 @@ app.get('/:type/data/', function (req, res, next) {
   if (type === typeEnum.BASIC) return database.getFestivals(festivalId, startTime, page, pageSize, callback);
   else if (type === typeEnum.ADVANCE) return database.getPopularity(festivalId, startTime, endTime, page, pageSize, callback);
   else return next ({error: "Unknown Type", code: 400});
+});
+
+// GET endpoint for performanceId, startTime and endTime from Performance table(RESULT VIEWER)
+app.get('/basic/result', function (req, res, next) {
+  const { festivalId } = req.query;
+  database.getFestivalsForComputation(festivalId, (error, result) => {
+    if (error) return next(error);
+    const {error: computationError, result: computationResult} = algorithm.compute(result);
+    if (computationError) return next(computationError);
+    return res.json(computationResult);
+  });
 });
 
 // 404 Error Handler(OK)

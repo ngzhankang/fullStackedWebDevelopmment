@@ -64,11 +64,12 @@ function insertPerformance (performance, callback) {
 // insert data into PerformanceWithPopularity Table
 function insertPopularity (popularity, callback) {
     let i = 1;
-    const template = popularity.map(performance => `($${i++}, $${i++}, $${i++}, $${i++}, $${i++})`).join(',');
+    const template = popularity.map(popularity => `($${i++}, $${i++}, $${i++}, $${i++}, $${i++})`).join(',');
     const values = popularity.reduce((reduced, popularity) => [...reduced, popularity.festivalId, popularity.performanceId, popularity.startTime, popularity.endTime, popularity.popularity], [])
     const query = `INSERT INTO PerformanceWithPopularity (festivalId, performanceId, startTime, endTime, popularity) VALUES ${template};`;
     const client = connect();
     client.query(query, values, (err, result) => {
+        console.log(query)
         callback(err, result);
         client.end();
     });
@@ -118,7 +119,7 @@ function getFestivals (festivalId, startTime, page=0, pageSize=5, callback) {
 }
 
 // retrieve data from PerformanceWithPopularity Table
-function getPopularity(festivalId, startTime, endTime, page=0, pageSize=5, callback) {
+function getPopularity (festivalId, startTime, endTime, page=0, pageSize=5, callback) {
     let whereClause;
     let i = 1;
     const values = [];
@@ -150,6 +151,15 @@ function getPopularity(festivalId, startTime, endTime, page=0, pageSize=5, callb
     });
 }
 
+// retrieve data from the Performance Table based on user festivalId input
+function getFestivalsForComputation(festivalId, callback) {
+    const client = connect();
+    client.query(`SELECT * FROM Performance WHERE festivalId = $1`, [festivalId], (err, { rows }) => {
+        client.end();
+        callback(err, rows);
+    });
+}
+
 // export functions
 module.exports = {
     resetPerformanceTable,
@@ -158,5 +168,6 @@ module.exports = {
     insertPopularity,
     insertFestival,
     getFestivals,
-    getPopularity
+    getPopularity,
+    getFestivalsForComputation
 }
