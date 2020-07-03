@@ -19,7 +19,8 @@
     crossorigin="anonymous"></script>
 
   <!-- BootStrap CSS And CSS Script And JS For buttons to work!-->
-  D
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="index.css" />
   <script src="BasicDataFunc.js" type="text/JavaScript"></script>
   <script src="AdvanceDataFunc.js" type="text/JavaScript"></script>
@@ -48,52 +49,56 @@
       </nav>
     </header>
 
+
     <!-- Main Body -->
     <main role="main">
-      <!-- Main Body(Basic Filter) -->
-      <form id='basic-data-filter-form'>
-        <div class="form-row">
-          <div class="col-5">
-            <input key="festivalId" name="searchFestivalId" type="number" min="1000000000" max="9999999999"
-              class="form-control" placeholder="festivalId" id="festivalIdInput" />
-          </div>
-          <div class="col-5">
-            <input key="startTime" name="searchStartTime" type="number" min="0000" max="2400" class="form-control"
-              placeholder="startTime" id="startTimeInput" />
-          </div>
-          <div class="col-1">
-            <input class="btn btn-primary" type="submit" value="Submit" />
-          </div>
-          <div class="custom-control custom-switch">
-            <input type="checkbox" id="basicSwitch" />
-            <label class="custom-control-label" for="basicSwitch" id="functionLabel">Basic</label>
-          </div>
+      <div class='form-row'>
+        <div class='form-group col-11'>
+          <!-- Main Body(Basic Filter) -->
+          <form id='basic-data-filter-form'>
+            <div class="form-row">
+              <div class="col-5">
+                <input key="festivalId" name="searchFestivalId" type="number" min="1000000000" max="9999999999"
+                  class="form-control" placeholder="festivalId" id="festivalIdInput" />
+              </div>
+              <div class="col-5">
+                <input key="startTime" name="searchStartTime" type="number" min="0000" max="2400" class="form-control"
+                  placeholder="startTime" id="startTimeInput" />
+              </div>
+              <div class="col-1">
+                <input class="btn btn-primary" type="submit" value="Submit" />
+              </div>
+
+            </div>
+          </form>
+          <!-- Main Body(Advance Filter) -->
+          <form id='advance-data-filter-form'>
+            <div class="form-row">
+              <div class="col-3">
+                <input key="festivalId" name="searchFestivalId" type="number" min="1000000000" max="9999999999"
+                  class="form-control" placeholder="festivalId" id="festivalIdInput" />
+              </div>
+              <div class="col-4">
+                <input key="startTime" name="searchStartTime" type="number" min="0000" max="2400" class="form-control"
+                  placeholder="startTime" id="startTimeInput" />
+              </div>
+              <div class="col-4">
+                <input key="endTime" name="searchEndTime" type="number" min="0000" max="2400" class="form-control"
+                  placeholder="endTime" id="endTimeInput" />
+              </div>
+              <div class="col-1">
+                <input class="btn btn-primary float-left" type="submit" value="Submit" />
+              </div>
+
+            </div>
+          </form>
         </div>
-      </form>
-      <!-- Main Body(Advance Filter) -->
-      <form id='advance-data-filter-form'>
-        <div class="form-row">
-          <div class="col-3">
-            <input key="festivalId" name="searchFestivalId" type="number" min="1000000000" max="9999999999"
-              class="form-control" placeholder="festivalId" id="festivalIdInput" />
-          </div>
-          <div class="col-3">
-            <input key="startTime" name="searchStartTime" type="number" min="0000" max="2400" class="form-control"
-              placeholder="startTime" id="startTimeInput" />
-          </div>
-          <div class="col-3">
-            <input key="endTime" name="searchEndTime" type="number" min="0000" max="2400" class="form-control"
-              placeholder="endTime" id="endTimeInput" />
-          </div>
-          <div class="col-1">
-            <input class="btn btn-primary float-left" type="submit" value="Submit" />
-          </div>
-          <div class="custom-control custom-switch">
-            <input type="checkbox" id="basicSwitch" />
-            <label class="custom-control-label" for="basicSwitch" id="functionLabel">Advance</label>
-          </div>
+        <div class="custom-control custom-switch pt-2">
+          <input type="checkbox" class="custom-control-input" id="basicSwitch" />
+          <label class="custom-control-label" for="basicSwitch" id="functionLabel">Basic</label>
         </div>
-      </form>
+      </div>
+
       <!-- Main Body(Basic Table) -->
       <table class="table" id="basicTable">
         <thead>
@@ -124,7 +129,7 @@
     </main>
 
     <!-- Footer (Basic)-->
-    <footer class="mt-auto"  id="basicNav">
+    <footer class="mt-auto" id="basicNav">
 
       <div class="form-row">
         <div class="col-10">
