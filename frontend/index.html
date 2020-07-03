@@ -49,13 +49,12 @@
       </nav>
     </header>
 
-
     <!-- Main Body -->
     <main role="main">
-      <div class='form-row'>
-        <div class='form-group col-11'>
+      <div class="form-row">
+        <div class="form-group col-11">
           <!-- Main Body(Basic Filter) -->
-          <form id='basic-data-filter-form'>
+          <form id="basic-data-filter-form">
             <div class="form-row">
               <div class="col-5">
                 <input key="festivalId" name="searchFestivalId" type="number" min="1000000000" max="9999999999"
@@ -68,35 +67,44 @@
               <div class="col-1">
                 <input class="btn btn-primary" type="submit" value="Submit" />
               </div>
-
             </div>
           </form>
           <!-- Main Body(Advance Filter) -->
-          <form id='advance-data-filter-form'>
+          <form id="advance-data-filter-form">
             <div class="form-row">
               <div class="col-3">
                 <input key="festivalId" name="searchFestivalId" type="number" min="1000000000" max="9999999999"
                   class="form-control" placeholder="festivalId" id="festivalIdInput" />
               </div>
-              <div class="col-4">
+              <div class="col-3">
                 <input key="startTime" name="searchStartTime" type="number" min="0000" max="2400" class="form-control"
                   placeholder="startTime" id="startTimeInput" />
               </div>
-              <div class="col-4">
+              <div class="col-3">
                 <input key="endTime" name="searchEndTime" type="number" min="0000" max="2400" class="form-control"
                   placeholder="endTime" id="endTimeInput" />
               </div>
-              <div class="col-1">
+              <div class="col-2">
                 <input class="btn btn-primary float-left" type="submit" value="Submit" />
               </div>
-
             </div>
           </form>
         </div>
-        <div class="custom-control custom-switch pt-2">
+        <div class="custom-control custom-switch pt-2 col-1">
           <input type="checkbox" class="custom-control-input" id="basicSwitch" />
           <label class="custom-control-label" for="basicSwitch" id="functionLabel">Basic</label>
         </div>
+        <script>
+          $("#basicSwitch").click(function () {
+            var functionLabel = document.getElementById("functionLabel");
+
+            if ($("#functionLabel").text() == "Basic") {
+              functionLabel.innerHTML = "Advance";
+            } else {
+              functionLabel.innerHTML = "Basic";
+            }
+          });
+        </script>
       </div>
 
       <!-- Main Body(Basic Table) -->
@@ -109,8 +117,7 @@
             <th scope="col">endTime</th>
           </tr>
         </thead>
-        <tbody id='basic-data-tbody'>
-        </tbody>
+        <tbody id="basic-data-tbody"></tbody>
       </table>
       <!-- Main Body(Advance Table) -->
       <table class="table" id="advancedTable">
@@ -123,41 +130,39 @@
             <th scope="col">popularity</th>
           </tr>
         </thead>
-        <tbody id='advance-data-tbody'>
-        </tbody>
+        <tbody id="advance-data-tbody"></tbody>
       </table>
     </main>
 
     <!-- Footer (Basic)-->
     <footer class="mt-auto" id="basicNav">
-
       <div class="form-row">
         <div class="col-10">
           <!-- Footer(Pagination basic) -->
           <nav aria-label="Page navigation">
             <ul class="pagination">
               <li class="page-item">
-                <a fn='gotoFirstPage' id="basic-data-first-page" class="page-link" href="#">First</a>
+                <a fn="gotoFirstPage" id="basic-data-first-page" class="page-link" href="#">First</a>
               </li>
               <li class="page-item">
-                <a fn='changePage' value="-1" id="basic-data-previous-page" class="page-link" href="#">Previous</a>
+                <a fn="changePage" value="-1" id="basic-data-previous-page" class="page-link" href="#">Previous</a>
               </li>
               <li class="page-item">
-                <a fn='changePage' value="1" id="basic-data-next-page" class="page-link" href="#">Next</a>
+                <a fn="changePage" value="1" id="basic-data-next-page" class="page-link" href="#">Next</a>
               </li>
             </ul>
           </nav>
         </div>
         <div class="col-1">
           <!-- Footer(Size Options basic) -->
-          <select fn='changePageSize' id='basic-data-page-size-select' class="custom-select">
+          <select fn="changePageSize" id="basic-data-page-size-select" class="custom-select">
             <option value="5" selected>5</option>
             <option value="10">10</option>
             <option value="20">20</option>
           </select>
         </div>
       </div>
-      <hr>
+      <hr />
       <!-- Footer(Copyrights basic) -->
       <p class="copyright-text">
         Copyright &copy; 2020 All Rights Reserved by skrtttt.
@@ -166,42 +171,39 @@
 
     <!-- Footer (Advance) -->
     <footer class="mt-auto" id="advanceNav">
-
       <div class="form-row">
         <div class="col-10">
           <!-- Footer(Pagination advance) -->
           <nav aria-label="Page navigation">
             <ul class="pagination">
               <li class="page-item">
-                <a fn='gotoFirstPage' id="advance-data-first-page" class="page-link" href="#">First</a>
+                <a fn="gotoFirstPage" id="advance-data-first-page" class="page-link" href="#">First</a>
               </li>
               <li class="page-item">
-                <a fn='changePage' value="-1" id="advance-data-previous-page" class="page-link" href="#">Previous</a>
+                <a fn="changePage" value="-1" id="advance-data-previous-page" class="page-link" href="#">Previous</a>
               </li>
               <li class="page-item">
-                <a fn='changePage' value="1" id="advance-data-next-page" class="page-link" href="#">Next</a>
+                <a fn="changePage" value="1" id="advance-data-next-page" class="page-link" href="#">Next</a>
               </li>
             </ul>
           </nav>
         </div>
         <div class="col-1">
           <!-- Footer(Size Options advance) -->
-          <select fn='changePageSize' id='advance-data-page-size-select' class="custom-select">
+          <select fn="changePageSize" id="advance-data-page-size-select" class="custom-select">
             <option value="5" selected>5</option>
             <option value="10">10</option>
             <option value="20">20</option>
           </select>
         </div>
       </div>
-      <hr>
+      <hr />
       <!-- Footer(Copyrights advance) -->
       <p class="copyright-text">
         Copyright &copy; 2020 All Rights Reserved by skrtttt.
       </p>
     </footer>
   </div>
-
-
 </body>
 
 </html>

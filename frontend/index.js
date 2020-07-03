@@ -40,18 +40,18 @@ window.addEventListener("load", () => {
 
 
 
-const basicSwitch = document.getElementById("basicSwitch");
-
-function basicAdvance() {
-  var functionLabel = document.getElementById("functionLabel");
-
-  if (basicSwitch.checked) {
-    functionLabel.innerHTML = "Advance";
-  } 
-  else {
-    functionLabel.innerHTML = "Basic";
-  }
-}
+// function basicAdvance () {
+  // $("#basicSwitch").click(function () {
+  //   var functionLabel = document.getElementById("functionLabel");
+              
+  //   if($("#functionLabel").text() == "Basic") { 
+  //     functionLabel.innerHTML = "Advance";
+  //   } 
+  //   else {
+  //     functionLabel.innerHTML = "Basic";
+  //   }
+  // });
+// }
 
 // basicMethod switch function
 function togglePopularityColumn () {
@@ -77,16 +77,13 @@ function onBasicSwitch () {
   togglePopularityColumn();
   toggleAddSearch();
   togglePagination();
+  // basicAdvance()
   return true;
 }
 
 function SUMMONALLOUT () {
   $("#basicSwitch").click(onBasicSwitch);
 }
-
-window.addEventListener("change", () => {
-  basicAdvance();
-});
 
 // call these functions
 $(document).ready(function () {
