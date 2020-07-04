@@ -23,16 +23,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.post('/basic/insert', function (req, res, next) {
   const { data } = req.body;
 
-  if(data.length === 0) {
-    res.json({result: "Success!", code: 200})
+  if (data.length === 0) {
+    res.json({ result: "Success!", code: 200 })
   }
   else {
-    for(var i = 0; i < data.length; i++){
+    for (var i = 0; i < data.length; i++) {
       // check that each entry has all the fields
       // check for entries that doesn't have all the fields
-      if(data[i].festivalId == undefined || data[i].performanceId == undefined || data[i].startTime == undefined || data[i].endTime == undefined)
-      // return error
-      return res.json({error: 'Invalid data', code: 400})
+      if (data[i].festivalId == undefined || data[i].performanceId == undefined || data[i].startTime == undefined || data[i].endTime == undefined)
+        // return error
+        return res.json({ error: 'Invalid data', code: 400 })
     }
     database.insertFestival(data, (error, result) => {
       if (error) {
@@ -45,7 +45,7 @@ app.post('/basic/insert', function (req, res, next) {
           console.log(error2);
           return next(error2);
         }
-      res.json({result: "success"});
+        res.json({ result: "success" });
       })
     });
   }
@@ -56,12 +56,12 @@ app.post('/advance/insert', function (req, res, next) {
   const { data } = req.body;
 
   if (data.length === 0) {  // if nothing in input, return success message
-    res.json({result: "success", code: 200})
+    res.json({ result: "success", code: 200 })
   }
   else {
     for (var i = 0; i < data.length; i++) { // check that each entry has all the fields
-      if(data[i].festivalId == undefined || data[i].performanceId == undefined || data[i].startTime == undefined || data[i].endTime == undefined || data[i].popularity == undefined) // check for entries that doesn't have all the fields
-      return res.json({error: 'Invalid data', code: 400}) // return error if check fail
+      if (data[i].festivalId == undefined || data[i].performanceId == undefined || data[i].startTime == undefined || data[i].endTime == undefined || data[i].popularity == undefined) // check for entries that doesn't have all the fields
+        return res.json({ error: 'Invalid data', code: 400 }) // return error if check fail
     }
     database.insertFestival(data, (error, result) => {  // insert festivalId
       if (error) {
@@ -73,7 +73,7 @@ app.post('/advance/insert', function (req, res, next) {
           console.log(error2);
           return next(error2);
         }
-      res.json({result: "success"});
+        res.json({ result: "success" });
       })
     });
   }
@@ -83,12 +83,12 @@ app.post('/advance/insert', function (req, res, next) {
 app.get('/:type/data', function (req, res, next) {
   const { type } = req.params;
   const { festivalId, startTime, endTime, page, pageSize } = req.query;
-  const typeEnum = { BASIC: 'basic', ADVANCE: 'advance' }; 
-  const callback = (error, result) => {if (error) return next(error); else return res.json(result);}
+  const typeEnum = { BASIC: 'basic', ADVANCE: 'advance' };
+  const callback = (error, result) => { if (error) return next(error); else return res.json(result); }
 
   if (type === typeEnum.BASIC) return database.getFestivals(festivalId, startTime, page, pageSize, callback);
   else if (type === typeEnum.ADVANCE) return database.getPopularity(festivalId, startTime, endTime, page, pageSize, callback);
-  else return next ({error: "Unknown Type", code: 400});
+  else return next({ error: "Unknown Type", code: 400 });
 });
 
 // GET endpoint for performanceId, startTime and endTime from Performance table(RESULT VIEWER)
@@ -96,9 +96,9 @@ app.get('/basic/result', function (req, res, next) {
   const { festivalId } = req.query;
   database.getFestivalsForComputation(festivalId, (error, result) => {
     if (error) return next(error);
-    const {error: computationError, result: computationResult} = algorithm.compute(result);
-    if (computationError) return next(computationError);
-    return res.json(computationResult);
+    const { error: algorithmError, result: algorithmResult } = algorithm.compute(result)
+    if (algorithmError) return next(algorithmError);
+    return res.json(algorithmResult);
   });
 });
 
