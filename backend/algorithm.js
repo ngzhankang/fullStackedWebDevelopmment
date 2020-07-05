@@ -8,7 +8,7 @@ const database = require("./database");
 
 // catch error here
 async function compute (festivalId) {
-    try{return { error: null, result: await sortPerformanceByFinishTime(festivalId)}} 
+    try{return { result: await maintainSortedPerformance(festivalId)}} 
     catch (error) {return { error, result: null };}
 } 
 
@@ -30,8 +30,21 @@ async function sortPerformanceByFinishTime(festivalId) {
     return furtherFilter;
 };
 
-// // 3. selectedPerformances to maintain a list of selected performance
-// const selectedPerformances = [];
+// 3. remove key from objects to maintain the entire list
+async function maintainSortedPerformance(festivalId) {
+    const performance = await sortPerformanceByFinishTime(festivalId);  //do a await to get result from previous function
+    function mapOut(sourceObject, removeKeys = []) {    //create a function to remove festivalid key from all the arrays
+        const sourceKeys = Object.keys(sourceObject);
+        const returnKeys = sourceKeys.filter(k => !removeKeys.includes(k));
+        let returnObject = {};
+        returnKeys.forEach(k => {
+          returnObject[k] = sourceObject[k];
+        });
+        return returnObject;
+      }
+    const newArray = performance.map(obj => mapOut(obj, ["festivalid", ]))  //push the filteredarray to remove the festvialid
+    return newArray;
+};
 
 // // 4. iteratePerformance to iterate through each of the sorted performance
 // for (...) {
