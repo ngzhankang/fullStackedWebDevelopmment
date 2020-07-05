@@ -8,31 +8,31 @@ Content-Type: application/json
             "festivalId": 2234567891, 
             "performanceId": 1234567890,
             "startTime": 1330,
-            "endTime": 1530
+            "endTime": 1630
         },
         {
             "festivalId": 2234567891,
             "performanceId": 1234567891,
             "startTime": 1530,
-            "endTime": 1630
+            "endTime": 1530
         },
         {
             "festivalId": 2234567891,
             "performanceId": 1234567892,
             "startTime": 1330,
-            "endTime": 1530
+            "endTime": 1830
         },
         {
             "festivalId": 2234567891,
             "performanceId": 1234567893,
             "startTime": 1330,
-            "endTime": 1530
+            "endTime": 1730
         },
         {
             "festivalId": 2234567891,
             "performanceId": 1234567894,
             "startTime": 1430,
-            "endTime": 1530
+            "endTime": 1930
         },
         {
             "festivalId": 2234567892,

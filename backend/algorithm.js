@@ -8,11 +8,11 @@ const database = require("./database");
 
 // catch error here
 async function compute (festivalId) {
-    try{return { error: null, result: await selectPerformanceByFestivalId(festivalId)}} 
+    try{return { error: null, result: await sortPerformanceByFinishTime(festivalId)}} 
     catch (error) {return { error, result: null };}
 } 
 
-// 1. selectPerformance to correctly select set of performance for computation
+// 1. selectPerformanceByFestivalId to correctly select set of performance for computation
 async function selectPerformanceByFestivalId(festivalId) {
     const performances = await database.getPerformanceByFestivalId(festivalId)
     const l = performances.length;  //length of performances
@@ -23,21 +23,13 @@ async function selectPerformanceByFestivalId(festivalId) {
     return selectedPerformance; //return the array
 };
 
-// 2. sortPerformance to sort performance by increasing order of their finishing time
-async function sortPerformanceByFinishTime(endTime) {
-    const filteredPerformance = await selectPerformanceByFestivalId;  //do a await to let the previous function execute first before continuing
-    const storeArray = []   //create a new array to reorder the stuff again
-    console.log(filteredPerformance)
-    for (i = 0; i < filteredPerformance.length; i++) {  //do a for loop to go thru each selected performance
-        if (filteredPerformance.endTime[i] < filteredPerformance.endTime[i + 1]) {
-            storeArray.push(filteredPerformance.endTime[i]);// store it into a new array
-        };
-        console.log(filteredPerformance[i])
-
-        // console.log(storeArray);
-    };
-    // return storeArray
+// 2. sortPerformanceByFinishTime to sort performance by increasing order of their finishing time
+async function sortPerformanceByFinishTime(festivalId) {
+    const filteredPerformance = await selectPerformanceByFestivalId(festivalId);  //do a await to get result from previous function
+    const furtherFilter = filteredPerformance.sort((a,b) => parseInt(a.endtime) - parseInt(b.endtime))  //sort the performances based on their finishing time and assign them to furtherFilter
+    return furtherFilter;
 };
+
 // // 3. selectedPerformances to maintain a list of selected performance
 // const selectedPerformances = [];
 
@@ -48,8 +40,6 @@ async function sortPerformanceByFinishTime(endTime) {
 //         // 4a add
 //         selectedPerformances.push(performance);
 //     }
-// }
-
 
 // export modules
 module.exports = {
