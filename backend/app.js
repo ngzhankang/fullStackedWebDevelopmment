@@ -8,6 +8,7 @@ var cors = require('cors');
 
 const database = require('./database');
 const algorithm = require('./algorithm');
+const { compute } = require('./algorithm');
 
 var app = express();
 
@@ -92,15 +93,16 @@ app.get('/:type/data', function (req, res, next) {
 });
 
 // GET endpoint for performanceId, startTime and endTime from Performance table(RESULT VIEWER)
-app.get('/basic/result', function (req, res, next) {
-  const { festivalId } = req.query;
-  database.getFestivalsForComputation(festivalId, (error, result) => {
-    if (error) return next(error);
-    const { error: algorithmError, result: algorithmResult } = algorithm.compute(result)
-    if (algorithmError) return next(algorithmError);
-    return res.json(algorithmResult);
-  });
-});
+// app.get('/basic/result', function (req, res, next) {
+//   const { festivalId } = req.query;
+//   database.getPerformanceByFestivalId(festivalId, (error, result) => {
+//     if (error) return next(error);
+//     const { error: algorithmError, result: algorithmResult } = algorithm.compute(result)
+//     if (algorithmError) return next(algorithmError);
+//     return res.json(algorithmResult);
+//   });
+// });
+app.get('/basic/result', async(req, res) => res.json(await compute(req.query.festivalId)));
 
 // 404 Error Handler(OK)
 app.use(function (req, res, next) {

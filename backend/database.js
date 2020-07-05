@@ -152,16 +152,13 @@ function getPopularity (festivalId, startTime, endTime, page=0, pageSize=5, call
 }
 
 // retrieve data from the Performance Table based on user festivalId input
-function getFestivalsForComputation(festivalId, callback) {
+async function getPerformanceByFestivalId(festivalId) {
     const query = `SELECT * FROM Performance WHERE festivalId = $1`;
     const client = connect();
-    client.query(query, [festivalId], function (err, result) {
-        if(err) return callback(err, result);
-        const {rows} = result;  //concat the extracted data in a '{}'
-        console.log(query);
-        client.end();
-        callback(err, rows);
-    });
+    const {rows} = await client.query(query, [festivalId]);
+    console.log(query);
+    client.end();
+    return rows;
 }
  
 // export functions
@@ -169,9 +166,9 @@ module.exports = {
     resetPerformanceTable,
     resetPopularityTable,
     insertPerformance,
-    insertPopularity,
+    insertPopularity,   
     insertFestival,
     getFestivals,
     getPopularity,
-    getFestivalsForComputation
+    getPerformanceByFestivalId
 }
