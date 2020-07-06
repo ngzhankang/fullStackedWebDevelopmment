@@ -7,32 +7,32 @@ Content-Type: application/json
         {
             "festivalId": 2234567891, 
             "performanceId": 1234567890,
-            "startTime": 1330,
-            "endTime": 1630
+            "startTime": 1000,
+            "endTime": 1100
         },
         {
             "festivalId": 2234567891,
             "performanceId": 1234567891,
-            "startTime": 1530,
-            "endTime": 1530
+            "startTime": 1100,
+            "endTime": 1200
         },
         {
             "festivalId": 2234567891,
             "performanceId": 1234567892,
-            "startTime": 1330,
-            "endTime": 1830
+            "startTime": 1400,
+            "endTime": 1500
         },
         {
             "festivalId": 2234567891,
             "performanceId": 1234567893,
-            "startTime": 1330,
-            "endTime": 1730
+            "startTime": 1200,
+            "endTime": 1300
         },
         {
             "festivalId": 2234567891,
             "performanceId": 1234567894,
-            "startTime": 1430,
-            "endTime": 1930
+            "startTime": 1200,
+            "endTime": 1400
         },
         {
             "festivalId": 2234567892,
@@ -111,4 +111,4 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3000/basic/result?festivalId=2234567891 HTTP/1.1
-Content-Type: application/json
+Content-Type: application/json  

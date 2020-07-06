@@ -92,16 +92,7 @@ app.get('/:type/data', function (req, res, next) {
   else return next({ error: "Unknown Type", code: 400 });
 });
 
-// GET endpoint for performanceId, startTime and endTime from Performance table(RESULT VIEWER)
-// app.get('/basic/result', function (req, res, next) {
-//   const { festivalId } = req.query;
-//   database.getPerformanceByFestivalId(festivalId, (error, result) => {
-//     if (error) return next(error);
-//     const { error: algorithmError, result: algorithmResult } = algorithm.compute(result)
-//     if (algorithmError) return next(algorithmError);
-//     return res.json(algorithmResult);
-//   });
-// });
+// GET endpoint to get the results based on the user festivalId input(RESULT VIEWER)
 app.get('/basic/result', async(req, res) => res.json(await compute(req.query.festivalId)));
 
 // 404 Error Handler(OK)

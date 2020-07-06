@@ -8,10 +8,10 @@
 const database = require("./database");
 
 // catch error here, else send result out
-async function compute (festivalId) {
-    try{return { result: await iteratePerformance(festivalId)}} 
-    catch (error) {return { error, result: null };}
-} 
+async function compute(festivalId) {
+    try { return { result: await iteratePerformance(festivalId) } }
+    catch (error) { return { error, result: null }; }
+}
 
 // 1. selectPerformanceByFestivalId to correctly select set of performance for computation
 async function selectPerformanceByFestivalId(festivalId) {
@@ -27,7 +27,7 @@ async function selectPerformanceByFestivalId(festivalId) {
 // 2. sortPerformanceByFinishTime to sort performance by increasing order of their finishing time
 async function sortPerformanceByFinishTime(festivalId) {
     const filteredPerformance = await selectPerformanceByFestivalId(festivalId);  //do a await to get result from previous function
-    const furtherFilter = filteredPerformance.sort((a,b) => parseInt(a.endtime) - parseInt(b.endtime))  //sort the performances based on their finishing time and assign them to furtherFilter
+    const furtherFilter = filteredPerformance.sort((a, b) => parseInt(a.endtime) - parseInt(b.endtime))  //sort the performances based on their finishing time and assign them to furtherFilter
     return furtherFilter;
 };
 
@@ -39,31 +39,33 @@ async function maintainSortedPerformance(festivalId) {
         const returnKeys = sourceKeys.filter(k => !removeKeys.includes(k));
         let returnObject = {};
         returnKeys.forEach(k => {
-          returnObject[k] = sourceObject[k];
+            returnObject[k] = sourceObject[k];
         });
         return returnObject;
-      }
-    const newArray = performance.map(obj => mapOut(obj, ["festivalid", ]))  //push the filteredarray to remove the festvialid
-    const newerArray = new Array(newArray)  //wrap the entire thing in a list
-    return newerArray;
+    }
+    const newArray = performance.map(obj => mapOut(obj, ["festivalid",]))  //push the filteredarray to remove the festvialid
+    return newArray;
 };
 
 // 4. iteratePerformance to iterate through each of the sorted performance
-// for (...) {
-//     const performance = sortedSelectedPerformance[i];
-//     if (doesNotClash(selectedPerformance, performance)) {
-//         // 4a add
-//         selectedPerformances.push(performance);
-//     }
 async function iteratePerformance(festivalId) {
     const performance = await maintainSortedPerformance(festivalId);
-    // const finalPerformances = []    //create a new list to push correct performances into it later
-    
-    // performance.sort(function(a,b) {
-    //     return parseFloat(parseFloat(a.festivalId) - parseFloat(b.festivalId));
-    // })
-    console.log(performance)
-    return performance;
+    const finalPerformances = []    //create a new list to push correct performances into it later
+    finalPerformances.push(performance[0])  //push the 1st object into the array first
+
+    for (i = 1; i < performance.length; i++) {
+        if (((performance[i]).starttime - (performance[i - 1].endtime)) < 0) {
+            console.log('Nope!')
+        }
+        else if (((performance[i]).starttime - (performance[i - 1].endtime)) === 0) {
+            finalPerformances.push(performance[i]);
+        }
+        else if (((performance[i]).starttime - (performance[i - 1].endtime)) > 0) {
+            finalPerformances.push(performance[i]);
+        }
+    }
+    const newerArray = new Array(finalPerformances)  //wrap the entire thing in a list
+    return newerArray;
 }
 
 // export modules
