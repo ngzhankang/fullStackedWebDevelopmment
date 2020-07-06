@@ -53,7 +53,7 @@ async function iteratePerformance(festivalId) {
     const finalPerformances = []    //create a new list to push correct performances into it later
     finalPerformances.push(performance[0])  //push the 1st object into the array first
 
-    for (i = 1; i < performance.length; i++) {
+    for (i = 1; i < performance.length; i++) {  //do a for and a if loop to get those performances not clashed into the new list
         if (((performance[i]).starttime - (performance[i - 1].endtime)) < 0) {
             console.log('Nope!')
         }
