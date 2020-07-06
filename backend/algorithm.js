@@ -9,7 +9,7 @@ const database = require("./database");
 
 // catch error here, else send result out
 async function compute(festivalId) {
-    try { return { result: await generateAllWays(festivalId) } }
+    try { return { result: await iteratePerformance(festivalId) } }
     catch (error) { return { error, result: null }; }
 }
 
@@ -68,39 +68,43 @@ async function iteratePerformance(festivalId) {
     return newerArray;
 }
 
-// 5. generateAllWays to generate all possible ways to select the performances(BRUTE FORCE)
-async function generateAllWays(festivalId) {
-    const performance = await maintainSortedPerformance(festivalId);  //do a await to get result from previous function
-    var possibleCombinations = []   //declare a empty array to store the possible combinations later
+// // 5. generateAllWays to generate all possible ways to select the performances(BRUTE FORCE)
+// async function generateAllWays(festivalId) {
+//     const performance = await maintainSortedPerformance(festivalId);  //do a await to get result from previous function
+//     var possibleCombinations = []   //declare a empty array to store the possible combinations later
 
-    function* subsets(array, offset = 0) {  //calculate total number of possibilities
-        while (offset < array.length) {
-            let first = array[offset++];
-            for (let subset of subsets(array, offset)) {
-                subset.push(first);
-                yield subset;
-            }
-        }
-        yield [];
-    }
+//     function* subsets(array, offset = 0) {  //calculate total number of possibilities
+//         while (offset < array.length) {
+//             let first = array[offset++];
+//             for (let subset of subsets(array, offset)) {
+//                 subset.push(first);
+//                 yield subset;
+//             }
+//         }
+//         yield [];
+//     }
 
-    for (let subset of subsets(performance)) {  //throw the data into the function
-        possibleCombinations.push(subset);
-    }
-    return possibleCombinations;
-}
+//     for (let subset of subsets(performance)) {  //throw the data into the function
+//         possibleCombinations.push(subset);
+//     }
+//     return possibleCombinations;
+// }
 
-// 6. eliminateInvalid to get rid of invalid options(BRUTE FORCE)
-async function eliminateInvalid(festivalId) {
-    const possibilities = await generateAllWays(festivalId);  //do a await to get result from previous function
+// // 6. eliminateInvalid to get rid of invalid options(BRUTE FORCE)
+// async function eliminateInvalid(festivalId) {
+//     const allPossibilities = await generateAllWays(festivalId);  //do a await to get result from previous function
 
-
-}
+//     // part1: remove results that has timing clash
+//     const validPeformances = [] //create a new array to store the performance combinations that does not have clash at all
+//     return (allPossibilities[0])
+// }
 
 // // 7. getMostPerformance to get the subset with the most number of performances(BRUTE FORCE)
 // async function getMostPerformance(festivalId) {
 //     // do sth here
 // }
+
+
 
 // export modules
 module.exports = {
