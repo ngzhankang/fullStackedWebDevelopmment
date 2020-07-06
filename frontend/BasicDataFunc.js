@@ -1,4 +1,4 @@
-// BASIC DATA VIEWER
+// DATA VIEWER - BASIC
 const basicDataQuery = {
   festivalId: null,
   startTime: null,

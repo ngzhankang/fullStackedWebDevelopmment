@@ -64,6 +64,8 @@ function toggleAddSearch () {
     // to hide and unhide the search filters
     $('#basic-data-filter-form').toggle();
     $('#advance-data-filter-form').toggle();
+    $('#basic-result-filter-form').toggle();
+    $('#advance-result-filter-form').toggle();
 }
 
 function togglePagination() {
@@ -90,6 +92,7 @@ $(document).ready(function () {
   SUMMONALLOUT();
   $('#advancedTable').toggle();
   $('#advance-data-filter-form').toggle();
+  $('#advance-result-filter-form').toggle();
   $('#advanceNav').toggle();
 });
 

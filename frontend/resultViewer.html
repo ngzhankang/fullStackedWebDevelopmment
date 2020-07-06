@@ -23,6 +23,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="index.css" />
     <script src="BasicResultFunc.js" type="text/JavaScript"></script>
+    <script src="AdvanceResultFunc.js" type="text/JavaScript"></script>
 </head>
 </head>
 
@@ -51,26 +52,53 @@
         </header>
 
         <!-- Main Body -->
-        <main role="main">
-            <!-- Main Body(Filter) -->
-            <form id='basic-result-input-form'>
-                <div class="form-row col-6 mx-auto pt-5 pb-5 pl-5">
-                    <div class="col-6">
-                        <input required key="festivalId" type="number" min="1000000000" max="9999999999"
-                            class="form-control" placeholder="festivalId" id="festivalIdInput" />
-                    </div>
-                    <div class="col-1">
-                        <input class="btn btn-primary" type="submit" value="Submit" />
-                    </div>
-                    <div class="custom-control custom-switch col-5 pt-2 pl-5">
-                        <input type="checkbox" class="custom-control-input" id="basicSwitch" />
-                        <label class="custom-control-label" for="basicSwitch" id="functionLabel">Basic</label>
-                    </div>
+    <main role="main">
+        <div class="form-row">
+          <div class="form-group col-11">
+            <!-- Main Body(Basic Filter) -->
+            <form id="basic-result-filter-form">
+              <div class="form-row justify-content-center">
+                <div class="col-6">
+                  <input key="festivalId" name="searchFestivalId" type="number" min="1000000000" max="9999999999"
+                    class="form-control" placeholder="festivalId" id="festivalIdInput" />
                 </div>
+                <div class="col-1">
+                  <input class="btn btn-primary" type="submit" value="Submit" />
+                </div>
+              </div>
             </form>
+            <!-- Main Body(Advance Filter) -->
+            <form id="advance-result-filter-form">
+              <div class="form-row justify-content-center">
+                <div class="col-6">
+                  <input key="festivalId" name="searchFestivalId" type="number" min="1000000000" max="9999999999"
+                    class="form-control" placeholder="festivalId" id="festivalIdInput" />
+                </div>
+                <div class="col-1">
+                  <input class="btn btn-primary float-left" type="submit" value="Submit" />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="custom-control custom-switch pt-2 col-1">
+            <input type="checkbox" class="custom-control-input" id="basicSwitch" />
+            <label class="custom-control-label" for="basicSwitch" id="functionLabel">Basic</label>
+          </div>
+          <script>
+            $("#basicSwitch").click(function () {
+              var functionLabel = document.getElementById("functionLabel");
+  
+              if ($("#functionLabel").text() == "Basic") {
+                functionLabel.innerHTML = "Advance";
+              } else {
+                functionLabel.innerHTML = "Basic";
+              }
+            });
+          </script>
+        </div>
 
-            <!-- Main Body(Table) -->
-            <table class="table">
+            <!-- Main Body(Basic Table) -->
+            <table class="table" id='basicTable'>
                 <thead>
                     <tr>
                         <th scope="col">performanceId</th>
@@ -81,14 +109,26 @@
                 <tbody id='basic-result-tbody'>
                 </tbody>
             </table>
+            <!-- Main Body(Advance Table) -->
+            <table class="table" id="advancedTable">
+                <thead>
+                    <tr>
+                        <th scope="col">performanceId</th>
+                        <th scope="col">startTime</th>
+                        <th scope="col">endTime</th>
+                        <th scope="col">popularity</th>
+                    </tr>
+                </thead>
+                <tbody id="advance-result-tbody"></tbody>
+            </table>
         </main>
 
-        <!-- Footer -->
-        <footer class="mt-auto">
+        <!-- Footer (Basic)-->
+        <footer class="mt-auto" id="basicNav">
 
             <div class="form-row">
                 <div class="col-10">
-                    <!-- Footer(Pagination) -->
+                    <!-- Footer(Pagination basic) -->
                     <nav aria-label="Page navigation">
                         <ul class="pagination">
                             <li class="page-item">
@@ -107,7 +147,7 @@
                 </div>
                 <div class="col-1">
 
-                    <!-- Footer(Size Options) -->
+                    <!-- Footer(Size Options basic) -->
                     <select fn='changePageSize' id='basic-result-page-size-select' class="custom-select">
                         <option value="5" selected>5</option>
                         <option value="10">10</option>
@@ -117,7 +157,47 @@
             </div>
             <hr>
 
-            <!-- Footer(Copyrights) -->
+            <!-- Footer(Copyrights basic) -->
+            <p class="copyright-text">
+                Copyright &copy; 2020 All Rights Reserved by skrtttt.
+            </p>
+        </footer>
+
+        <!-- Footer (Advance) -->
+        <footer class="mt-auto" id="advanceNav">
+
+            <div class="form-row">
+                <div class="col-10">
+                    <!-- Footer(Pagination advance) -->
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a fn='gotoFirstPage' id="advance-result-first-page" class="page-link" href="#">First</a>
+                            </li>
+                            <li class="page-item">
+                                <a fn='changePage' value="-1" id="advance-result-previous-page" class="page-link"
+                                    href="#">Previous</a>
+                            </li>
+                            <li class="page-item">
+                                <a fn='changePage' value="1" id="advance-result-next-page" class="page-link"
+                                    href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-1">
+
+                    <!-- Footer(Size Options advance) -->
+                    <select fn='changePageSize' id='advance-result-page-size-select' class="custom-select">
+                        <option value="5" selected>5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                    </select>
+                </div>
+            </div>
+            <hr>
+
+            <!-- Footer(Copyrights advance) -->
             <p class="copyright-text">
                 Copyright &copy; 2020 All Rights Reserved by skrtttt.
             </p>

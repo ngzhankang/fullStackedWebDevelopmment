@@ -1,4 +1,4 @@
-// ADVANCE DATA VIEWER
+// DATA VIEWER - ADVANCE
 const advanceDataQuery = {
     festivalId: null,
     startTime: null,

@@ -1,4 +1,4 @@
-// RESULT VIEWER
+// RESULT VIEWER - BASIC
 const basicResultQuery = {
     festivalId: null,
     page: 0,
@@ -68,7 +68,7 @@ const basicResultQuery = {
       if (error) return alert(JSON.stringify(error));
       populateBasicResultTable(data);
       if (data.rows.length === 0) return basicDataQuery['page']--;
-      currentData = data.rows;
+      currentData2 = data.rows;
     });
   }
   
