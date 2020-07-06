@@ -4,11 +4,12 @@
  ** in the process, check if the performances clash with one another or not, if it does rearrange, and if not possible, drop it.
 **/
 
+// require the necessary files
 const database = require("./database");
 
-// catch error here
+// catch error here, else send result out
 async function compute (festivalId) {
-    try{return { result: await maintainSortedPerformance(festivalId)}} 
+    try{return { result: await iteratePerformance(festivalId)}} 
     catch (error) {return { error, result: null };}
 } 
 
@@ -43,16 +44,27 @@ async function maintainSortedPerformance(festivalId) {
         return returnObject;
       }
     const newArray = performance.map(obj => mapOut(obj, ["festivalid", ]))  //push the filteredarray to remove the festvialid
-    return newArray;
+    const newerArray = new Array(newArray)  //wrap the entire thing in a list
+    return newerArray;
 };
 
-// // 4. iteratePerformance to iterate through each of the sorted performance
+// 4. iteratePerformance to iterate through each of the sorted performance
 // for (...) {
 //     const performance = sortedSelectedPerformance[i];
 //     if (doesNotClash(selectedPerformance, performance)) {
 //         // 4a add
 //         selectedPerformances.push(performance);
 //     }
+async function iteratePerformance(festivalId) {
+    const performance = await maintainSortedPerformance(festivalId);
+    // const finalPerformances = []    //create a new list to push correct performances into it later
+    
+    // performance.sort(function(a,b) {
+    //     return parseFloat(parseFloat(a.festivalId) - parseFloat(b.festivalId));
+    // })
+    console.log(performance)
+    return performance;
+}
 
 // export modules
 module.exports = {
