@@ -52,50 +52,52 @@
         </header>
 
         <!-- Main Body -->
-    <main role="main">
-        <div class="form-row">
-          <div class="form-group col-11">
-            <!-- Main Body(Basic Filter) -->
-            <form id="basic-result-filter-form">
-              <div class="form-row justify-content-center">
-                <div class="col-6">
-                  <input key="festivalId" name="searchFestivalId" type="number" min="1000000000" max="9999999999"
-                    class="form-control" placeholder="festivalId" id="festivalIdInput" />
+        <main role="main">
+            <div class="form-row">
+                <div class="form-group col-11">
+                    <!-- Main Body(Basic Filter) -->
+                    <form id="basic-result-filter-form">
+                        <div class="form-row justify-content-center">
+                            <div class="col-6">
+                                <input key="festivalId" name="searchFestivalId" type="number" min="1000000000"
+                                    max="9999999999" class="form-control" placeholder="festivalId"
+                                    id="festivalIdInput" />
+                            </div>
+                            <div class="col-1">
+                                <input class="btn btn-primary" type="submit" value="Submit" />
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Main Body(Advance Filter) -->
+                    <form id="advance-result-filter-form">
+                        <div class="form-row justify-content-center">
+                            <div class="col-6">
+                                <input key="festivalId" name="searchFestivalId" type="number" min="1000000000"
+                                    max="9999999999" class="form-control" placeholder="festivalId"
+                                    id="festivalIdInput" />
+                            </div>
+                            <div class="col-1">
+                                <input class="btn btn-primary float-left" type="submit" value="Submit" />
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="col-1">
-                  <input class="btn btn-primary" type="submit" value="Submit" />
+                <div class="custom-control custom-switch pt-2 col-1">
+                    <input type="checkbox" class="custom-control-input" id="basicSwitch" />
+                    <label class="custom-control-label" for="basicSwitch" id="functionLabel">Basic</label>
                 </div>
-              </div>
-            </form>
-            <!-- Main Body(Advance Filter) -->
-            <form id="advance-result-filter-form">
-              <div class="form-row justify-content-center">
-                <div class="col-6">
-                  <input key="festivalId" name="searchFestivalId" type="number" min="1000000000" max="9999999999"
-                    class="form-control" placeholder="festivalId" id="festivalIdInput" />
-                </div>
-                <div class="col-1">
-                  <input class="btn btn-primary float-left" type="submit" value="Submit" />
-                </div>
-              </div>
-            </form>
-          </div>
-          <div class="custom-control custom-switch pt-2 col-1">
-            <input type="checkbox" class="custom-control-input" id="basicSwitch" />
-            <label class="custom-control-label" for="basicSwitch" id="functionLabel">Basic</label>
-          </div>
-          <script>
-            $("#basicSwitch").click(function () {
-              var functionLabel = document.getElementById("functionLabel");
-  
-              if ($("#functionLabel").text() == "Basic") {
-                functionLabel.innerHTML = "Advance";
-              } else {
-                functionLabel.innerHTML = "Basic";
-              }
-            });
-          </script>
-        </div>
+                <script>
+                    $("#basicSwitch").click(function () {
+                        var functionLabel = document.getElementById("functionLabel");
+
+                        if ($("#functionLabel").text() == "Basic") {
+                            functionLabel.innerHTML = "Advance";
+                        } else {
+                            functionLabel.innerHTML = "Basic";
+                        }
+                    });
+                </script>
+            </div>
 
             <!-- Main Body(Basic Table) -->
             <table class="table" id='basicTable'>
@@ -123,81 +125,8 @@
             </table>
         </main>
 
-        <!-- Footer (Basic)-->
-        <footer class="mt-auto" id="basicNav">
-
-            <div class="form-row">
-                <div class="col-10">
-                    <!-- Footer(Pagination basic) -->
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a fn='gotoFirstPage' id="basic-result-first-page" class="page-link" href="#">First</a>
-                            </li>
-                            <li class="page-item">
-                                <a fn='changePage' value="-1" id="basic-result-previous-page" class="page-link"
-                                    href="#">Previous</a>
-                            </li>
-                            <li class="page-item">
-                                <a fn='changePage' value="1" id="basic-result-next-page" class="page-link"
-                                    href="#">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-1">
-
-                    <!-- Footer(Size Options basic) -->
-                    <select fn='changePageSize' id='basic-result-page-size-select' class="custom-select">
-                        <option value="5" selected>5</option>
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                    </select>
-                </div>
-            </div>
-            <hr>
-
-            <!-- Footer(Copyrights basic) -->
-            <p class="copyright-text">
-                Copyright &copy; 2020 All Rights Reserved by skrtttt.
-            </p>
-        </footer>
-
-        <!-- Footer (Advance) -->
-        <footer class="mt-auto" id="advanceNav">
-
-            <div class="form-row">
-                <div class="col-10">
-                    <!-- Footer(Pagination advance) -->
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a fn='gotoFirstPage' id="advance-result-first-page" class="page-link" href="#">First</a>
-                            </li>
-                            <li class="page-item">
-                                <a fn='changePage' value="-1" id="advance-result-previous-page" class="page-link"
-                                    href="#">Previous</a>
-                            </li>
-                            <li class="page-item">
-                                <a fn='changePage' value="1" id="advance-result-next-page" class="page-link"
-                                    href="#">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-1">
-
-                    <!-- Footer(Size Options advance) -->
-                    <select fn='changePageSize' id='advance-result-page-size-select' class="custom-select">
-                        <option value="5" selected>5</option>
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                    </select>
-                </div>
-            </div>
-            <hr>
-
-            <!-- Footer(Copyrights advance) -->
+        <!-- Footer(Copyrights basic) -->
+        <footer>
             <p class="copyright-text">
                 Copyright &copy; 2020 All Rights Reserved by skrtttt.
             </p>
