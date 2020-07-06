@@ -10,6 +10,7 @@ This report is for you to document the progres of your project. You should also 
 
 -   Since school is going to start, we are going to start working on the assignment so that we can finish the assignment earlier and focus on assignments for other modules.
 -   For e.g cleaning up ca1 and ca2, updating database for advanced feature, add wireframes for advanced feature, add more things to the markdowns for advanced feature.
+-   Complete advance data viewer
 
 ## Additional Thoughts
 

@@ -47,7 +47,7 @@ This document helps you identify the smaller tasks and helps you create a rough 
 | Week | Level | Component | Feature       | Task  |  Responsibility  |
 | ---- | ----- | --------- | ------------- | -------------- |-----------|
 | 10   | Advanced | Planning + Database | Markdown Scripts, Wireframes, Database | Add wireframes, edit markdown scripts, edit database for advanced feature | Both |
-| 11   | Advanced | Planning  | Markdown Scripts | Fill Up Markdown Scripts | Both |
-| 12   | Advanced | Database  | DB Population  | Creating Table And Establishing Table Relationships  | Both |
-| 13   | Advanced | Frontend and Backend  | Endpoints and Filters(part 1)  | Create basic endpoints and make filters in frontend | Both |
-| 14   | Advanced | Frontend and Backend  | Endpoints and Filters(part 2)  | Finish up endpoints and frontend | Both |
+| 11   | Advanced | Frontend and Backend  | Webpage and Endpoints | Complete data viewer (advanced) | Both |
+| 12   | Basic | Frontend and Backend  | Webpage and Endpoints and algorithm | Complete result viewer (basic)  | Both |
+| 13   | Advanced | Frontend and Backend  | Webpage and Endpoints and algorithm | Complete result viewer (advanced) | Both |
+| 14   | Advanced | Planning | Documentation of advanced features, Project management  | Fill up the documentation | Both |
