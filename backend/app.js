@@ -7,8 +7,8 @@ var logger = require('morgan');
 var cors = require('cors');
 
 const database = require('./database');
-const algorithm = require('./algorithm');
 const { compute } = require('./algorithm');
+const { computeAdvance } = require('./algorithm');
 
 var app = express();
 
@@ -80,7 +80,7 @@ app.post('/advance/insert', function (req, res, next) {
   }
 });
 
-// GET endpoint for either Performance or PerformanceWithPopularity table(DATA VIEWER)
+// GET endpoint for either Performance or PerformanceWithPopularity table(OK)(DATA VIEWER)
 app.get('/:type/data', function (req, res, next) {
   const { type } = req.params;
   const { festivalId, startTime, endTime, page, pageSize } = req.query;
@@ -92,8 +92,13 @@ app.get('/:type/data', function (req, res, next) {
   else return next({ error: "Unknown Type", code: 400 });
 });
 
-// GET endpoint to get the results based on the user festivalId input(RESULT VIEWER)
-app.get('/basic/result', async(req, res) => res.json(await compute(req.query.festivalId)));
+// GET endpoint for either Performance or PerformanceWithPopularity table(OK)(RESULT VIEWER)
+app.get('/:type/result', async (req, res) => {
+  const { type } = req.params;
+  const  typeEnum = { BASIC: 'basic', ADVANCE: 'advance' };
+  if (type === typeEnum.BASIC) res.json(await compute(req.query.festivalId))
+  else if (type === typeEnum.ADVANCE) res.json(await computeAdvance(req.query.festivalId))
+});
 
 // 404 Error Handler(OK)
 app.use(function (req, res, next) {

@@ -7,9 +7,15 @@
 // require the necessary files
 const database = require("./database");
 
-// catch error here, else send result out
+// catch error here, else send result out(BASIC)
 async function compute(festivalId) {
     try { return { result: await iteratePerformance(festivalId) } }
+    catch (error) { return { error, result: null }; }
+}
+
+// catch error here, else send result out(ADVANCE)
+async function computeAdvance(festivalId) {
+    try { return { result: await generateAllWays(festivalId) } }
     catch (error) { return { error, result: null }; }
 }
 
@@ -68,27 +74,61 @@ async function iteratePerformance(festivalId) {
     return newerArray;
 }
 
-// // 5. generateAllWays to generate all possible ways to select the performances(BRUTE FORCE)
-// async function generateAllWays(festivalId) {
-//     const performance = await maintainSortedPerformance(festivalId);  //do a await to get result from previous function
-//     var possibleCombinations = []   //declare a empty array to store the possible combinations later
+// 5. selectPopularityByFestivalId to correctly select set of performance for computation (ADVANCE)
+async function selectPopularityByFestivalId(festivalId) {
+    const performances = await database.getPopularityByFestivalId(festivalId)
+    const l = performances.length;  //length of performances
+    const selectedPerformance = []; //create a new array selectedPerformance
+    for (let i = 0; i < l; i++) {   //iterate through all the festivalId
+        selectedPerformance.push(performances[i]);  //push filtered performance into the array
+    };
+    return selectedPerformance; //return the array
+};
 
-//     function* subsets(array, offset = 0) {  //calculate total number of possibilities
-//         while (offset < array.length) {
-//             let first = array[offset++];
-//             for (let subset of subsets(array, offset)) {
-//                 subset.push(first);
-//                 yield subset;
-//             }
-//         }
-//         yield [];
-//     }
+// 6. sortPopularityByFinishTime to sort performance by increasing order of their finishing time
+async function sortPopularityByFinishTime(festivalId) {
+    const filteredPerformance = await selectPopularityByFestivalId(festivalId);  //do a await to get result from previous function
+    const furtherFilter = filteredPerformance.sort((a, b) => parseInt(a.endtime) - parseInt(b.endtime))  //sort the performances based on their finishing time and assign them to furtherFilter
+    return furtherFilter;
+};
 
-//     for (let subset of subsets(performance)) {  //throw the data into the function
-//         possibleCombinations.push(subset);
-//     }
-//     return possibleCombinations;
-// }
+// 7. remove key from objects to maintain the entire list
+async function maintainSortedPopularity(festivalId) {
+    const performance = await sortPopularityByFinishTime(festivalId);  //do a await to get result from previous function
+    function mapOut(sourceObject, removeKeys = []) {    //create a function to remove festivalid key from all the arrays
+        const sourceKeys = Object.keys(sourceObject);
+        const returnKeys = sourceKeys.filter(k => !removeKeys.includes(k));
+        let returnObject = {};
+        returnKeys.forEach(k => {
+            returnObject[k] = sourceObject[k];
+        });
+        return returnObject;
+    }
+    const newArray = performance.map(obj => mapOut(obj, ["festivalid",]))  //push the filteredarray to remove the festvialid
+    return newArray;
+};
+
+// 8. generateAllWays to generate all possible ways to select the performances(ADVANCE)
+async function generateAllWays(festivalId) {
+    const performance = await maintainSortedPopularity(festivalId);  //do a await to get result from previous function
+    const possibleCombinations = []   //declare a empty array to store the possible combinations later
+
+    function* subsets(array, offset = 0) {  //calculate total number of possibilities
+        while (offset < array.length) {
+            let first = array[offset++];
+            for (let subset of subsets(array, offset)) {
+                subset.push(first);
+                yield subset;
+            }
+        }
+        yield [];
+    }
+
+    for (let subset of subsets(performance)) {  //throw the data into the function
+        possibleCombinations.push(subset);
+    }
+    return possibleCombinations;
+}
 
 // // 6. eliminateInvalid to get rid of invalid options(BRUTE FORCE)
 // async function eliminateInvalid(festivalId) {
@@ -104,9 +144,8 @@ async function iteratePerformance(festivalId) {
 //     // do sth here
 // }
 
-
-
 // export modules
 module.exports = {
-    compute
+    compute,
+    computeAdvance
 }

@@ -160,6 +160,16 @@ async function getPerformanceByFestivalId(festivalId) {
     client.end();
     return rows;
 }
+
+// retrieve data from the Performance Table based on user festivalId input
+async function getPopularityByFestivalId(festivalId) {
+    const query = `SELECT * FROM PerformanceWithPopularity WHERE festivalId = $1`;
+    const client = connect();
+    const {rows} = await client.query(query, [festivalId]);
+    console.log(query);
+    client.end();
+    return rows;
+}
  
 // export functions
 module.exports = {
@@ -170,5 +180,6 @@ module.exports = {
     insertFestival,
     getFestivals,
     getPopularity,
-    getPerformanceByFestivalId
+    getPerformanceByFestivalId,
+    getPopularityByFestivalId
 }
