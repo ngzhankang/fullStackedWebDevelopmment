@@ -15,7 +15,7 @@ async function compute(festivalId) {
 
 // catch error here, else send result out(ADVANCE)
 async function computeAdvance(festivalId) {
-    try { return { result: await generateAllWays(festivalId) } }
+    try { return { result: await gedRidClashes(festivalId) } }
     catch (error) { return { error, result: null }; }
 }
 
@@ -85,14 +85,14 @@ async function selectPopularityByFestivalId(festivalId) {
     return selectedPerformance; //return the array
 };
 
-// 6. sortPopularityByFinishTime to sort performance by increasing order of their finishing time
+// 6. sortPopularityByFinishTime to sort performance by increasing order of their finishing time(ADVANCE)
 async function sortPopularityByFinishTime(festivalId) {
     const filteredPerformance = await selectPopularityByFestivalId(festivalId);  //do a await to get result from previous function
     const furtherFilter = filteredPerformance.sort((a, b) => parseInt(a.endtime) - parseInt(b.endtime))  //sort the performances based on their finishing time and assign them to furtherFilter
     return furtherFilter;
 };
 
-// 7. remove key from objects to maintain the entire list
+// 7. remove key from objects to maintain the entire list (ADVANCE)
 async function maintainSortedPopularity(festivalId) {
     const performance = await sortPopularityByFinishTime(festivalId);  //do a await to get result from previous function
     function mapOut(sourceObject, removeKeys = []) {    //create a function to remove festivalid key from all the arrays
@@ -113,10 +113,10 @@ async function generateAllWays(festivalId) {
     const performance = await maintainSortedPopularity(festivalId);  //do a await to get result from previous function
     const possibleCombinations = []   //declare a empty array to store the possible combinations later
 
-    function* subsets(array, offset = 0) {  //calculate total number of possibilities
+    function* result(array, offset = 0) {  //calculate total number of possibilities
         while (offset < array.length) {
             let first = array[offset++];
-            for (let subset of subsets(array, offset)) {
+            for (let subset of result(array, offset)) {
                 subset.push(first);
                 yield subset;
             }
@@ -124,11 +124,53 @@ async function generateAllWays(festivalId) {
         yield [];
     }
 
-    for (let subset of subsets(performance)) {  //throw the data into the function
+    for (let subset of result(performance)) {  //throw the data into the function
         possibleCombinations.push(subset);
     }
     return possibleCombinations;
 }
+
+// 9a. getRidInvalids to remove null result
+async function getRidInvalids(festivalId) {
+    const result = await generateAllWays(festivalId)
+    const newArray = [];
+    for (h = 0; h < result.length; h++) {  //check if a subset is zero. if zero, discard
+        if ((result[h]) === undefined || (result[h]) == 0) {
+        }
+        else {
+            newArray.push(result[h])
+        }
+    }
+    return newArray
+};
+
+// 9b. gedRidClashes to remove result with performance that clash
+async function gedRidClashes(festivalId) {
+    const result = await getRidInvalids(festivalId);
+    const finalresult = []    //create a new list to push correct result into it later
+
+
+    for (let i = 1; i < result.length; i++) { //loop thru the concated list in the big list
+        if ((result[i]).length === 1) {
+            finalresult.push(result[i]);
+        }
+        else {
+            for (let j = 1; j < (result[i]).length; j++) {  //loop thru each concated list to access the objects
+                if ((((result[i])[j]).starttime - (((result[i])[j - 1]).endtime)) < 0) {  //if 
+                    console.log('.')
+                }
+                else if ((((result[i])[j]).starttime - (((result[i])[j - 1]).endtime)) === 0) {
+                    finalresult.push(((result[i])[j]));
+                }
+                else if ((((result[i])[j]).starttime - (((result[i])[j - 1]).endtime)) > 0) {
+                    finalresult.push(((result[i])[j]));
+                }
+            }
+        }
+    }
+    console.log(finalresult)
+    return finalresult;
+};
 
 // // 6. eliminateInvalid to get rid of invalid options(BRUTE FORCE)
 // async function eliminateInvalid(festivalId) {
