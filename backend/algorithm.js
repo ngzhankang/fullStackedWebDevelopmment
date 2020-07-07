@@ -146,30 +146,43 @@ async function getRidInvalids(festivalId) {
 
 // 9b. gedRidClashes to remove result with performance that clash
 async function gedRidClashes(festivalId) {
-    const result = await getRidInvalids(festivalId);
+    const result = await getRidInvalids(festivalId);    //all the possible subsets
     const finalresult = []    //create a new list to push correct result into it later
+    const onlyOneObject = []    //create a new list to push those with only 1 object
+    const manyObjects = []  //create a new list to push those with more than 1 object
 
 
     for (let i = 1; i < result.length; i++) { //loop thru the concated list in the big list
         if ((result[i]).length === 1) {
-            finalresult.push(result[i]);
+            onlyOneObject.push(result[i]);    // if size of inner list is 1 (1 object only) push to list
         }
-        else {
-            for (let j = 1; j < (result[i]).length; j++) {  //loop thru each concated list to access the objects
-                if ((((result[i])[j]).starttime - (((result[i])[j - 1]).endtime)) < 0) {  //if 
-                    console.log('.')
-                }
-                else if ((((result[i])[j]).starttime - (((result[i])[j - 1]).endtime)) === 0) {
-                    finalresult.push(((result[i])[j]));
-                }
-                else if ((((result[i])[j]).starttime - (((result[i])[j - 1]).endtime)) > 0) {
-                    finalresult.push(((result[i])[j]));
-                }
-            }
+        else if ((result[i].length > 1)) {
+            manyObjects.push(result[i]);    // if size of inner list is more than 1, push to list
         }
     }
-    console.log(finalresult)
-    return finalresult;
+
+    for (let j = 1; j < manyObjects.length; j++) {  //loop thru list with inner lists including more than 1
+        for (let k = 0; k < (manyObjects[j]).length; k++) { //loop thru inner list and accessing each object
+            if ( ( ((manyObjects[j])[k]).starttime - ((manyObjects[j])[k+1]).endtime  < 0) || )
+        }
+    }
+
+        // else {
+        //     for (let j = 1; j < (result[i]).length; j++) {  //loop thru each concated list to access the objects
+        //         if ((((result[i])[j]).starttime - (((result[i])[j - 1]).endtime)) < 0) {  //if 
+        //             console.log('.')
+        //         }
+        //         else if ((((result[i])[j]).starttime - (((result[i])[j - 1]).endtime)) === 0) {
+        //             finalresult.push(((result[i])[j]));
+        //         }
+        //         else if ((((result[i])[j]).starttime - (((result[i])[j - 1]).endtime)) > 0) {
+        //             finalresult.push(((result[i])[j]));
+        //         }
+        //     }
+        // }
+
+    console.log(manyObjects)
+    return manyObjects;
 };
 
 // // 6. eliminateInvalid to get rid of invalid options(BRUTE FORCE)
@@ -191,3 +204,93 @@ module.exports = {
     compute,
     computeAdvance
 }
+
+
+
+
+
+
+
+// // 9b. onlyOnePerformance to get objects with only 1 performance and store it in a new array 
+// async function onlyOnePerformance(festivalId) {
+//     const data = await getRidInvalids(festivalId);
+//     const onlyOne = [];
+//     for (let i = 0; i < data.length; i++) {
+//         if(data[i].length === 1) {
+//             onlyOne.push(data[i])
+//             data.splice(i, 1)
+//         }
+//     }
+//     return onlyOne, data
+// }
+
+// // 9c. 
+
+// // 9b. isPerformanceConflict to filter if the performance has clash
+// async function isPerformanceConflict(performance1, performance2) {
+//     if ((performance1.starttime - performance2.endtime) < 0) {  //if 
+//         console.log('.')
+//     }
+//     else if ((performance1.starttime - performance2.endtime) === 0) {
+//         finalresult.push(((result[i])[j]));
+//     }
+//     else if ((performance1.starttime - performance2.endtime) > 0) {
+//         finalresult.push(((result[i])[j]));
+//     }
+// };
+
+// // 9c. isSubsetConflict to do handler for isPerformanceConflict(takes in only 1 subset a time)
+// async function isSubsetConflict(subset) {
+//     for (let i = 0; i < subset.length; i++) {   //loop thru the subsets
+//         if ((subset[i]).length === 1) {
+//             return false;   //return false if there is only 1 object in the list
+//         }
+//     }
+//     for (let j = 0; j < subset.length; j++) {   //determine if 2 performances conflict with one another
+//         for (k = j; k < subset.length; k++) {
+//             await isPerformanceConflict((subset[0]), (subset[1]))   //determine if 
+//         }
+//     }
+//     return false;   //if no conflict return boolean false
+// };
+
+// // 9c. gedRidClashes to remove result with performance that clash
+// async function gedRidClashes(festivalId) {
+//     const result = await getRidInvalids(festivalId);
+//     const finalresult = []    //create a new list to push correct result into it later
+
+    
+
+    
+
+//     // for (let i = 1; i < result.length; i++) { //loop thru the concated list in the big list
+//     //     if ((result[i]).length === 1) {
+//     //         finalresult.push(result[i]);
+//     //     }
+//     //     else {
+//     //         for (let j = 1; j < (result[i]).length; j++) {  //loop thru each concated list to access the objects
+//     //             if ((((result[i])[j]).starttime - (((result[i])[j - 1]).endtime)) < 0) {  //if 
+//     //                 console.log('.')
+//     //             }
+//     //             else if ((((result[i])[j]).starttime - (((result[i])[j - 1]).endtime)) === 0) {
+//     //                 finalresult.push(((result[i])[j]));
+//     //             }
+//     //             else if ((((result[i])[j]).starttime - (((result[i])[j - 1]).endtime)) > 0) {
+//     //                 finalresult.push(((result[i])[j]));
+//     //             }
+//     //         }
+//     //     }
+//     // }
+
+//     // for (i = 0; i < subsets.length; i++) {
+//     //     if isSubsetConflict(subset[i]) {
+
+//     //     }
+//     // }
+//     //     if isSubsetConflict(subsets[i])
+//     //         continue;
+//     //     finalResult.push(subsets[i])
+
+//     console.log(result.length)
+//     return result;
+// };
