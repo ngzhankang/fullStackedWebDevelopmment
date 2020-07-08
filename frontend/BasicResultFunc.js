@@ -16,7 +16,7 @@ const basicResultQuery = {
     //   return;
     // }
     // else {
-      const resultTableHtml = (data.result).map( //data.result
+      const resultTableHtml = (data.result).map(
         ({ performanceid, starttime, endtime }) => `
               <tr>
                   <td>${performanceid}</td>
@@ -71,6 +71,6 @@ const basicResultQuery = {
 // call these functions
 $(document).ready(function () {
     registerBasicResultInput();
-    refreshBasicResultTable();
+    // refreshBasicResultTable();
   });
   

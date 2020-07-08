@@ -113,6 +113,7 @@ function getFestivals (festivalId, startTime, page=0, pageSize=5, callback) {
     const client = connect();
     client.query(query, values, function(err, rows) {
         console.log(query)
+        console.log(err)
         client.end();
         callback(err, rows);
     });

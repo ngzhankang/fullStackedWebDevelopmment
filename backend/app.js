@@ -93,11 +93,22 @@ app.get('/:type/data', function (req, res, next) {
 });
 
 // GET endpoint for either Performance or PerformanceWithPopularity table(OK)(RESULT VIEWER)
+// app.get('/:type/result', async (req, res, next) => {
+//   const { type } = req.params;
+//   const callback = (error, result) => { if (error) return next(error); else return res.json(result)}
+//   const  typeEnum = { BASIC: 'basic', ADVANCE: 'advance' };
+//   if (type === typeEnum.BASIC) res.json(await compute(req.query.festivalId), callback)
+//   else if (type === typeEnum.ADVANCE) res.json(await computeAdvance(req.query.festivalId), callback)
+// });
+
+// GET endpoint for either Performance or PerformanceWithPopularity table(OK)(RESULT VIEWER)
 app.get('/:type/result', async (req, res, next) => {
   const { type } = req.params;
+  const callback = (error, result) => { if (error) return next(error); else return res.json(result)}
   const  typeEnum = { BASIC: 'basic', ADVANCE: 'advance' };
   if (type === typeEnum.BASIC) res.json(await compute(req.query.festivalId))
   else if (type === typeEnum.ADVANCE) res.json(await computeAdvance(req.query.festivalId))
+  else return next({ error: "Server Error", code: 500});
 });
 
 // 404 Error Handler(OK)
@@ -110,7 +121,6 @@ app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
   // render the error page
   res.status(err.status || 500);
   res.json({

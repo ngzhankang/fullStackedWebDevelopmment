@@ -80,8 +80,10 @@ async function iteratePerformance(festivalId) {
       finalPerformances.push(performance[i]);
     }
   }
-  const newerArray = new Array(finalPerformances); //wrap the entire thing in a list
-  return newerArray;
+  newestArray = [];
+  newestArray.push(finalPerformances)
+  // const newerArray = new Array(finalPerformances); //wrap the entire thing in a list
+  return newestArray;
 }
 
 // 5. selectPopularityByFestivalId to correctly select set of performance for computation (ADVANCE)
