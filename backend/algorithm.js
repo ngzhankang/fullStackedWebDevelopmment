@@ -15,7 +15,7 @@ async function compute(festivalId) {
 
 // catch error here, else send result out(ADVANCE)
 async function computeAdvance(festivalId) {
-    try { return { result: await gedRidClashes(festivalId) } }
+    try { return { result: await selectHighestPopularity(festivalId) } }
     catch (error) { return { error, result: null }; }
 }
 
@@ -147,150 +147,92 @@ async function getRidInvalids(festivalId) {
 // 9b. gedRidClashes to remove result with performance that clash
 async function gedRidClashes(festivalId) {
     const result = await getRidInvalids(festivalId);    //all the possible subsets
-    const finalresult = []    //create a new list to push correct result into it later
-    const onlyOneObject = []    //create a new list to push those with only 1 object
-    const manyObjects = []  //create a new list to push those with more than 1 object
+    // result is a array of subsets of the original array of performances 
+    // and all the entries are valid.
 
+    const finalresult = []    //create a new list to push subsets that have no clashes within itself into it later
+    const manyObjects = []  //create a new list to push those with more than 1 object
 
     for (let i = 1; i < result.length; i++) { //loop thru the concated list in the big list
         if ((result[i]).length === 1) {
-            onlyOneObject.push(result[i]);    // if size of inner list is 1 (1 object only) push to list
+            finalresult.push(result[i]);    // if size of inner list is 1 (1 object only) push to list
         }
         else if ((result[i].length > 1)) {
             manyObjects.push(result[i]);    // if size of inner list is more than 1, push to list
         }
     }
 
-    for (let j = 1; j < manyObjects.length; j++) {  //loop thru list with inner lists including more than 1
-        for (let k = 0; k < (manyObjects[j]).length; k++) { //loop thru inner list and accessing each object
-            if ( ( ((manyObjects[j])[k]).starttime - ((manyObjects[j])[k+1]).endtime  < 0) || )
+    // Want to check if performances within a particular subset has conflicts.
+    for (let j = 0; j < manyObjects.length; j++) {  //for every subset.
+        const currentSubset = manyObjects[j];
+        let skip = false;
+        for (let k = 0; k < currentSubset.length; k++) { // for every performance in the subset
+            const currentPerformance = currentSubset[k];
+            for (let l = k + 1; l < currentSubset.length; l++) {
+                const performanceToCompareWith = currentSubset[l];
+                if ((currentPerformance.starttime - performanceToCompareWith.endtime <= 0 && performanceToCompareWith.starttime - currentPerformance.starttime <= 0)
+                    || (performanceToCompareWith.starttime - currentPerformance.endtime <= 0 && currentPerformance.starttime - performanceToCompareWith.starttime <= 0)) {
+                    skip = true;
+                    break;
+                }
+            }
+            if (skip) break;    //performances do not clash
         }
+        //performances do not clash
+        if (!skip) finalresult.push(currentSubset); //push it into finalresult
+    }
+    return finalresult
+}
+
+// 9c. selectHighestPopularity to retrieve all popularity score and select the subset that gives the highest score
+async function selectHighestPopularity(festivalId) {
+    const finalresult = await gedRidClashes(festivalId);    //all the good subsets
+
+    function functionCurrentPopularity(finalresult) {   //create a inner function to get the respective scores
+        const allTheScores = [] //create a list to store the respective scores
+        const totalScore = 0   //to store the total score of that list
+
+        for (let i = 0; i < finalresult.length; i++) {    //do a for loop to detect if subset has 1 performance or more than 1 performance in the list
+            const currentSubset  = finalresult[i]   //re-initialze current subset as a new const
+            if (currentSubset.length === 1) {  //if subset has only 1 performance
+                const onlyOneObject = finalresult[i];   //declare onlyOneObject
+                const oneTotalScore = parseInt(onlyOneObject.popularity)  //get popularity for that object
+                console.log(oneTotalScore)
+                allTheScores.push(oneTotalScore)    //push total popularity into allTheScores
+            }
+            else if ((currentSubset.length > 1)) {   //if subset has more than 1 performance
+                const manyObjects = finalresult[i]  //declare manyObjects
+                for (let j = 0; j < onlyOneObject.length; j++) {    // get the sum of popularity for manyObjects
+                    const currentList = manyObjects[j]; //to simplify the index of each list i am attending to
+                    currentList.forEach(item => {   //get the sum of all popularity in a list
+                        totalScore += item.popularity
+                    })
+                }
+                const manyTotalScore = totalScore   //declare it as another const to call it later
+                allTheScores.push(parseInt(manyTotalScore))   //push total popularity into allTheScores
+            }
+        }
+        // console.log(allTheScores)
+        return allTheScores
     }
 
-        // else {
-        //     for (let j = 1; j < (result[i]).length; j++) {  //loop thru each concated list to access the objects
-        //         if ((((result[i])[j]).starttime - (((result[i])[j - 1]).endtime)) < 0) {  //if 
-        //             console.log('.')
-        //         }
-        //         else if ((((result[i])[j]).starttime - (((result[i])[j - 1]).endtime)) === 0) {
-        //             finalresult.push(((result[i])[j]));
-        //         }
-        //         else if ((((result[i])[j]).starttime - (((result[i])[j - 1]).endtime)) > 0) {
-        //             finalresult.push(((result[i])[j]));
-        //         }
-        //     }
-        // }
-
-    console.log(manyObjects)
-    return manyObjects;
-};
-
-// // 6. eliminateInvalid to get rid of invalid options(BRUTE FORCE)
-// async function eliminateInvalid(festivalId) {
-//     const allPossibilities = await generateAllWays(festivalId);  //do a await to get result from previous function
-
-//     // part1: remove results that has timing clash
-//     const validPeformances = [] //create a new array to store the performance combinations that does not have clash at all
-//     return (allPossibilities[0])
-// }
-
-// // 7. getMostPerformance to get the subset with the most number of performances(BRUTE FORCE)
-// async function getMostPerformance(festivalId) {
-//     // do sth here
-// }
+    const bestPopularity = 0; //initialize bestPopularity
+    const bestSubset = [];    //create an array to store the best subset
+    for (let i = 0; i < finalresult.length; i++) {
+        const currentSubset = finalresult[i];   //extract the 1st selected subset from finalresult
+        const currentPopularity = functionCurrentPopularity(finalresult) //compute score for that subset[i]. should return popularity score for that subset
+        const rightNowThePopularity = currentPopularity[i]  //extract the ith popularity score from currentPopularity
+        if (rightNowThePopularity > bestPopularity) { //check if the currentPopularity is more than the highest popularity so far captured
+            bestSubset = currentSubset; //update the current subset to the best subset
+            bestPopularity = rightNowThePopularity; //update bestPopularity to the current best popularity score
+        }
+    }
+    // console.log(bestSubset);
+    return bestPopularity;
+}
 
 // export modules
 module.exports = {
     compute,
     computeAdvance
 }
-
-
-
-
-
-
-
-// // 9b. onlyOnePerformance to get objects with only 1 performance and store it in a new array 
-// async function onlyOnePerformance(festivalId) {
-//     const data = await getRidInvalids(festivalId);
-//     const onlyOne = [];
-//     for (let i = 0; i < data.length; i++) {
-//         if(data[i].length === 1) {
-//             onlyOne.push(data[i])
-//             data.splice(i, 1)
-//         }
-//     }
-//     return onlyOne, data
-// }
-
-// // 9c. 
-
-// // 9b. isPerformanceConflict to filter if the performance has clash
-// async function isPerformanceConflict(performance1, performance2) {
-//     if ((performance1.starttime - performance2.endtime) < 0) {  //if 
-//         console.log('.')
-//     }
-//     else if ((performance1.starttime - performance2.endtime) === 0) {
-//         finalresult.push(((result[i])[j]));
-//     }
-//     else if ((performance1.starttime - performance2.endtime) > 0) {
-//         finalresult.push(((result[i])[j]));
-//     }
-// };
-
-// // 9c. isSubsetConflict to do handler for isPerformanceConflict(takes in only 1 subset a time)
-// async function isSubsetConflict(subset) {
-//     for (let i = 0; i < subset.length; i++) {   //loop thru the subsets
-//         if ((subset[i]).length === 1) {
-//             return false;   //return false if there is only 1 object in the list
-//         }
-//     }
-//     for (let j = 0; j < subset.length; j++) {   //determine if 2 performances conflict with one another
-//         for (k = j; k < subset.length; k++) {
-//             await isPerformanceConflict((subset[0]), (subset[1]))   //determine if 
-//         }
-//     }
-//     return false;   //if no conflict return boolean false
-// };
-
-// // 9c. gedRidClashes to remove result with performance that clash
-// async function gedRidClashes(festivalId) {
-//     const result = await getRidInvalids(festivalId);
-//     const finalresult = []    //create a new list to push correct result into it later
-
-    
-
-    
-
-//     // for (let i = 1; i < result.length; i++) { //loop thru the concated list in the big list
-//     //     if ((result[i]).length === 1) {
-//     //         finalresult.push(result[i]);
-//     //     }
-//     //     else {
-//     //         for (let j = 1; j < (result[i]).length; j++) {  //loop thru each concated list to access the objects
-//     //             if ((((result[i])[j]).starttime - (((result[i])[j - 1]).endtime)) < 0) {  //if 
-//     //                 console.log('.')
-//     //             }
-//     //             else if ((((result[i])[j]).starttime - (((result[i])[j - 1]).endtime)) === 0) {
-//     //                 finalresult.push(((result[i])[j]));
-//     //             }
-//     //             else if ((((result[i])[j]).starttime - (((result[i])[j - 1]).endtime)) > 0) {
-//     //                 finalresult.push(((result[i])[j]));
-//     //             }
-//     //         }
-//     //     }
-//     // }
-
-//     // for (i = 0; i < subsets.length; i++) {
-//     //     if isSubsetConflict(subset[i]) {
-
-//     //     }
-//     // }
-//     //     if isSubsetConflict(subsets[i])
-//     //         continue;
-//     //     finalResult.push(subsets[i])
-
-//     console.log(result.length)
-//     return result;
-// };

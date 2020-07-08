@@ -28,7 +28,7 @@ CREATE TABLE PerformanceWithPopularity(
     startTime SMALLINT NOT NULL,
     endTime SMALLINT NOT NULL,
     festivalId BIGINT NOT NULL CHECK (festivalId BETWEEN 0000000001 and 9999999999),
-    popularity NUMERIC NOT NULL,
+    popularity SMALLINT NOT NULL,
     FOREIGN KEY (festivalId) REFERENCES MusicFestival(festivalId)
 );
 
