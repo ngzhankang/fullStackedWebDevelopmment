@@ -18,10 +18,10 @@ async function compute(festivalId) {
 
 // catch error here, else send result out(ADVANCE)
 async function computeAdvance(festivalId) {
-  try {
-    return { result: await selectHighestPopularity(festivalId) };
+    var {bestSubset, bestPopularity} = await selectHighestPopularity(festivalId)
+    try {
+    return { result: ultimateSubset, totalPopularity: bestPopularity};
   } catch (error) {
-    console.log(error);
     return { error, result: null };
   }
 }
@@ -146,7 +146,7 @@ async function generateAllWays(festivalId) {
   return possibleCombinations;
 }
 
-// 9a. getRidInvalids to remove null result
+// 9a. getRidInvalids to remove null result (ADVANCE)
 async function getRidInvalids(festivalId) {
   const result = await generateAllWays(festivalId);
   const newArray = [];
@@ -160,7 +160,7 @@ async function getRidInvalids(festivalId) {
   return newArray;
 }
 
-// 9b. gedRidClashes to remove result with performance that clash
+// 9b. gedRidClashes to remove result with performance that clash (ADVANCE)
 async function gedRidClashes(festivalId) {
   const result = await getRidInvalids(festivalId); //all the possible subsets
   // result is a array of subsets of the original array of performances
@@ -170,7 +170,7 @@ async function gedRidClashes(festivalId) {
   const manyObjects = []; //create a new list to push those with more than 1 object
 
   for (let i = 1; i < result.length; i++) {
-    //loop thru the concated list in the big list
+    //loop thru the concatenated list in the big list
     if (result[i].length === 1) {
       finalresult.push(result[i]); // if size of inner list is 1 (1 object only) push to list
     } else if (result[i].length > 1) {
@@ -210,7 +210,7 @@ async function gedRidClashes(festivalId) {
   return finalresult;
 }
 
-// 9c. selectHighestPopularity to retrieve all popularity score and select the subset that gives the highest score
+// 9c. selectHighestPopularity to retrieve all popularity score and select the subset that gives the highest score (ADVANCE)
 async function selectHighestPopularity(festivalId) {
   const finalresult = await gedRidClashes(festivalId); //all the good subsets
 
@@ -247,8 +247,9 @@ async function selectHighestPopularity(festivalId) {
       bestPopularity = rightNowThePopularity; //update bestPopularity to the current best popularity score
     }
   }
-  console.log(bestSubset);
-  return bestPopularity;
+  ultimateSubset = []   //doing this to push the entire bestSubset into another list for the schema
+  ultimateSubset.push(bestSubset)
+  return { ultimateSubset, bestPopularity }
 }
 
 // export modules

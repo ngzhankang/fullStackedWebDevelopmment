@@ -93,7 +93,7 @@ app.get('/:type/data', function (req, res, next) {
 });
 
 // GET endpoint for either Performance or PerformanceWithPopularity table(OK)(RESULT VIEWER)
-app.get('/:type/result', async (req, res) => {
+app.get('/:type/result', async (req, res, next) => {
   const { type } = req.params;
   const  typeEnum = { BASIC: 'basic', ADVANCE: 'advance' };
   if (type === typeEnum.BASIC) res.json(await compute(req.query.festivalId))
