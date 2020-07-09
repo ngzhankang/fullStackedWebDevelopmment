@@ -35,3 +35,4 @@ CREATE TABLE PerformanceWithPopularity(
 SELECT * FROM Performance
 SELECT * FROM MusicFestival
 SELECT * FROM PerformanceWithPopularity
+SELECT * FROM Performance WHERE festivalId = 2234567891

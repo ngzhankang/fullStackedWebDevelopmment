@@ -8,10 +8,11 @@ var currentData2 = []
 // using localhost machine address to get and fetch from the backend
 const basicResultUrl = "http://localhost:3000/basic/result";
 
+
+
 // to populate the table upon getting the data from the backend
 function populateBasicResultTable(data) {
-  console.log(data.result[0]);
-  const resultTableHtml = (data.result[0]).map(
+  const resultTableHtml = (data.result).map(
     ({ performanceid, starttime, endtime }) => `
               <tr>
                   <td>${performanceid}</td>
@@ -21,6 +22,16 @@ function populateBasicResultTable(data) {
             `,
   );
   $('#basic-result-tbody').html(resultTableHtml);
+}
+
+// catch error from the backend and let the frontend handle it
+function catchDaError(data) {
+  if(data == undefined) {
+    alert('Invalid festivalId!')
+  }
+  else {  
+    populateBasicResultTable(data)
+  }
 }
 
 // to fire the query to the backend and wait for response for table data
@@ -40,7 +51,7 @@ function getBasicResultFromBackend(callback) {
 function refreshBasicResultTable() {
   getBasicResultFromBackend(function (error, data) {
     if (error) return alert(JSON.stringify(error));
-    populateBasicResultTable(data);
+    catchDaError(data);
     // if (data.rows.length === 0) return basicResultQuery['page']--;
     // currentData2 = data.rows;
   });

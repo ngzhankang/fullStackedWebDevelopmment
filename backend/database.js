@@ -158,8 +158,14 @@ async function getPerformanceByFestivalId(festivalId) {
     const client = connect();
     const {rows} = await client.query(query, [festivalId]);
     console.log(query);
-    client.end();
-    return rows;
+    if (rows.length === 0) {
+        client.end();
+        return { error: 'festivalId not found!' }
+    }
+    else {
+        client.end();
+        return rows;
+    }
 }
 
 // retrieve data from the Performance Table based on user festivalId input

@@ -18,17 +18,32 @@ async function compute(festivalId) {
 
 // catch error here, else send result out(ADVANCE)
 async function computeAdvance(festivalId) {
-    var {bestSubset, bestPopularity} = await selectHighestPopularity(festivalId)
-    try {
-    return { result: ultimateSubset, totalPopularity: bestPopularity};
+  var { bestSubset, bestPopularity } = await selectHighestPopularity(festivalId)
+  try {
+    return { result: bestSubset, totalPopularity: bestPopularity };
   } catch (error) {
     return { error, result: null };
   }
 }
 
+// // 0. checkValidity to see if the array is null or not
+// async function checkValidity(festivalId) {
+//   const performance = await database.getPerformanceByFestivalId(festivalId);
+//   if (typeof (performance) === 'object') {
+//     return performance;
+//   }
+//   else {
+//     return performance;
+//   }
+// }
+
 // 1. selectPerformanceByFestivalId to correctly select set of performance for computation
 async function selectPerformanceByFestivalId(festivalId) {
   const performances = await database.getPerformanceByFestivalId(festivalId);
+  // if (typeof (performances) === 'object') {
+  //   throw performances
+  // }
+  // else {
   const l = performances.length; //length of performances
   const selectedPerformance = []; //create a new array selectedPerformance
   for (let i = 0; i < l; i++) {
@@ -36,6 +51,7 @@ async function selectPerformanceByFestivalId(festivalId) {
     selectedPerformance.push(performances[i]); //push filtered performance into the array
   }
   return selectedPerformance; //return the array
+  // }
 }
 
 // 2. sortPerformanceByFinishTime to sort performance by increasing order of their finishing time
@@ -80,10 +96,10 @@ async function iteratePerformance(festivalId) {
       finalPerformances.push(performance[i]);
     }
   }
-  newestArray = [];
-  newestArray.push(finalPerformances)
+  // newestArray = [];
+  // newestArray.push(finalPerformances)
   // const newerArray = new Array(finalPerformances); //wrap the entire thing in a list
-  return newestArray;
+  return finalPerformances;
 }
 
 // 5. selectPopularityByFestivalId to correctly select set of performance for computation (ADVANCE)
@@ -194,11 +210,11 @@ async function gedRidClashes(festivalId) {
           (currentPerformance.starttime - performanceToCompareWith.endtime <=
             0 &&
             performanceToCompareWith.starttime - currentPerformance.starttime <=
-              0) ||
+            0) ||
           (performanceToCompareWith.starttime - currentPerformance.endtime <=
             0 &&
             currentPerformance.starttime - performanceToCompareWith.starttime <=
-              0)
+            0)
         ) {
           skip = true;
           break;
@@ -249,9 +265,9 @@ async function selectHighestPopularity(festivalId) {
       bestPopularity = rightNowThePopularity; //update bestPopularity to the current best popularity score
     }
   }
-  ultimateSubset = []   //doing this to push the entire bestSubset into another list for the schema
-  ultimateSubset.push(bestSubset)
-  return { ultimateSubset, bestPopularity }
+  // ultimateSubset = []   //doing this to push the entire bestSubset into another list for the schema
+  // ultimateSubset.push(bestSubset)
+  return { bestSubset, bestPopularity }
 }
 
 // export modules
