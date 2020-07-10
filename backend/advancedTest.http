@@ -51,5 +51,5 @@ Content-Type: application/json
 
 ### GET REQUIRED datas to test for success message
 
-GET http://localhost:3000/advance/result?festivalId=2234567899 HTTP/1.1
+GET http://localhost:3000/advance/result?festivalId=2234567891 HTTP/1.1
 Content-Type: application/json  

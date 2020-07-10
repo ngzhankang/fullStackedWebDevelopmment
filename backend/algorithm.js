@@ -10,7 +10,11 @@ const database = require("./database");
 // catch error here, else send result out(BASIC)
 async function compute(festivalId) {
   try {
-    return { result: await iteratePerformance(festivalId) };
+    const performance = await iteratePerformance(festivalId);
+    if (performance.error) {
+      return { error: performance.error };
+    }
+    return { result: performance.finalPerformances };
   } catch (error) {
     return { error, result: null };
   }
@@ -18,71 +22,74 @@ async function compute(festivalId) {
 
 // catch error here, else send result out(ADVANCE)
 async function computeAdvance(festivalId) {
-  var { bestSubset, bestPopularity } = await selectHighestPopularity(festivalId)
+  var selectedHighestPopularityObject = await selectHighestPopularity(festivalId)
   try {
-    return { result: bestSubset, totalPopularity: bestPopularity };
+    if (selectedHighestPopularityObject.error) {
+      return { error: selectedHighestPopularityObject.error };
+    }
+    return { result: selectedHighestPopularityObject.bestSubset, totalPopularity: selectedHighestPopularityObject.bestPopularity, error: null };
   } catch (error) {
-    return { error, result: null };
+    return { error, result: null};
   }
 }
-
-// // 0. checkValidity to see if the array is null or not
-// async function checkValidity(festivalId) {
-//   const performance = await database.getPerformanceByFestivalId(festivalId);
-//   if (typeof (performance) === 'object') {
-//     return performance;
-//   }
-//   else {
-//     return performance;
-//   }
-// }
 
 // 1. selectPerformanceByFestivalId to correctly select set of performance for computation
 async function selectPerformanceByFestivalId(festivalId) {
   const performances = await database.getPerformanceByFestivalId(festivalId);
-  // if (typeof (performances) === 'object') {
-  //   throw performances
-  // }
-  // else {
-  const l = performances.length; //length of performances
+  if (performances.error) {
+    return performances;
+  }
+  const l = performances.rows.length; //length of performances 
   const selectedPerformance = []; //create a new array selectedPerformance
   for (let i = 0; i < l; i++) {
     //iterate through all the festivalId
-    selectedPerformance.push(performances[i]); //push filtered performance into the array
+    selectedPerformance.push(performances.rows[i]); //push filtered performance into the array
   }
-  return selectedPerformance; //return the array
+  return { selectedPerformance }; //return the array
   // }
 }
 
 // 2. sortPerformanceByFinishTime to sort performance by increasing order of their finishing time
 async function sortPerformanceByFinishTime(festivalId) {
   const filteredPerformance = await selectPerformanceByFestivalId(festivalId); //do a await to get result from previous function
-  const furtherFilter = filteredPerformance.sort(
+  if (filteredPerformance.error) {
+    return filteredPerformance;
+  } 
+  const furtherFilter = filteredPerformance.selectedPerformance.sort(
     (a, b) => parseInt(a.endtime) - parseInt(b.endtime)
   ); //sort the performances based on their finishing time and assign them to furtherFilter
-  return furtherFilter;
+  return { furtherFilter };
+}
+
+// split this function out. Will be used later.
+function mapOut(sourceObject, removeKeys = []) {
+  //create a function to remove festivalid key from all the arrays
+  const sourceKeys = Object.keys(sourceObject);
+  const returnKeys = sourceKeys.filter((k) => !removeKeys.includes(k));
+  let returnObject = {};
+  returnKeys.forEach((k) => {
+    returnObject[k] = sourceObject[k];
+  });
+  return returnObject;
 }
 
 // 3. remove key from objects to maintain the entire list
 async function maintainSortedPerformance(festivalId) {
   const performance = await sortPerformanceByFinishTime(festivalId); //do a await to get result from previous function
-  function mapOut(sourceObject, removeKeys = []) {
-    //create a function to remove festivalid key from all the arrays
-    const sourceKeys = Object.keys(sourceObject);
-    const returnKeys = sourceKeys.filter((k) => !removeKeys.includes(k));
-    let returnObject = {};
-    returnKeys.forEach((k) => {
-      returnObject[k] = sourceObject[k];
-    });
-    return returnObject;
+  if (performance.error) {
+    return performance;
   }
-  const newArray = performance.map((obj) => mapOut(obj, ["festivalid"])); //push the filteredarray to remove the festvialid
-  return newArray;
+  const newArray = performance.furtherFilter.map((obj) => mapOut(obj, ["festivalid"])); //push the filteredarray to remove the festvialid
+  return { newArray };
 }
 
 // 4. iteratePerformance to iterate through each of the sorted performance
 async function iteratePerformance(festivalId) {
-  const performance = await maintainSortedPerformance(festivalId);
+  const sortedPerformance = await maintainSortedPerformance(festivalId);
+  if (sortedPerformance.error) {
+    return sortedPerformance;
+  }
+  const performance = sortedPerformance.newArray 
   const finalPerformances = []; //create a new list to push correct performances into it later
   finalPerformances.push(performance[0]); //push the 1st object into the array first
 
@@ -96,53 +103,64 @@ async function iteratePerformance(festivalId) {
       finalPerformances.push(performance[i]);
     }
   }
-  // newestArray = [];
-  // newestArray.push(finalPerformances)
-  // const newerArray = new Array(finalPerformances); //wrap the entire thing in a list
-  return finalPerformances;
+  return { finalPerformances };
 }
 
 // 5. selectPopularityByFestivalId to correctly select set of performance for computation (ADVANCE)
 async function selectPopularityByFestivalId(festivalId) {
   const performances = await database.getPopularityByFestivalId(festivalId);
-  const l = performances.length; //length of performances
+  if (performances.error) {
+    return performances;
+  }
+  const l = performances.rows.length; //length of performances
   const selectedPerformance = []; //create a new array selectedPerformance
   for (let i = 0; i < l; i++) {
     //iterate through all the festivalId
-    selectedPerformance.push(performances[i]); //push filtered performance into the array
+    selectedPerformance.push(performances.rows[i]); //push filtered performance into the array
   }
-  return selectedPerformance; //return the array
+  return { selectedPerformance }; //return the array
 }
 
 // 6. sortPopularityByFinishTime to sort performance by increasing order of their finishing time(ADVANCE)
 async function sortPopularityByFinishTime(festivalId) {
   const filteredPerformance = await selectPopularityByFestivalId(festivalId); //do a await to get result from previous function
-  const furtherFilter = filteredPerformance.sort(
+  if (filteredPerformance.error) {
+    return filteredPerformance;
+  }
+  const furtherFilter = filteredPerformance.selectedPerformance.sort(
     (a, b) => parseInt(a.endtime) - parseInt(b.endtime)
   ); //sort the performances based on their finishing time and assign them to furtherFilter
-  return furtherFilter;
+  return { furtherFilter };
+}
+
+// split this function out. Will be used later.
+function mapOut(sourceObject, removeKeys = []) {
+  //create a function to remove festivalid key from all the arrays
+  const sourceKeys = Object.keys(sourceObject);
+  const returnKeys = sourceKeys.filter((k) => !removeKeys.includes(k));
+  let returnObject = {};
+  returnKeys.forEach((k) => {
+    returnObject[k] = sourceObject[k];
+  });
+  return returnObject;
 }
 
 // 7. remove key from objects to maintain the entire list (ADVANCE)
 async function maintainSortedPopularity(festivalId) {
   const performance = await sortPopularityByFinishTime(festivalId); //do a await to get result from previous function
-  function mapOut(sourceObject, removeKeys = []) {
-    //create a function to remove festivalid key from all the arrays
-    const sourceKeys = Object.keys(sourceObject);
-    const returnKeys = sourceKeys.filter((k) => !removeKeys.includes(k));
-    let returnObject = {};
-    returnKeys.forEach((k) => {
-      returnObject[k] = sourceObject[k];
-    });
-    return returnObject;
+  if (performance.error) {
+    return performance;
   }
-  const newArray = performance.map((obj) => mapOut(obj, ["festivalid"])); //push the filteredarray to remove the festvialid
-  return newArray;
+  const newArray = performance.furtherFilter.map((obj) => mapOut(obj, ["festivalid"])); //push the filteredarray to remove the festvialid
+  return { newArray };
 }
 
 // 8. generateAllWays to generate all possible ways to select the performances(ADVANCE)
 async function generateAllWays(festivalId) {
   const performance = await maintainSortedPopularity(festivalId); //do a await to get result from previous function
+  if (performance.error) {
+    return performance;
+  }
   const possibleCombinations = []; //declare a empty array to store the possible combinations later
 
   function* result(array, offset = 0) {
@@ -157,16 +175,20 @@ async function generateAllWays(festivalId) {
     yield [];
   }
 
-  for (let subset of result(performance)) {
+  for (let subset of result(performance.newArray)) {
     //throw the data into the function
     possibleCombinations.push(subset);
   }
-  return possibleCombinations;
+  return { possibleCombinations };
 }
 
 // 9a. getRidInvalids to remove null result (ADVANCE)
 async function getRidInvalids(festivalId) {
-  const result = await generateAllWays(festivalId);
+  const originResult = await generateAllWays(festivalId);
+  if (originResult.error) {
+    return originResult;
+  }
+  const result = originResult.possibleCombinations
   const newArray = [];
   for (h = 0; h < result.length; h++) {
     //check if a subset is zero. if zero, discard
@@ -175,15 +197,18 @@ async function getRidInvalids(festivalId) {
       newArray.push(result[h]);
     }
   }
-  return newArray;
+  return { newArray };
 }
 
 // 9b. gedRidClashes to remove result with performance that clash (ADVANCE)
 async function gedRidClashes(festivalId) {
-  const result = await getRidInvalids(festivalId); //all the possible subsets
+  const originResult = await getRidInvalids(festivalId); //all the possible subsets
   // result is a array of subsets of the original array of performances
   // and all the entries are valid.
-
+  if (originResult.error) {
+    return originResult;
+  }
+  const result = originResult.newArray
   const finalresult = []; //create a new list to push subsets that have no clashes within itself into it later
   const manyObjects = []; //create a new list to push those with more than 1 object
 
@@ -225,20 +250,23 @@ async function gedRidClashes(festivalId) {
     //performances do not clash
     if (!skip) finalresult.push(currentSubset); //push it into finalresult
   }
-  return finalresult;
+  return { finalresult };
 }
 
 // 9c. selectHighestPopularity to retrieve all popularity score and select the subset that gives the highest score (ADVANCE)
 async function selectHighestPopularity(festivalId) {
-  const finalresult = await gedRidClashes(festivalId); //all the good subsets
-
+  const originResult = await gedRidClashes(festivalId); //all the good subsets
+  if (originResult.error) {
+    return originResult
+  }
+  const finalresult = originResult.finalresult;
   function functionCurrentPopularity(finalresult) {
     //create a inner function to get the respective scores
     const allTheScores = []; //create a list to store the respective scores
 
     for (let i = 0; i < finalresult.length; i++) {
       //do a for loop to detect if subset has 1 performance or more than 1 performance in the list
-      const currentSubset = finalresult[i]; //re-initialze current subset as a new const
+      // const currentSubset = finalresult[i]; //re-initialze current subset as a new const
       //if subset has more than 1 performance
       const manyObjects = finalresult[i]; //declare manyObjects
       totalScore = 0;
@@ -265,8 +293,6 @@ async function selectHighestPopularity(festivalId) {
       bestPopularity = rightNowThePopularity; //update bestPopularity to the current best popularity score
     }
   }
-  // ultimateSubset = []   //doing this to push the entire bestSubset into another list for the schema
-  // ultimateSubset.push(bestSubset)
   return { bestSubset, bestPopularity }
 }
 

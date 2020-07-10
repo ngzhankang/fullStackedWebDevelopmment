@@ -49,7 +49,7 @@ function resetPopularityTable() {
 }
 
 // insert data into Performance Table
-function insertPerformance (performance, callback) {
+function insertPerformance(performance, callback) {
     let i = 1;
     const template = performance.map(performance => `($${i++}, $${i++}, $${i++}, $${i++})`).join(',');
     const values = performance.reduce((reduced, performance) => [...reduced, performance.festivalId, performance.performanceId, performance.startTime, performance.endTime], [])
@@ -62,7 +62,7 @@ function insertPerformance (performance, callback) {
 }
 
 // insert data into PerformanceWithPopularity Table
-function insertPopularity (popularity, callback) {
+function insertPopularity(popularity, callback) {
     let i = 1;
     const template = popularity.map(popularity => `($${i++}, $${i++}, $${i++}, $${i++}, $${i++})`).join(',');
     const values = popularity.reduce((reduced, popularity) => [...reduced, popularity.festivalId, popularity.performanceId, popularity.startTime, popularity.endTime, popularity.popularity], [])
@@ -76,7 +76,7 @@ function insertPopularity (popularity, callback) {
 }
 
 // insert data into MusicFestival Table
-function insertFestival (performance, callback) {
+function insertFestival(performance, callback) {
     let i = 1;
     const templates = performance.map(MusicFestival => `($${i++})`).join(',');
     const values = performance.reduce((reduced, performance) => [...reduced, performance.festivalId], [])
@@ -90,11 +90,11 @@ function insertFestival (performance, callback) {
 }
 
 // retrieve data from Performance Table
-function getFestivals (festivalId, startTime, page=0, pageSize=5, callback) {
+function getFestivals(festivalId, startTime, page = 0, pageSize = 5, callback) {
     let whereClause;
     let i = 1;
     const values = [];
-    if (!festivalId && !startTime) {whereClause = ''}
+    if (!festivalId && !startTime) { whereClause = '' }
     else {
         whereClause = 'WHERE'
         if (festivalId) {
@@ -111,7 +111,7 @@ function getFestivals (festivalId, startTime, page=0, pageSize=5, callback) {
     values.push(parseInt(page) * parseInt(pageSize)); //offset = page * pageSize
     const query = `SELECT * FROM Performance ${whereClause} ${limitoffsetClause}`;
     const client = connect();
-    client.query(query, values, function(err, rows) {
+    client.query(query, values, function (err, rows) {
         console.log(query)
         console.log(err)
         client.end();
@@ -120,11 +120,11 @@ function getFestivals (festivalId, startTime, page=0, pageSize=5, callback) {
 }
 
 // retrieve data from PerformanceWithPopularity Table
-function getPopularity (festivalId, startTime, endTime, page=0, pageSize=5, callback) {
+function getPopularity(festivalId, startTime, endTime, page = 0, pageSize = 5, callback) {
     let whereClause;
     let i = 1;
     const values = [];
-    if (!festivalId && !startTime && !endTime) {whereClause = ''}
+    if (!festivalId && !startTime && !endTime) { whereClause = '' }
     else {
         whereClause = 'WHERE'
         if (festivalId) {
@@ -145,7 +145,7 @@ function getPopularity (festivalId, startTime, endTime, page=0, pageSize=5, call
     values.push(parseInt(page) * parseInt(pageSize));   //offset = page * pageSize
     const query = `SELECT * FROM PerformanceWithPopularity ${whereClause} ${limitoffsetClause}`;
     const client = connect();
-    client.query(query, values, function(err, rows) {
+    client.query(query, values, function (err, rows) {
         console.log(query)
         client.end();
         callback(err, rows);
@@ -156,7 +156,7 @@ function getPopularity (festivalId, startTime, endTime, page=0, pageSize=5, call
 async function getPerformanceByFestivalId(festivalId) {
     const query = `SELECT * FROM Performance WHERE festivalId = $1`;
     const client = connect();
-    const {rows} = await client.query(query, [festivalId]);
+    const { rows } = await client.query(query, [festivalId]);
     console.log(query);
     if (rows.length === 0) {
         client.end();
@@ -164,7 +164,7 @@ async function getPerformanceByFestivalId(festivalId) {
     }
     else {
         client.end();
-        return rows;
+        return { rows };
     }
 }
 
@@ -172,18 +172,24 @@ async function getPerformanceByFestivalId(festivalId) {
 async function getPopularityByFestivalId(festivalId) {
     const query = `SELECT * FROM PerformanceWithPopularity WHERE festivalId = $1`;
     const client = connect();
-    const {rows} = await client.query(query, [festivalId]);
+    const { rows } = await client.query(query, [festivalId]);
     console.log(query);
-    client.end();
-    return rows;
+    if (rows.length === 0) {
+        client.end();
+        return { error: 'festivalId not found!' }
+    }
+    else {
+        client.end();
+        return { rows };
+    }
 }
- 
+
 // export functions
 module.exports = {
     resetPerformanceTable,
     resetPopularityTable,
     insertPerformance,
-    insertPopularity,   
+    insertPopularity,
     insertFestival,
     getFestivals,
     getPopularity,

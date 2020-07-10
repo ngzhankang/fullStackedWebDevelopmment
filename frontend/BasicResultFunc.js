@@ -12,7 +12,7 @@ const basicResultUrl = "http://localhost:3000/basic/result";
 
 // to populate the table upon getting the data from the backend
 function populateBasicResultTable(data) {
-  const resultTableHtml = (data.result).map(
+  const resultTableHtml = (data).map(
     ({ performanceid, starttime, endtime }) => `
               <tr>
                   <td>${performanceid}</td>
@@ -26,11 +26,11 @@ function populateBasicResultTable(data) {
 
 // catch error from the backend and let the frontend handle it
 function catchDaError(data) {
-  if(data == undefined) {
-    alert('Invalid festivalId!')
+  if(data.error) {
+    alert(data.error)
   }
   else {  
-    populateBasicResultTable(data)
+    populateBasicResultTable(data.result)
   }
 }
 
