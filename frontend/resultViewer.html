@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="index.css" />
     <script src="BasicResultFunc.js" type="text/JavaScript"></script>
     <script src="AdvanceResultFunc.js" type="text/JavaScript"></script>
+
 </head>
 </head>
 
@@ -86,17 +87,6 @@
                     <input type="checkbox" class="custom-control-input" id="basicSwitch" />
                     <label class="custom-control-label" for="basicSwitch" id="functionLabel">Basic</label>
                 </div>
-                <script>
-                    $("#basicSwitch").click(function () {
-                        var functionLabel = document.getElementById("functionLabel");
-
-                        if ($("#functionLabel").text() == "Basic") {
-                            functionLabel.innerHTML = "Advance";
-                        } else {
-                            functionLabel.innerHTML = "Basic";
-                        }
-                    });
-                </script>
             </div>
 
             <!-- Main Body(Basic Table) -->
@@ -122,6 +112,7 @@
                     </tr>
                 </thead>
                 <tbody id="advance-result-tbody"></tbody>
+                <p id='totalPopularity-result-tbody'></p>
             </table>
         </main>
 

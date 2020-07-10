@@ -27,7 +27,7 @@ async function computeAdvance(festivalId) {
     if (selectedHighestPopularityObject.error) {
       return { error: selectedHighestPopularityObject.error };
     }
-    return { result: selectedHighestPopularityObject.bestSubset, totalPopularity: selectedHighestPopularityObject.bestPopularity, error: null };
+    return { result: selectedHighestPopularityObject.bestSubset, totalPopularity: selectedHighestPopularityObject.bestPopularity };
   } catch (error) {
     return { error, result: null};
   }

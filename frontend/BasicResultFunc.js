@@ -8,10 +8,9 @@ var currentData2 = []
 // using localhost machine address to get and fetch from the backend
 const basicResultUrl = "http://localhost:3000/basic/result";
 
-
-
 // to populate the table upon getting the data from the backend
 function populateBasicResultTable(data) {
+  console.log(data)
   const resultTableHtml = (data).map(
     ({ performanceid, starttime, endtime }) => `
               <tr>
@@ -25,7 +24,7 @@ function populateBasicResultTable(data) {
 }
 
 // catch error from the backend and let the frontend handle it
-function catchDaError(data) {
+function catchDaErrorBasic(data) {
   if(data.error) {
     alert(data.error)
   }
@@ -41,24 +40,18 @@ function getBasicResultFromBackend(callback) {
     .fail((message) => callback(message, null));
 }
 
-// async function getBasicResultFromBackend() {
-//   $.get(basicResultUrl, basicResultQuery)
-//       .done(await result)
-//       .fail(await message);
-//   }
-
 // to fire the table to refresh the old datas and to call populateBasicResultTable function
 function refreshBasicResultTable() {
   getBasicResultFromBackend(function (error, data) {
     if (error) return alert(JSON.stringify(error));
-    catchDaError(data);
+    catchDaErrorBasic(data);
     // if (data.rows.length === 0) return basicResultQuery['page']--;
     // currentData2 = data.rows;
   });
 }
 
 // to compute the results that will be displayed after filter
-function compute() {
+function computeBasic() {
   $('#basic-result-input-form input')
     .not(':input[type=submit]')
     .each((_, input) => {
@@ -70,11 +63,20 @@ function compute() {
 
 // getting info from the frontend and then sending it to compute function
 function registerBasicResultInput() {
-  $("#basic-result-input-form").submit(compute);
+  $("#basic-result-input-form").submit(computeBasic);
 }
 
 // call these functions
 $(document).ready(function () {
+  $("#basicSwitch").click(function () {
+    var functionLabel = document.getElementById("functionLabel");
+
+    if ($("#functionLabel").text() == "Basic") {
+        functionLabel.innerHTML = "Advance";
+    } else {
+        functionLabel.innerHTML = "Basic";
+    }
+});
   registerBasicResultInput();
   // refreshBasicResultTable();
 });

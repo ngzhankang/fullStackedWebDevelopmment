@@ -45,13 +45,12 @@ function populateAdvanceDataTable(data) {
     }
     else {
       const dataTableHtml = data.rows.map(
-        ({ festivalid, performanceid, starttime, endtime, popularity }) => `
+        ({ festivalid, performanceid, starttime, endtime }) => `
               <tr>
                   <td>${festivalid}</td>
                   <td>${performanceid}</td>
                   <td>${starttime}</td>
                   <td>${endtime}</td>
-                  <td>${popularity}</td>
               </tr>
             `,
       );
