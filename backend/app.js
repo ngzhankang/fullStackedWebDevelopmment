@@ -110,6 +110,18 @@ app.get('/:type/result', async (req, res, next) => {
   res.json(result)
 });
 
+// GET endpoint to reset all the tables
+app.get('/reset', function (req, res) {
+  database.resetAllTable(function (err, result) {
+    if (err) {
+      return res.json({ error: err });
+    }
+    else {
+      return res.json({ result : result });
+    }
+  });
+})
+
 // 404 Error Handler(OK)
 app.use(function (req, res, next) {
   next(createError(404));

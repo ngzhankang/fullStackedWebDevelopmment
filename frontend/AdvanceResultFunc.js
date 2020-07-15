@@ -1,4 +1,4 @@
-// RESULT VIEWER - ADVANCE
+  // RESULT VIEWER - ADVANCE
 const advanceResultQuery = {
   festivalId: null,
 };

@@ -16,7 +16,6 @@ Content-Type: application/json
             "startTime": 1330,
             "endTime": 1330,
             "popularity": 1
-
         },
         {
             "festivalId": 2234567891,
