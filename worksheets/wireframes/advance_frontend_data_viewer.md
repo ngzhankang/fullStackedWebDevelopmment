@@ -6,7 +6,7 @@ This document should help you explain how your user interfaces are designed. You
 
 > This is just an example, please find your own wireframe.
 
-![Wireframe](assets/sample-wireframe-data-viewer-frontend.png)
+![Wireframe](assets/Advance_Data_Viewer.png)
 
 ## Justifications
 
@@ -14,7 +14,7 @@ This document should help you explain how your user interfaces are designed. You
 
 > This is just an example, please find your own justifications.
 
-![Justificaiton1](https://www.jquery-az.com/wp-content/uploads/2016/05/39.0_1-Bootstrap-data-table.png)
+![Justification1](https://www.jquery-az.com/wp-content/uploads/2016/05/39.0_1-Bootstrap-data-table.png)
 
 #### Good Points
 

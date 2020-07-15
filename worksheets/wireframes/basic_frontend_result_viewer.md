@@ -4,7 +4,7 @@ This document should help you explain how your user interfaces are designed. You
 
 ## Wireframe
 
-![Wireframe](assets/FSP_Wireframe_Website_blockframe_Result_viewer_API.png)
+![Wireframe](assets/Basic_Result_Viewer.png)
 
 ## Justifications
 
