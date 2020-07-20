@@ -11,8 +11,8 @@ DROP TABLE IF EXISTS Performance;
 DROP TABLE IF EXISTS PerformanceWithPopularity;
 CREATE TABLE Performance(
     performanceId BIGINT PRIMARY KEY NOT NULL CHECK (performanceId BETWEEN 0000000001 and 9999999999) UNIQUE,
-    startTime SMALLINT NOT NULL,
-    endTime SMALLINT NOT NULL,
+    startTime TIME NOT NULL,
+    endTime TIME NOT NULL,
     festivalId BIGINT NOT NULL CHECK (festivalId BETWEEN 0000000001 and 9999999999),
     FOREIGN KEY (festivalId) REFERENCES MusicFestival(festivalId)
 );
@@ -25,8 +25,8 @@ CREATE TABLE MusicFestival(
 -- Performance With Popularity Table
 CREATE TABLE PerformanceWithPopularity(
     performanceId BIGINT PRIMARY KEY NOT NULL CHECK (performanceId BETWEEN 0000000001 and 9999999999) UNIQUE,
-    startTime SMALLINT NOT NULL,
-    endTime SMALLINT NOT NULL,
+    startTime TIME NOT NULL,
+    endTime TIME NOT NULL,
     festivalId BIGINT NOT NULL CHECK (festivalId BETWEEN 0000000001 and 9999999999),
     popularity SMALLINT NOT NULL,
     FOREIGN KEY (festivalId) REFERENCES MusicFestival(festivalId)

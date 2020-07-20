@@ -23,15 +23,15 @@ function resetAllTable(callback) {
     );
     CREATE TABLE Performance(
         performanceId BIGINT PRIMARY KEY NOT NULL CHECK (performanceId BETWEEN 0000000001 and 9999999999) UNIQUE,
-        startTime SMALLINT NOT NULL,
-        endTime SMALLINT NOT NULL,
+        startTime TIME NOT NULL,
+        endTime TIME NOT NULL,
         festivalId BIGINT NOT NULL CHECK (festivalId BETWEEN 0000000001 and 9999999999),
         FOREIGN KEY (festivalId) REFERENCES MusicFestival(festivalId)
     );
     CREATE TABLE PerformanceWithPopularity(
         performanceId BIGINT PRIMARY KEY NOT NULL CHECK (performanceId BETWEEN 0000000001 and 9999999999) UNIQUE,
-        startTime SMALLINT NOT NULL,
-        endTime SMALLINT NOT NULL,
+        startTime TIME NOT NULL,
+        endTime TIME NOT NULL,
         festivalId BIGINT NOT NULL CHECK (festivalId BETWEEN 0000000001 and 9999999999),
         popularity SMALLINT NOT NULL,
         FOREIGN KEY (festivalId) REFERENCES MusicFestival(festivalId)
@@ -149,7 +149,7 @@ function resetAllTable(callback) {
 
     // retrieve data from the Performance Table based on user festivalId input
     async function getPerformanceByFestivalId(festivalId) {
-        const query = `SELECT * FROM Performance WHERE festivalId = $1`;
+        const query = `SELECT CAST(performanceId AS INTEGER) AS performanceId, to_char(startTime, 'HH24MI') AS startTime, to_char(endTime, 'HH24MI') AS endTime FROM Performance WHERE festivalId = $1`;
         const client = connect();
         const { rows } = await client.query(query, [festivalId]);
         console.log(query);
@@ -165,7 +165,7 @@ function resetAllTable(callback) {
 
     // retrieve data from the Performance Table based on user festivalId input
     async function getPopularityByFestivalId(festivalId) {
-        const query = `SELECT * FROM PerformanceWithPopularity WHERE festivalId = $1`;
+        const query = `SELECT festivalId, CAST(performanceId AS INTEGER) AS performanceId, to_char(startTime, 'HH24MI') AS startTime, to_char(endTime, 'HH24MI') AS endTime, popularity FROM PerformanceWithPopularity WHERE festivalId = $1`;
         const client = connect();
         const { rows } = await client.query(query, [festivalId]);
         console.log(query);
