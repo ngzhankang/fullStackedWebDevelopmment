@@ -38,7 +38,7 @@ function resetAllTable(callback) {
     );
     `;
     client.query(query, (err, res) => {
-        console.log(err, res);
+        callback(err, res)
         client.end();
     });
 }
@@ -168,7 +168,7 @@ function resetAllTable(callback) {
         const query = `SELECT festivalId, CAST(performanceId AS INTEGER) AS performanceId, to_char(startTime, 'HH24MI') AS startTime, to_char(endTime, 'HH24MI') AS endTime, popularity FROM PerformanceWithPopularity WHERE festivalId = $1`;
         const client = connect();
         const { rows } = await client.query(query, [festivalId]);
-        console.log(query);
+        console.log(query, festivalId, "<<")
         if (rows.length === 0) {
             client.end();
             return { error: 'festivalId not found!' }

@@ -22,8 +22,8 @@ async function compute(festivalId) {
 
 // catch error here, else send result out(ADVANCE)
 async function computeAdvance(festivalId) {
-  var selectedHighestPopularityObject = await selectHighestPopularity(festivalId)
   try {
+    var selectedHighestPopularityObject = await selectHighestPopularity(festivalId)
     if (selectedHighestPopularityObject.error) {
       return { error: selectedHighestPopularityObject.error };
     }
@@ -36,6 +36,7 @@ async function computeAdvance(festivalId) {
 // 1. selectPerformanceByFestivalId to correctly select set of performance for computation
 async function selectPerformanceByFestivalId(festivalId) {
   const performances = await database.getPerformanceByFestivalId(festivalId);
+  // try to convert performanceId to int here!
   if (performances.error) {
     return performances;
   }
