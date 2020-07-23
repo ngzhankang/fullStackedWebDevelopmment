@@ -110,5 +110,5 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/basic/result?festivalId=2234567891 HTTP/1.1
+GET http://localhost:3000/basic/result?festivalId=1100000002 HTTP/1.1
 Content-Type: application/json  

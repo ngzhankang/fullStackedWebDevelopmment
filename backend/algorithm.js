@@ -29,7 +29,7 @@ async function computeAdvance(festivalId) {
     }
     return { result: selectedHighestPopularityObject.bestSubset, totalPopularity: selectedHighestPopularityObject.bestPopularity };
   } catch (error) {
-    return { error, result: null};
+    return { error, result: null };
   }
 }
 
@@ -47,7 +47,7 @@ async function selectPerformanceByFestivalId(festivalId) {
     selectedPerformance.push(performances.rows[i]); //push filtered performance into the array
   }
   return { selectedPerformance }; //return the array
-  // }
+
 }
 
 // 2. sortPerformanceByFinishTime to sort performance by increasing order of their finishing time
@@ -55,7 +55,7 @@ async function sortPerformanceByFinishTime(festivalId) {
   const filteredPerformance = await selectPerformanceByFestivalId(festivalId); //do a await to get result from previous function
   if (filteredPerformance.error) {
     return filteredPerformance;
-  } 
+  }
   const furtherFilter = filteredPerformance.selectedPerformance.sort(
     (a, b) => parseInt(a.endtime) - parseInt(b.endtime)
   ); //sort the performances based on their finishing time and assign them to furtherFilter
@@ -90,19 +90,22 @@ async function iteratePerformance(festivalId) {
   if (sortedPerformance.error) {
     return sortedPerformance;
   }
-  const performance = sortedPerformance.newArray 
+  const performance = sortedPerformance.newArray
   const finalPerformances = []; //create a new list to push correct performances into it later
   finalPerformances.push(performance[0]); //push the 1st object into the array first
-
   for (i = 1; i < performance.length; i++) {
     //do a for and a if loop to get those performances not clashed into the new list
-    if (performance[i].starttime - performance[i - 1].endtime < 0) {
+    if (performance[i].startTime - performance[i - 1].endTime < 0) {
       console.log("Nope!");
-    } else if (performance[i].starttime - performance[i - 1].endtime === 0) {
+    } else if (performance[i].startTime - performance[i - 1].endTime === 0) {
       finalPerformances.push(performance[i]);
-    } else if (performance[i].starttime - performance[i - 1].endtime > 0) {
+    } else if (performance[i].startTime - performance[i - 1].endTime > 0) {
       finalPerformances.push(performance[i]);
     }
+  }
+    // to convert performanceId from string to int
+  for (let count = 0; count < finalPerformances.length; count++) {
+    finalPerformances[count].performanceId = parseInt(finalPerformances[count].performanceId)
   }
   return { finalPerformances };
 }
@@ -212,8 +215,7 @@ async function gedRidClashes(festivalId) {
   const result = originResult.newArray
   const finalresult = []; //create a new list to push subsets that have no clashes within itself into it later
   const manyObjects = []; //create a new list to push those with more than 1 object
-
-  for (let i = 1; i < result.length; i++) {
+  for (let i = 0; i < result.length; i++) {
     //loop thru the concatenated list in the big list
     if (result[i].length === 1) {
       finalresult.push(result[i]); // if size of inner list is 1 (1 object only) push to list
@@ -221,7 +223,6 @@ async function gedRidClashes(festivalId) {
       manyObjects.push(result[i]); // if size of inner list is more than 1, push to list
     }
   }
-
   // Want to check if performances within a particular subset has conflicts.
   for (let j = 0; j < manyObjects.length; j++) {
     //for every subset.
@@ -233,13 +234,13 @@ async function gedRidClashes(festivalId) {
       for (let l = k + 1; l < currentSubset.length; l++) {
         const performanceToCompareWith = currentSubset[l];
         if (
-          (currentPerformance.starttime - performanceToCompareWith.endtime <=
+          (currentPerformance.startTime - performanceToCompareWith.endTime <=
             0 &&
-            performanceToCompareWith.starttime - currentPerformance.starttime <=
+            performanceToCompareWith.startTime - currentPerformance.startTime <=
             0) ||
-          (performanceToCompareWith.starttime - currentPerformance.endtime <=
+          (performanceToCompareWith.startTime - currentPerformance.endTime <
             0 &&
-            currentPerformance.starttime - performanceToCompareWith.starttime <=
+            currentPerformance.startTime - performanceToCompareWith.startTime <=
             0)
         ) {
           skip = true;
@@ -293,6 +294,10 @@ async function selectHighestPopularity(festivalId) {
       bestSubset = currentSubset; //update the current subset to the best subset
       bestPopularity = rightNowThePopularity; //update bestPopularity to the current best popularity score
     }
+  }
+  // to convert performanceId from string to int
+  for (let count = 0; count < bestSubset.length; count++) {
+    bestSubset[count].performanceId = parseInt(bestSubset[count].performanceId)
   }
   return { bestSubset, bestPopularity }
 }

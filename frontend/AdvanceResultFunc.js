@@ -12,11 +12,11 @@ const advanceResultUrl = "http://localhost:3000/advance/result";
 function populateAdvanceResultTable(data) {
   console.log(data);
   const resultTableHtml = (data).map(
-    ({ performanceid, starttime, endtime, popularity }) => `
+    ({ performanceId, startTime, endTime, popularity }) => `
             <tr>
-                <td>${performanceid}</td>
-                <td>${starttime}</td>
-                <td>${endtime}</td>
+                <td>${performanceId}</td>
+                <td>${startTime}</td>
+                <td>${endTime}</td>
                 <td>${popularity}</td>
             </tr>
           `,

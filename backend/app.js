@@ -94,16 +94,12 @@ app.get('/:type/data', function (req, res, next) {
 
 // GET endpoint for either Performance or PerformanceWithPopularity table(RESULT VIEWER)
 app.get('/:type/result', async (req, res, next) => {
-  console.log("ello")
   const { type } = req.params;
   const  typeEnum = { BASIC: 'basic', ADVANCE: 'advance' };
 
   let result;
   if (type === typeEnum.BASIC) {
     result = await compute(req.query.festivalId);
-    for (let count = 0; count < result.length; count++) {
-      result[count].performanceId = parseInt(result[count].performanceId)
-    }
   }
   else if (type === typeEnum.ADVANCE) {
     if(req.query.festivalId === null || req.query.festivalId === undefined) return next(createError(400, 'invalid festivalId'))  

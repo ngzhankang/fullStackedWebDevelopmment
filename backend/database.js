@@ -149,7 +149,7 @@ function resetAllTable(callback) {
 
     // retrieve data from the Performance Table based on user festivalId input
     async function getPerformanceByFestivalId(festivalId) {
-        const query = `SELECT CAST(performanceId AS INTEGER) AS performanceId, to_char(startTime, 'HH24MI') AS startTime, to_char(endTime, 'HH24MI') AS endTime FROM Performance WHERE festivalId = $1`;
+        const query = `SELECT performanceid AS "performanceId", to_char(startTime, 'HH24MI') AS "startTime", to_char(endTime, 'HH24MI') AS "endTime" FROM Performance WHERE festivalId = $1`;
         const client = connect();
         const { rows } = await client.query(query, [festivalId]);
         console.log(query);
@@ -165,10 +165,10 @@ function resetAllTable(callback) {
 
     // retrieve data from the Performance Table based on user festivalId input
     async function getPopularityByFestivalId(festivalId) {
-        const query = `SELECT festivalId, CAST(performanceId AS INTEGER) AS performanceId, to_char(startTime, 'HH24MI') AS startTime, to_char(endTime, 'HH24MI') AS endTime, popularity FROM PerformanceWithPopularity WHERE festivalId = $1`;
+        const query = `SELECT performanceid AS "performanceId", to_char(startTime, 'HH24MI') AS "startTime", to_char(endTime, 'HH24MI') AS "endTime", popularity AS "popularity" FROM PerformanceWithPopularity WHERE festivalId = $1`;
         const client = connect();
         const { rows } = await client.query(query, [festivalId]);
-        console.log(query, festivalId, "<<")
+        console.log(query)
         if (rows.length === 0) {
             client.end();
             return { error: 'festivalId not found!' }

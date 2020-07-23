@@ -12,11 +12,11 @@ const basicResultUrl = "http://localhost:3000/basic/result";
 function populateBasicResultTable(data) {
   console.log(data)
   const resultTableHtml = (data).map(
-    ({ performanceid, starttime, endtime }) => `
+    ({ performanceId, startTime, endTime }) => `
               <tr>
-                  <td>${performanceid}</td>
-                  <td>${starttime}</td>
-                  <td>${endtime}</td>
+                  <td>${performanceId}</td>
+                  <td>${startTime}</td>
+                  <td>${endTime}</td>
               </tr>
             `,
   );
