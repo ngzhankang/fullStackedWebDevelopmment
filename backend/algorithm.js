@@ -33,38 +33,35 @@ async function computeAdvance(festivalId) {
   }
 }
 
-// 1. selectPerformanceByFestivalId to correctly select set of performance for computation
+// 1. selectPerformanceByFestivalId to correctly select set of performance for computation(BASIC)
 async function selectPerformanceByFestivalId(festivalId) {
   const performances = await database.getPerformanceByFestivalId(festivalId);
-  // try to convert performanceId to int here!
   if (performances.error) {
     return performances;
   }
   const l = performances.rows.length; //length of performances 
   const selectedPerformance = []; //create a new array selectedPerformance
-  for (let i = 0; i < l; i++) {
-    //iterate through all the festivalId
+  for (let i = 0; i < l; i++) { //iterate through all the festivalId
     selectedPerformance.push(performances.rows[i]); //push filtered performance into the array
   }
   return { selectedPerformance }; //return the array
 
 }
 
-// 2. sortPerformanceByFinishTime to sort performance by increasing order of their finishing time
+// 2. sortPerformanceByFinishTime to sort performance by increasing order of their finishing time(BASIC)
 async function sortPerformanceByFinishTime(festivalId) {
-  const filteredPerformance = await selectPerformanceByFestivalId(festivalId); //do a await to get result from previous function
+  const filteredPerformance = await selectPerformanceByFestivalId(festivalId);  //do a await to get result from previous function
   if (filteredPerformance.error) {
     return filteredPerformance;
   }
-  const furtherFilter = filteredPerformance.selectedPerformance.sort(
+  const furtherFilter = filteredPerformance.selectedPerformance.sort( //sort the performances based on their finishing time and assign them to furtherFilter
     (a, b) => parseInt(a.endtime) - parseInt(b.endtime)
-  ); //sort the performances based on their finishing time and assign them to furtherFilter
+  );
   return { furtherFilter };
 }
 
 // split this function out. Will be used later.
-function mapOut(sourceObject, removeKeys = []) {
-  //create a function to remove festivalid key from all the arrays
+function mapOut(sourceObject, removeKeys = []) {  //create a function to remove festivalid key from all the arrays
   const sourceKeys = Object.keys(sourceObject);
   const returnKeys = sourceKeys.filter((k) => !removeKeys.includes(k));
   let returnObject = {};
@@ -74,9 +71,9 @@ function mapOut(sourceObject, removeKeys = []) {
   return returnObject;
 }
 
-// 3. remove key from objects to maintain the entire list
+// 3. remove key from objects to maintain the entire list(BASIC)
 async function maintainSortedPerformance(festivalId) {
-  const performance = await sortPerformanceByFinishTime(festivalId); //do a await to get result from previous function
+  const performance = await sortPerformanceByFinishTime(festivalId);  //do a await to get result from previous function
   if (performance.error) {
     return performance;
   }
@@ -84,7 +81,7 @@ async function maintainSortedPerformance(festivalId) {
   return { newArray };
 }
 
-// 4. iteratePerformance to iterate through each of the sorted performance
+// 4. iteratePerformance to iterate through each of the sorted performance(BASIC)
 async function iteratePerformance(festivalId) {
   const sortedPerformance = await maintainSortedPerformance(festivalId);
   if (sortedPerformance.error) {
@@ -93,8 +90,7 @@ async function iteratePerformance(festivalId) {
   const performance = sortedPerformance.newArray
   const finalPerformances = []; //create a new list to push correct performances into it later
   finalPerformances.push(performance[0]); //push the 1st object into the array first
-  for (i = 1; i < performance.length; i++) {
-    //do a for and a if loop to get those performances not clashed into the new list
+  for (i = 1; i < performance.length; i++) {  //do a for and a if loop to get those performances not clashed into the new list
     if (performance[i].startTime - performance[i - 1].endTime < 0) {
       console.log("Nope!");
     } else if (performance[i].startTime - performance[i - 1].endTime === 0) {
@@ -103,8 +99,7 @@ async function iteratePerformance(festivalId) {
       finalPerformances.push(performance[i]);
     }
   }
-    // to convert performanceId from string to int
-  for (let count = 0; count < finalPerformances.length; count++) {
+  for (let count = 0; count < finalPerformances.length; count++) {  // to convert performanceId from string to int
     finalPerformances[count].performanceId = parseInt(finalPerformances[count].performanceId)
   }
   return { finalPerformances };
@@ -118,11 +113,10 @@ async function selectPopularityByFestivalId(festivalId) {
   }
   const l = performances.rows.length; //length of performances
   const selectedPerformance = []; //create a new array selectedPerformance
-  for (let i = 0; i < l; i++) {
-    //iterate through all the festivalId
+  for (let i = 0; i < l; i++) { //iterate through all the festivalId
     selectedPerformance.push(performances.rows[i]); //push filtered performance into the array
   }
-  return { selectedPerformance }; //return the array
+  return { selectedPerformance };
 }
 
 // 6. sortPopularityByFinishTime to sort performance by increasing order of their finishing time(ADVANCE)
@@ -131,15 +125,14 @@ async function sortPopularityByFinishTime(festivalId) {
   if (filteredPerformance.error) {
     return filteredPerformance;
   }
-  const furtherFilter = filteredPerformance.selectedPerformance.sort(
+  const furtherFilter = filteredPerformance.selectedPerformance.sort( //sort the performances based on their finishing time and assign them to furtherFilter
     (a, b) => parseInt(a.endtime) - parseInt(b.endtime)
-  ); //sort the performances based on their finishing time and assign them to furtherFilter
+  );
   return { furtherFilter };
 }
 
 // split this function out. Will be used later.
-function mapOut(sourceObject, removeKeys = []) {
-  //create a function to remove festivalid key from all the arrays
+function mapOut(sourceObject, removeKeys = []) {  //create a function to remove festivalid key from all the arrays
   const sourceKeys = Object.keys(sourceObject);
   const returnKeys = sourceKeys.filter((k) => !removeKeys.includes(k));
   let returnObject = {};
@@ -167,8 +160,7 @@ async function generateAllWays(festivalId) {
   }
   const possibleCombinations = []; //declare a empty array to store the possible combinations later
 
-  function* result(array, offset = 0) {
-    //calculate total number of possibilities
+  function* result(array, offset = 0) { //calculate total number of possibilities
     while (offset < array.length) {
       let first = array[offset++];
       for (let subset of result(array, offset)) {
@@ -179,8 +171,7 @@ async function generateAllWays(festivalId) {
     yield [];
   }
 
-  for (let subset of result(performance.newArray)) {
-    //throw the data into the function
+  for (let subset of result(performance.newArray)) {  //throw the data into the function
     possibleCombinations.push(subset);
   }
   return { possibleCombinations };
@@ -194,8 +185,7 @@ async function getRidInvalids(festivalId) {
   }
   const result = originResult.possibleCombinations
   const newArray = [];
-  for (h = 0; h < result.length; h++) {
-    //check if a subset is zero. if zero, discard
+  for (h = 0; h < result.length; h++) { //check if a subset is zero. if zero, discard
     if (result[h] === undefined || result[h] == 0) {
     } else {
       newArray.push(result[h]);
@@ -215,8 +205,7 @@ async function gedRidClashes(festivalId) {
   const result = originResult.newArray
   const finalresult = []; //create a new list to push subsets that have no clashes within itself into it later
   const manyObjects = []; //create a new list to push those with more than 1 object
-  for (let i = 0; i < result.length; i++) {
-    //loop thru the concatenated list in the big list
+  for (let i = 0; i < result.length; i++) { //loop thru the concatenated list in the big list
     if (result[i].length === 1) {
       finalresult.push(result[i]); // if size of inner list is 1 (1 object only) push to list
     } else if (result[i].length > 1) {
@@ -268,12 +257,10 @@ async function selectHighestPopularity(festivalId) {
 
     for (let i = 0; i < finalresult.length; i++) {
       //do a for loop to detect if subset has 1 performance or more than 1 performance in the list
-      // const currentSubset = finalresult[i]; //re-initialze current subset as a new const
       //if subset has more than 1 performance
       const manyObjects = finalresult[i]; //declare manyObjects
       totalScore = 0;
-      for (let j = 0; j < manyObjects.length; j++) {
-        // get the sum of popularity for manyObjects
+      for (let j = 0; j < manyObjects.length; j++) {  // get the sum of popularity for manyObjects
         const currentList = manyObjects[j]; //to simplify the index of each list i am attending to
         totalScore += currentList.popularity;
       }
@@ -289,14 +276,12 @@ async function selectHighestPopularity(festivalId) {
   for (let i = 0; i < finalresult.length; i++) {
     const currentSubset = finalresult[i]; //extract the 1st selected subset from finalresult
     const rightNowThePopularity = currentPopularity[i]; //extract the ith popularity score from currentPopularity
-    if (rightNowThePopularity > bestPopularity) {
-      //check if the currentPopularity is more than the highest popularity so far captured
+    if (rightNowThePopularity > bestPopularity) { //check if the currentPopularity is more than the highest popularity so far captured
       bestSubset = currentSubset; //update the current subset to the best subset
       bestPopularity = rightNowThePopularity; //update bestPopularity to the current best popularity score
     }
   }
-  // to convert performanceId from string to int
-  for (let count = 0; count < bestSubset.length; count++) {
+  for (let count = 0; count < bestSubset.length; count++) { // to convert performanceId from string to int
     bestSubset[count].performanceId = parseInt(bestSubset[count].performanceId)
   }
   return { bestSubset, bestPopularity }
