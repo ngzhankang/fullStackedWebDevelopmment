@@ -120,12 +120,12 @@ function resetAllTable(callback) {
         let i = 1;
         const values = [];
         if (!festivalId && !startTime && !endTime) { whereClause = '' }
-        else if (!festivalId && startTime && endTime) {
-            whereClause = 'WHERE'
-            whereClause += `startTime >= $${i++} AND endTime < $${i++}`;
-            values.push(parseInt(startTime));
-            values.push(parseInt(endTime));
-        }
+        // else if (!festivalId && startTime && endTime) {
+        //     whereClause = 'WHERE'
+        //     whereClause += `startTime >= $${i++} AND endTime < $${i++}`;
+        //     values.push(parseInt(startTime));
+        //     values.push(parseInt(endTime));
+        // }
         else {
             whereClause = 'WHERE'
             if (festivalId) {
