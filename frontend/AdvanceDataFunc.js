@@ -35,7 +35,7 @@ const advanceDataPaginationFunction = {
 };
 
 // using localhost machine address to get and fetch from the backend
-const advanceDataUrl = "http://localhost:3000/advance/data";
+const advanceDataUrl = "https://fsp-jibaboom-skrtttt.herokuapp.com/advance/data";
 
 // to populate the table upon getting the data from the backend
 function populateAdvanceDataTable(data) {

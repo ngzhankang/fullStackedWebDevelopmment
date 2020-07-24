@@ -36,7 +36,7 @@ const basicDataPaginationFunction = {
 };
 
 // using localhost machine address to get and fetch from the backend
-const basicDataUrl = "http://localhost:3000/basic/data";
+const basicDataUrl = "https://fsp-jibaboom-skrtttt.herokuapp.com/basic/data";
 
 // to populate the table upon getting the data from the backend
 function populateBasicDataTable(data) {
