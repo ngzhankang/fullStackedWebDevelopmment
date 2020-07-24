@@ -141,7 +141,7 @@ function resetAllTable(callback) {
                 values.push(parseInt(endTime));
             }
             if (festivalId && startTime && endTime) {
-                whereClause += festivalId ? ` AND starTime >= $$ {i++} AND endTime < $${i++}`;
+                whereClause += `festivalId = $${i++} AND starTime >= $${i++} AND endTime < $${i++}`;
                 values.push(parseInt(festivalId));
                 values.push(parseInt(startTime));
                 values.push(parseInt(endTime));
