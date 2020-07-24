@@ -80,6 +80,19 @@ app.post('/advance/insert', function (req, res, next) {
   }
 });
 
+// GET endpoint to handle empty paths
+app.get('/', (req, res) => {
+  return res.json({
+      message: "Welcome to JiBaBoom - <TEAMNAME>",
+      availableEndpoints: [
+           'POST /basic/insert { "data": [ {key1: value1, key2: value2, ...} ] }',
+           'POST /advance/insert { "data": [ {key1: value1, key2: value2, ...} ] }',
+           'GET /basic/result?para1=value1&para2=value2',
+           'GET /advance/result?para1=value1&para2=value2',
+      ]
+  });
+});
+
 // GET endpoint for either Performance or PerformanceWithPopularity table(OK)(DATA VIEWER)
 app.get('/:type/data', function (req, res, next) {
   const { type } = req.params;
