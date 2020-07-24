@@ -129,16 +129,22 @@ function resetAllTable(callback) {
         else {
             whereClause = 'WHERE'
             if (festivalId) {
-                whereClause += festivalId ? ` AND starTime >= $${i++} AND endTime < $${i++}` : ` festivalId = $${i++}`;
+                whereClause += ` festivalId = $${i++}`;
                 values.push(parseInt(festivalId));
             }
             if (startTime) {
                 whereClause += festivalId ? ` AND startTime >= $${i++}` : ` startTime >= $${i++}`;
-                values.push(parseInt(startTime))
+                values.push(parseInt(startTime));
             }
             if (endTime) {
                 whereClause += festivalId ? ` AND endTime < $${i++}` : ` endTime < $${i++}`;
-                values.push(parseInt(endTime))
+                values.push(parseInt(endTime));
+            }
+            if (festivalId && startTime && endTime) {
+                whereClause += festivalId ? ` AND starTime >= $$ {i++} AND endTime < $${i++}`;
+                values.push(parseInt(festivalId));
+                values.push(parseInt(startTime));
+                values.push(parseInt(endTime));
             }
         }
         let limitoffsetClause = `LIMIT $${i++} OFFSET $${i++}`
