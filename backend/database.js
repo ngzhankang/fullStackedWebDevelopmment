@@ -86,10 +86,40 @@ function insertFestival(performance, callback) {
 
 // retrieve data from Performance Table
 function getFestivals(festivalId, startTime, page = 0, pageSize = 5, callback) {
+    let whereClause;
+    let i = 1;
+    const values = [];
+    if (!festivalId && !startTime) { whereClause = '' }
+    else {
+        whereClause = 'WHERE'
+        if (festivalId) {
+            whereClause += ` festivalId = $${i++}`;
+            values.push(parseInt(festivalId));
+        }
+        if (startTime) {
+            whereClause += festivalId ? ` AND startTime >= $${i++}` : ` startTime >= $${i++}`;
+            values.push(parseInt(startTime))
+        }
+    }
+    let limitoffsetClause = `LIMIT $${i++} OFFSET $${i++}`
+    values.push(parseInt(pageSize)); //Limit = pageSize
+    values.push(parseInt(page) * parseInt(pageSize)); //offset = page * pageSize
+    const query = `SELECT * FROM Performance ${whereClause} ${limitoffsetClause}`;
+    const client = connect();
+    client.query(query, values, function (err, rows) {
+        console.log(query)
+        console.log(err)
+        client.end();
+        callback(err, rows);
+    });
+}
+
+// retrieve data from PerformanceWithPopularity Table
+function getPopularity(festivalId, startTime, endTime, page = 0, pageSize = 5, callback) {
     // let whereClause;
     // let i = 1;
     // const values = [];
-    // if (!festivalId && !startTime) { whereClause = '' }
+    // if (!festivalId && !startTime && !endTime) { whereClause = '' }
     // else {
     //     whereClause = 'WHERE'
     //     if (festivalId) {
@@ -98,21 +128,23 @@ function getFestivals(festivalId, startTime, page = 0, pageSize = 5, callback) {
     //     }
     //     if (startTime) {
     //         whereClause += festivalId ? ` AND startTime >= $${i++}` : ` startTime >= $${i++}`;
-    //         values.push(parseInt(startTime))
+    //         values.push(parseInt(startTime));
+    //     }
+    //     if (endTime) {
+    //         whereClause += festivalId ? ` AND endTime < $${i++}` : ` endTime < $${i++}`;
+    //         values.push(parseInt(endTime));
     //     }
     // }
     // let limitoffsetClause = `LIMIT $${i++} OFFSET $${i++}`
-    // values.push(parseInt(pageSize)); //Limit = pageSize
-    // values.push(parseInt(page) * parseInt(pageSize)); //offset = page * pageSize
-    // const query = `SELECT * FROM Performance ${whereClause} ${limitoffsetClause}`;
+    // values.push(parseInt(pageSize));    //Limit = pageSize
+    // values.push(parseInt(page) * parseInt(pageSize));   //offset = page * pageSize
+    // const query = `SELECT * FROM PerformanceWithPopularity ${whereClause} ${limitoffsetClause}`;
     // const client = connect();
     // client.query(query, values, function (err, rows) {
     //     console.log(query)
-    //     console.log(err)
     //     client.end();
     //     callback(err, rows);
     // });
-
     let query = 'SELECT * FROM PerformanceWithPopularity WHERE 1 = 1 ';
 
     let ordinal = 1;
@@ -129,8 +161,13 @@ function getFestivals(festivalId, startTime, page = 0, pageSize = 5, callback) {
     }
 
     if (endTime) {
-        query += ` AND endTime <= $${ordinal++} `;
+        query += ` AND endTime < $${ordinal++} `;
         parameters.push(+endTime);
+    }
+
+    if (startTime && endTime) {
+        query += ` AND startTime >= $${ordinal++} AND endTime < $${ordinal++} `;
+        parameters.push(+startTime, endTime)
     }
 
     if (pageSize) {
@@ -147,39 +184,6 @@ function getFestivals(festivalId, startTime, page = 0, pageSize = 5, callback) {
     const client = connect();
     client.query(query, parameters, function (err, rows) {
         console.log(query);
-        client.end();
-        callback(err, rows);
-    });
-}
-
-// retrieve data from PerformanceWithPopularity Table
-function getPopularity(festivalId, startTime, endTime, page = 0, pageSize = 5, callback) {
-    let whereClause;
-    let i = 1;
-    const values = [];
-    if (!festivalId && !startTime && !endTime) { whereClause = '' }
-    else {
-        whereClause = 'WHERE'
-        if (festivalId) {
-            whereClause += ` festivalId = $${i++}`;
-            values.push(parseInt(festivalId));
-        }
-        if (startTime) {
-            whereClause += festivalId ? ` AND startTime >= $${i++}` : ` startTime >= $${i++}`;
-            values.push(parseInt(startTime));
-        }
-        if (endTime) {
-            whereClause += festivalId ? ` AND endTime < $${i++}` : ` endTime < $${i++}`;
-            values.push(parseInt(endTime));
-        }
-    }
-    let limitoffsetClause = `LIMIT $${i++} OFFSET $${i++}`
-    values.push(parseInt(pageSize));    //Limit = pageSize
-    values.push(parseInt(page) * parseInt(pageSize));   //offset = page * pageSize
-    const query = `SELECT * FROM PerformanceWithPopularity ${whereClause} ${limitoffsetClause}`;
-    const client = connect();
-    client.query(query, values, function (err, rows) {
-        console.log(query)
         client.end();
         callback(err, rows);
     });
