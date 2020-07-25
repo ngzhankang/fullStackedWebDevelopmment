@@ -122,7 +122,7 @@ function resetAllTable(callback) {
         if (!festivalId && !startTime && !endTime) { whereClause = '' }
         // else if (!festivalId && startTime && endTime) {
         //     whereClause = 'WHERE'
-        //     whereClause += `startTime >= $${i++} AND endTime < $${i++}`;
+        //     whereClause += ` startTime >= $${i++} AND endTime < $${i++} `;
         //     values.push(parseInt(startTime));
         //     values.push(parseInt(endTime));
         // }
@@ -140,12 +140,12 @@ function resetAllTable(callback) {
                 whereClause += festivalId ? ` AND endTime < $${i++}` : ` endTime < $${i++}`;
                 values.push(parseInt(endTime));
             }
-            if (festivalId && startTime && endTime) {
-                whereClause += `festivalId = $${i++} AND starTime >= $${i++} AND endTime < $${i++}`;
-                values.push(parseInt(festivalId));
-                values.push(parseInt(startTime));
-                values.push(parseInt(endTime));
-            }
+            // if (festivalId && startTime && endTime) {
+            //     whereClause += `festivalId = $${i++} AND starTime >= $${i++} AND endTime < $${i++}`;
+            //     values.push(parseInt(festivalId));
+            //     values.push(parseInt(startTime));
+            //     values.push(parseInt(endTime));
+            // }
         }
         let limitoffsetClause = `LIMIT $${i++} OFFSET $${i++}`
         values.push(parseInt(pageSize));    //Limit = pageSize
