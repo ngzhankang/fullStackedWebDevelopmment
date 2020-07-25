@@ -36,3 +36,5 @@ SELECT * FROM Performance
 SELECT * FROM MusicFestival
 SELECT * FROM PerformanceWithPopularity
 SELECT * FROM Performance WHERE festivalId = 2234567891
+SELECT * FROM PerformanceWithPopularity WHERE festivalId = 9900000003 AND startTime = '11:00:00' AND endTime = '12:00:00'
+SELECT * FROM PerformanceWithPopularity WHERE startTime = '11:00:00' AND endTime = '12:00:00'
