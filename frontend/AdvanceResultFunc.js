@@ -7,6 +7,7 @@ var currentData2 = []
 
 // using localhost machine address to get and fetch from the backend
 const advanceResultUrl = "https://fsp-jibaboom-skrtttt.herokuapp.com/advance/result";
+// const advanceResultUrl = "https://localhost:3000/advance/result";
 
 // to populate the table upon getting the data from the backend
 function populateAdvanceResultTable(data) {

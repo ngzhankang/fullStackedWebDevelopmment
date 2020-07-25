@@ -7,6 +7,7 @@ var currentData2 = []
 
 // using localhost machine address to get and fetch from the backend
 const basicResultUrl = "https://fsp-jibaboom-skrtttt.herokuapp.com/basic/result";
+// const basicResultUrl = "https://localhost:3000/basic/result";
 
 // to populate the table upon getting the data from the backend
 function populateBasicResultTable(data) {
