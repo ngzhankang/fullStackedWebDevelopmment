@@ -45,6 +45,18 @@ function resetAllTable(callback) {
 
 // insert data into Performance Table
 function insertPerformance(performance, callback) {
+    for (j = 0; j < performance.length; j++) {
+        if (parseInt(performance[j].startTime) > parseInt(performance[j].endTime)) {
+            var err = ({ "error": "startTime is more than endTime!", "code": 400});
+            callback(err)
+            return;
+        }
+        if (parseInt(performance[j].startTime) === parseInt(performance[j].endTime)) {
+            var err = ({ "error": "startTime is equals to endTime!", "code": 400});
+            callback(err)
+            return;
+        }
+    }
     let i = 1;
     const template = performance.map(performance => `($${i++}, $${i++}, $${i++}, $${i++})`).join(',');
     const values = performance.reduce((reduced, performance) => [...reduced, performance.festivalId, performance.performanceId, performance.startTime, performance.endTime], [])
@@ -58,6 +70,18 @@ function insertPerformance(performance, callback) {
 
 // insert data into PerformanceWithPopularity Table
 function insertPopularity(popularity, callback) {
+    for (j = 0; j < popularity.length; j++) {
+        if (parseInt(popularity[j].startTime) > parseInt(popularity[j].endTime)) {
+            var err = ({ "error": "startTime is more than endTime!", "code": 400});
+            callback(err)
+            return;
+        }
+        if (parseInt(popularity[j].startTime) === parseInt(popularity[j].endTime)) {
+            var err = ({ "error": "startTime is equals to endTime!", "code": 400});
+            callback(err)
+            return;
+        }
+    }
     let i = 1;
     const template = popularity.map(popularity => `($${i++}, $${i++}, $${i++}, $${i++}, $${i++})`).join(',');
     const values = popularity.reduce((reduced, popularity) => [...reduced, popularity.festivalId, popularity.performanceId, popularity.startTime, popularity.endTime, popularity.popularity], [])

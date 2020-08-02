@@ -31,10 +31,12 @@ app.post('/basic/insert', function (req, res, next) {
     for (var i = 0; i < data.length; i++) {
       // check that each entry has all the fields
       // check for entries that doesn't have all the fields
-      if (data[i].festivalId == undefined || data[i].performanceId == undefined || data[i].startTime == undefined || data[i].endTime == undefined)
+      if (data[i].festivalId == undefined || data[i].performanceId == undefined || data[i].startTime == undefined || data[i].endTime == undefined) {
         // return error
         return res.json({ error: 'Invalid data', code: 400 })
+      }
     }
+
     database.insertFestival(data, (error, result) => {
       if (error) {
         console.log(error)
@@ -44,9 +46,9 @@ app.post('/basic/insert', function (req, res, next) {
       database.insertPerformance(data, (error2, result2) => {
         if (error2) {
           console.log(error2);
-          return next(error2);
+          return res.status(error2.code).json(error2)
         }
-        res.json({ result: "success" });
+        return res.json({ result: "success" });
       })
     });
   }
@@ -72,9 +74,9 @@ app.post('/advance/insert', function (req, res, next) {
       database.insertPopularity(data, (error2, result2) => { // insert performanceId
         if (error2) {
           console.log(error2);
-          return next(error2);
+          return res.status(error2.code).json(error2)
         }
-        res.json({ result: "success" });
+        return res.json({ result: "success" });
       })
     });
   }
@@ -83,13 +85,13 @@ app.post('/advance/insert', function (req, res, next) {
 // GET endpoint to handle empty paths
 app.get('/', (req, res) => {
   return res.json({
-      message: "Welcome to JiBaBoom - <TEAMNAME>",
-      availableEndpoints: [
-           'POST /basic/insert { "data": [ {key1: value1, key2: value2, ...} ] }',
-           'POST /advance/insert { "data": [ {key1: value1, key2: value2, ...} ] }',
-           'GET /basic/result?para1=value1&para2=value2',
-           'GET /advance/result?para1=value1&para2=value2',
-      ]
+    message: "Welcome to JiBaBoom - skrtttt",
+    availableEndpoints: [
+      'POST /basic/insert { "data": [ {key1: value1, key2: value2, ...} ] }',
+      'POST /advance/insert { "data": [ {key1: value1, key2: value2, ...} ] }',
+      'GET /basic/result?para1=value1&para2=value2',
+      'GET /advance/result?para1=value1&para2=value2',
+    ]
   });
 });
 
@@ -108,17 +110,17 @@ app.get('/:type/data', function (req, res, next) {
 // GET endpoint for either Performance or PerformanceWithPopularity table(RESULT VIEWER)
 app.get('/:type/result', async (req, res, next) => {
   const { type } = req.params;
-  const  typeEnum = { BASIC: 'basic', ADVANCE: 'advance' };
+  const typeEnum = { BASIC: 'basic', ADVANCE: 'advance' };
 
   let result;
   if (type === typeEnum.BASIC) {
     result = await compute(req.query.festivalId);
   }
   else if (type === typeEnum.ADVANCE) {
-    if(req.query.festivalId === null || req.query.festivalId === undefined) return next(createError(400, 'invalid festivalId'))  
+    if (req.query.festivalId === null || req.query.festivalId === undefined) return next(createError(400, 'invalid festivalId'))
     result = await computeAdvance(req.query.festivalId);
   }
-  else return next({ error: "Server Error", code: 500});
+  else return next({ error: "Server Error", code: 500 });
   // if (result[0] === undefined) { 
   //   return next({ error: "Server Error", code: 500}) 
   // }
@@ -132,7 +134,7 @@ app.get('/reset', function (req, res) {
       return res.json({ error: err });
     }
     else {
-      return res.json({ result : result });
+      return res.json({ result: result });
     }
   });
 })
