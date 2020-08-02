@@ -97,6 +97,14 @@ function insertPopularity(popularity, callback) {
     const client = connect();
     client.query(query, values, (err, result) => {
         console.log(query)
+        if (err) {
+            if (err.code == 23505) {
+                var err = ({"error": "Duplicate Entry", "code": 409 })
+            }
+            else {
+                var err = ({"error": "Unknown Error", "code": 500})
+            }
+        }
         callback(err, result);
         client.end();
     });
