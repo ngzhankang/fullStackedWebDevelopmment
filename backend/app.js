@@ -32,7 +32,6 @@ app.post('/basic/insert', function (req, res, next) {
       // check that each entry has all the fields
       // check for entries that doesn't have all the fields
       if (data[i].festivalId == undefined || data[i].performanceId == undefined || data[i].startTime == undefined || data[i].endTime == undefined) {
-        // return error
         return res.json({ error: 'Invalid data', code: 400 })
       }
     }
@@ -46,7 +45,7 @@ app.post('/basic/insert', function (req, res, next) {
       database.insertPerformance(data, (error2, result2) => {
         if (error2) {
           console.log(error2);
-          return res.status(error2.code).json(error2)
+          return res.json({error: error2.error, code: error2.code})
         }
         return res.json({ result: "success" });
       })
@@ -74,7 +73,7 @@ app.post('/advance/insert', function (req, res, next) {
       database.insertPopularity(data, (error2, result2) => { // insert performanceId
         if (error2) {
           console.log(error2);
-          return res.status(error2.code).json(error2)
+          return res.json({error: error2.error, code: error2.code})
         }
         return res.json({ result: "success" });
       })

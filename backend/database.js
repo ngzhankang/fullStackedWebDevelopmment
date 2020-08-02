@@ -47,12 +47,12 @@ function resetAllTable(callback) {
 function insertPerformance(performance, callback) {
     for (j = 0; j < performance.length; j++) {
         if (parseInt(performance[j].startTime) > parseInt(performance[j].endTime)) {
-            var err = ({ "error": "startTime is more than endTime!", "code": 400});
+            var err = ({ error: "startTime is more than endTime!", code: 400});
             callback(err)
             return;
         }
         if (parseInt(performance[j].startTime) === parseInt(performance[j].endTime)) {
-            var err = ({ "error": "startTime is equals to endTime!", "code": 400});
+            var err = ({ error: "startTime is equals to endTime!", code: 400});
             callback(err)
             return;
         }
@@ -63,6 +63,14 @@ function insertPerformance(performance, callback) {
     const query = `INSERT INTO Performance (festivalId, performanceId, startTime, endTime) VALUES ${template};`;
     const client = connect();
     client.query(query, values, (err, result) => {
+        if (err) {
+            if (err.code == 23505) {
+                var err = ({"error": "Duplicate Entry", "code": 409 })
+            }
+            else {
+                var err = ({"error": "Unknown Error", "code": 500})
+            }
+        }
         callback(err, result);
         client.end();
     });
