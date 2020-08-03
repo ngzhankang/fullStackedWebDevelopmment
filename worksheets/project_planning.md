@@ -14,15 +14,6 @@ This document helps you identify the smaller tasks and helps you create a rough 
             1. Wireframe
             2. Implementation
             3. Integration
-    <!-- 2. Mobile
-        1. Data Viewer
-            1. Wireframe
-            2. Implementation
-            3. Integration
-        2. Result Viewer
-            1. Wireframe
-            2. Implementation
-            3. Integration -->
     2. Backend
         1. Insert API
             1. Database Setup

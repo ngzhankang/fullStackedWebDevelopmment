@@ -12,8 +12,8 @@ The following are examples of how you can create a table, replace the examples w
 ```sql
 CREATE TABLE Performance(
     performanceId BIGINT PRIMARY KEY NOT NULL CHECK (performanceId BETWEEN 0000000001 and 9999999999) UNIQUE,
-    startTime SMALLINT,
-    endTime SMALLINT,
+    startTime TIME NOT NULL,
+    endTime TIME NOT NULL,
     festivalId BIGINT CHECK (festivalId BETWEEN 0000000001 and 9999999999),
     FOREIGN KEY (festivalId) REFERENCES MusicFestival(festivalId)
 );
@@ -29,10 +29,11 @@ CREATE TABLE MusicFestival(
 > ADVANCED FEATURE (CA3 & CA4)
 ```sql
 CREATE TABLE PerformanceWithPopularity(
-    performanceId NUMERIC(10) PRIMARY KEY NOT NULL CHECK (performanceId BETWEEN 0000000001 and 9999999999) UNIQUE,
-    startTime TIME,
-    endTime TIME,
-    popularity NUMERIC,
-    FOREIGN KEY (performanceId) REFERENCES MusicFestival(festivalId)
+    performanceId BIGINT PRIMARY KEY NOT NULL CHECK (performanceId BETWEEN 0000000001 and 9999999999) UNIQUE,
+    startTime TIME NOT NULL,
+    endTime TIME NOT NULL,
+    festivalId BIGINT NOT NULL CHECK (festivalId BETWEEN 0000000001 and 9999999999),
+    popularity SMALLINT NOT NULL,
+    FOREIGN KEY (festivalId) REFERENCES MusicFestival(festivalId)
 );
 ```
