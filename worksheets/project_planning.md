@@ -42,3 +42,5 @@ This document helps you identify the smaller tasks and helps you create a rough 
 | 12   | Basic | Frontend and Backend  | Webpage and Endpoints and algorithm | Complete result viewer (basic)  | Both |
 | 13   | Advanced | Frontend and Backend  | Webpage and Endpoints and algorithm | Complete result viewer (advanced) | Both |
 | 14   | Advanced | Planning | Documentation of advanced features, Project management  | Fill up the documentation | Both |
+| 15   | Submission | Submission | Submission  | Submission of project | Both |
+

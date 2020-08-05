@@ -4,18 +4,16 @@ This report is for you to document the progres of your project. You should also 
 
 ## What have I done last week
 
--   Worked on...
--   Worked on...
--   Changed....
+-   Hosted our frontend on github pages and backend on heroku.
+-   Edited database.js to give error message if startTime > endTime.
+-   Edited markdowns.
 
 ## What do I plan to do next week
 
--   Worked on...
--   Worked on...
--   Changed....
+-  Submit the project.
+-  Focus on other assignments
 
 ## Additional Thoughts
 
--   VSCode is sick.
--   This addon is fabulous.
--   Lecturer is awesome.
+-   This lecturer is the best! Help us alot!
+-   Vs code is very sick more than what we expected.

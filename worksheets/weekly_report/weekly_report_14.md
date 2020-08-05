@@ -4,18 +4,15 @@ This report is for you to document the progres of your project. You should also 
 
 ## What have I done last week
 
--   Worked on...
--   Worked on...
--   Changed....
+-  Did some modifications in backend for responses such as error messages.
+-  Test out our codes with the test runner
 
 ## What do I plan to do next week
 
--   Worked on...
--   Worked on...
--   Changed....
+-   Do documentation for our project.
+-   Edit codes if needed.
+-   Fill up any markdowns if needed.
 
 ## Additional Thoughts
 
--   VSCode is sick.
--   This addon is fabulous.
--   Lecturer is awesome.
+-   The test runner if cool!
