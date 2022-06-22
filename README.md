@@ -8,7 +8,7 @@ This repository is to archive the docs that i did for this module during Year 2 
 
 Refer to the `README.md` in the [backend](./backend/) and [frontend](./frontend/) respectively.
 
-# Hosted Web Site (Decpreciated)
+# Hosted Web Site (Depreciated)
 - ~[Web App](https://ades-fsp.github.io/fsp-jibaboom-skrtttt/index.html)~
 - ~[API Server](https://fsp-jibaboom-skrtttt.herokuapp.com)~
 
