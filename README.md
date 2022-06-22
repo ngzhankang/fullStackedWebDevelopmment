@@ -23,4 +23,4 @@ Main developers:
 - Mr Jeremiah Ang
 
 # ⚠️Update as of 22/6/2022
-- As this coursework was complete for quite awhile and there is no future updates, the herokuapp dyno instance has been removed, and the public github pages has been removed to make way for usage in future projects to come.
+- As this coursework was completed for quite a while back in 2020, and there are no future updates, the herokuapp dyno instance and the public github page has been removed to make way for usage in my future projects to come.
