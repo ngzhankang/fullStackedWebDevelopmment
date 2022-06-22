@@ -8,9 +8,9 @@ This repository is to archive the docs that i did for this module during Year 2 
 
 Refer to the `README.md` in the [backend](./backend/) and [frontend](./frontend/) respectively.
 
-# Hosted Web Site
-- [Web App](https://ades-fsp.github.io/fsp-jibaboom-skrtttt/index.html)
-- [API Server](https://fsp-jibaboom-skrtttt.herokuapp.com)
+# Hosted Web Site (Decpreciated)
+- ~[Web App](https://ades-fsp.github.io/fsp-jibaboom-skrtttt/index.html)~
+- ~[API Server](https://fsp-jibaboom-skrtttt.herokuapp.com)~
 
 # Documentation
 1. The documentation can be found in the [docs](./docs/) folder.  
@@ -21,3 +21,6 @@ Refer to the `README.md` in the [backend](./backend/) and [frontend](./frontend/
 Main developers:  
 - Me & my bud Triston!
 - Mr Jeremiah Ang
+
+# ⚠️Update as of 22/6/2022
+- As this coursework was complete for quite awhile and there is no future updates, the herokuapp dyno instance has been removed, and the public github pages has been removed to make way for usage in future projects to come.
